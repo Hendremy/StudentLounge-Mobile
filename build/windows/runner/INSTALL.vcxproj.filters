@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\kamal\Documents\Helmo\Bloc3\Architectures logicielles\Projet\StudentLounge-Mobile\studentlounge_mobile\build\windows\CMakeFiles\ec11cd7566ffec50fe426b33fc0e6d0c\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F543FD7F-EF0C-3ADB-BCAB-D3007F712194}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

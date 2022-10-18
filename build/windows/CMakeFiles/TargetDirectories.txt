@@ -1,0 +1,10 @@
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/CMakeFiles/INSTALL.dir
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/CMakeFiles/ALL_BUILD.dir
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/CMakeFiles/ZERO_CHECK.dir
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/flutter/CMakeFiles/flutter_wrapper_plugin.dir
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/flutter/CMakeFiles/flutter_wrapper_app.dir
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/flutter/CMakeFiles/flutter_assemble.dir
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/flutter/CMakeFiles/INSTALL.dir
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/runner/CMakeFiles/studentlounge_mobile.dir
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/runner/CMakeFiles/INSTALL.dir
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/runner/CMakeFiles/ALL_BUILD.dir

@@ -1,0 +1,10 @@
+^C:\USERS\KAMAL\DOCUMENTS\HELMO\BLOC3\ARCHITECTURES LOGICIELLES\PROJET\STUDENTLOUNGE-MOBILE\STUDENTLOUNGE_MOBILE\BUILD\WINDOWS\CMAKEFILES\EED67F1E569E5BD9E0EFC8C5B6A09B8E\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/windows" "-BC:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/studentlounge_mobile.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

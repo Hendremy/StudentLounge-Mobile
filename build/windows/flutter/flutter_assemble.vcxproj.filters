@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\kamal\Documents\Helmo\Bloc3\Architectures logicielles\Projet\StudentLounge-Mobile\studentlounge_mobile\build\windows\CMakeFiles\c66e4169cda1ae1246bb36c9151318cb\flutter_windows.dll.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kamal\Documents\Helmo\Bloc3\Architectures logicielles\Projet\StudentLounge-Mobile\studentlounge_mobile\build\windows\CMakeFiles\ae6d8984e1d520ddc28ec2b9d6a580fc\flutter_assemble.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kamal\Documents\Helmo\Bloc3\Architectures logicielles\Projet\StudentLounge-Mobile\studentlounge_mobile\windows\flutter\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\kamal\Documents\Helmo\Bloc3\Architectures logicielles\Projet\StudentLounge-Mobile\studentlounge_mobile\build\windows\flutter\CMakeFiles\flutter_assemble" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F543FD7F-EF0C-3ADB-BCAB-D3007F712194}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
