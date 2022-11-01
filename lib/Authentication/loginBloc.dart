@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'AuthenticationBloc.dart';
 import 'AuthenticationEvents.dart';
@@ -13,28 +12,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({
     required this.userRepository,
     required this.authenticationBloc,
-  })  : assert(userRepository != null),
-        assert(authenticationBloc != null), super(LoginInitial());
-
-  @override
-  Stream<LoginState> mapEventToState(
-      LoginState currentState,
-      LoginEvent event,
-      ) async* {
-    if (event is LoginButtonPressed) {
-      yield LoginLoading();
+  })  : super(LoginInitial()){
+    on<LoginButtonPressed>((event, emit) async {
+      emit(LoginLoading());
 
       try {
-        final token = await userRepository.authenticate(
+        final response = await userRepository.authenticate(
           username: event.username,
           password: event.password,
         );
-
-        authenticationBloc.add(LoggedIn(token: token));
-        yield LoginInitial();
+        authenticationBloc.add(LoggedIn(token: response.body));
+        if(response.statusCode == 200) {
+          emit(LoginInitial());
+        } else{
+          emit(LoginFailure(error: response.statusCode.toString()));
+        }
       } catch (error) {
-        yield LoginFailure(error: error.toString());
+        emit(LoginFailure(error: error.toString()));
       }
-    }
+    });
   }
 }

@@ -1,44 +1,29 @@
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'AuthenticationEvents.dart';
 import 'AuthenticationState.dart';
 import 'UserRepository.dart';
 
-class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
+class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserRepository userRepository;
 
-  AuthenticationBloc({required this.userRepository})
-      : assert(userRepository != null), super(AuthenticationUninitialized());
-
-  @override
-  AuthenticationState get initialState => AuthenticationUninitialized();
-
-  @override
-  Stream<AuthenticationState> mapEventToState(
-      AuthenticationState currentState,
-      AuthenticationEvent event,
-      ) async* {
-    if (event is AppStarted) {
+  AuthenticationBloc({required this.userRepository}) : super(AuthenticationUnauthenticated()) {
+    on<AppStarted>((event, emit) async {
       final bool hasToken = await userRepository.hasToken();
-
       if (hasToken) {
-        yield AuthenticationAuthenticated();
+        emit(AuthenticationAuthenticated());
       } else {
-        yield AuthenticationUnauthenticated();
+        emit(AuthenticationUnauthenticated());
       }
-    }
-
-    if (event is LoggedIn) {
-      yield AuthenticationLoading();
+    });
+    on<LoggedIn>((event, emit) async {
+      emit(AuthenticationLoading());
       await userRepository.persistToken(event.token);
-      yield AuthenticationAuthenticated();
-    }
-
-    if (event is LoggedOut) {
-      yield AuthenticationLoading();
+      emit(AuthenticationAuthenticated());
+    });
+    on<LoggedOut>((event, emit) async {
+      emit(AuthenticationLoading());
       await userRepository.deleteToken();
-      yield AuthenticationUnauthenticated();
-    }
+      emit(AuthenticationUnauthenticated());
+    });
   }
 }

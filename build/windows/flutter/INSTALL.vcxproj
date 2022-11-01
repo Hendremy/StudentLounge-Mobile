@@ -176,7 +176,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\kamal\Documents\Helmo\Bloc3\Architectures logicielles\Projet\StudentLounge-Mobile\studentlounge_mobile\build\windows\ALL_BUILD.vcxproj">
+    <ProjectReference Include="C:\Users\kamal\Documents\Helmo\Bloc3\Architectures logicielles\Projet\StudentLounge-Mobile\studentlounge_mobile\build\windows\plugins\url_launcher_windows\ALL_BUILD.vcxproj">
       <Project>{89FF2AF7-80B5-3E72-BC6E-F38D4DCD247B}</Project>
       <Name>ALL_BUILD</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>

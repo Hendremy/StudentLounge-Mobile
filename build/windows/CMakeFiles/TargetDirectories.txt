@@ -8,3 +8,6 @@ C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLou
 C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/runner/CMakeFiles/studentlounge_mobile.dir
 C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/runner/CMakeFiles/INSTALL.dir
 C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/runner/CMakeFiles/ALL_BUILD.dir
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/plugins/url_launcher_windows/CMakeFiles/url_launcher_windows_plugin.dir
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/plugins/url_launcher_windows/CMakeFiles/INSTALL.dir
+C:/Users/kamal/Documents/Helmo/Bloc3/Architectures logicielles/Projet/StudentLounge-Mobile/studentlounge_mobile/build/windows/plugins/url_launcher_windows/CMakeFiles/ALL_BUILD.dir
