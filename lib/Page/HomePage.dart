@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'AuthenticationBloc.dart';
-import 'AuthenticationEvents.dart';
+import '../Authentication/AuthenticationBloc.dart';
+import '../Authentication/AuthenticationEvents.dart';
 
 class HomePage extends StatelessWidget {
   @override

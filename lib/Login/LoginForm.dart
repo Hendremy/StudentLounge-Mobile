@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'AuthenticationBloc.dart';
+import '../Authentication/AuthenticationBloc.dart';
 import 'LoginEvents.dart';
 import 'LoginState.dart';
 import 'loginBloc.dart';
@@ -138,6 +138,7 @@ class _LoginFormState extends State<LoginForm> {
     _loginBloc.add(LoginButtonPressed(
       username: _usernameController.text,
       password: _passwordController.text,
+      typeOfConnexion: 1
     ));
   }
 }

@@ -8,6 +8,15 @@
       <root url="file://$PROJECT_DIR$/../../../../../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_linux-3.0.1" />
       <root url="file://$PROJECT_DIR$/../../../../../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_macos-3.0.1" />
       <root url="file://$PROJECT_DIR$/../../../../../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_android-6.0.21" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_secure_storage_web-1.0.2" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_secure_storage-6.0.0" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_android-6.1.1" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-5.4.2" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.10.2" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_ios-5.5.0" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_login_facebook-1.6.2" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/sign_in_with_apple-4.2.0" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/sign_in_with_apple_web-1.0.1" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

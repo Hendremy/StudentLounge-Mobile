@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'Authentication/AuthenticationBloc.dart';
 import 'Authentication/AuthenticationEvents.dart';
 import 'Authentication/AuthenticationState.dart';
-import 'Authentication/HomePage.dart';
-import 'Authentication/LoadingIndicator.dart';
-import 'Authentication/LoginPage.dart';
-import 'Authentication/SplashPage.dart';
+import 'Page/HomePage.dart';
+import 'Login/LoginPage.dart';
+import 'Page/LoadingIndicator.dart';
+import 'Page/SplashPage.dart';
 import 'Authentication/UserRepository.dart';
 
 class SimpleBlocDelegate extends BlocObserver {
