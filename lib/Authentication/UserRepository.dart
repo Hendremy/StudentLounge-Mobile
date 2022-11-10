@@ -7,7 +7,9 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class UserRepository {
   var storage = const FlutterSecureStorage();
-  var baseUrl = "http://porthos-intra.cg.helmo.be/e190449";
+  //var baseUrl = "http://porthos-intra.cg.helmo.be/e190449";
+  var baseUrl = "https://localhost:44321";
+
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin _facebookLogin = FacebookLogin();
   Duration duration  = const Duration(seconds: 1);
@@ -18,7 +20,7 @@ class UserRepository {
   }) async {
     var body = jsonEncode({'username':username, 'password':password});
     http.Response response = await http.post(
-        Uri.parse('$baseUrl/Auth/Login/'),
+        Uri.parse('$baseUrl/Auth/Login'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
