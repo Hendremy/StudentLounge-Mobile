@@ -17,12 +17,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginButtonPressed>((event, emit) async {
       emit(LoginLoading());
       try {
-        if(event.typeOfConnexion == 1){
-          await basicLogin(event, emit);
-        }else if(event.typeOfConnexion == 2){
-          await googleLogin(emit);
-        }else if(event.typeOfConnexion == 3){
-          await facebookLogin(event, emit);
+        switch(event.typeOfConnexion){
+          case 1:
+            await basicLogin(event, emit);
+            break;
+          case 2:
+            await googleLogin(emit);
+            break;
         }
       } catch (error) {
         emit(LoginFailure(error: error.toString()));
@@ -37,7 +38,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       authenticationBloc.add(LoggedIn(token: token));
       emit(LoginInitial());
     } else{
-      emit(const LoginFailure(error: "non authentifié"));
+      emit(const LoginFailure(error: "Non authentifié"));
     }
   }
 
@@ -51,18 +52,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       authenticationBloc.add(LoggedIn(token: response.body));
       emit(LoginInitial());
     } else{
-      emit(LoginFailure(error: response.statusCode.toString()));
-    }
-  }
-
-  facebookLogin(LoginButtonPressed event, Emitter<LoginState> emit) async {
-    var auth = await userRepository.facebookSignIn();
-    var token = auth?.accessToken;
-    if(token != null) {
-      authenticationBloc.add(LoggedIn(token: token.token));
-      emit(LoginInitial());
-    } else{
-      emit(const LoginFailure(error: "non authentifié"));
+      emit(const LoginFailure(error: "Non authentifié"));
     }
   }
 }

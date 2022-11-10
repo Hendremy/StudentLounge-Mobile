@@ -1,23 +1,30 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:http/http.dart' as http;
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class UserRepository {
   var storage = const FlutterSecureStorage();
+<<<<<<< HEAD
   //var baseUrl = "http://porthos-intra.cg.helmo.be/e190449";
   var baseUrl = "https://localhost:44321";
 
+=======
+  var baseUrl = "https://porthos-intra.cg.helmo.be/e190449";
+>>>>>>> ac7955989ae753f16802945c2cea4803980eea9a
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin _facebookLogin = FacebookLogin();
   Duration duration  = const Duration(seconds: 1);
 
-  Future<http.Response> authenticate({
+  Future<dynamic> authenticate({
     required String username,
     required String password,
   }) async {
+<<<<<<< HEAD
     var body = jsonEncode({'username':username, 'password':password});
     http.Response response = await http.post(
         Uri.parse('$baseUrl/Auth/Login'),
@@ -26,6 +33,14 @@ class UserRepository {
         },
         body: body);
     return response;
+=======
+    var body = jsonEncode({"username":username, "password":password});
+    return await http.post(
+      Uri.parse('$baseUrl/Auth/Login'),
+      headers: {"Content-Type": "application/json"},
+      body : body,
+    );
+>>>>>>> ac7955989ae753f16802945c2cea4803980eea9a
   }
 
   Future<void> deleteToken() async {
@@ -37,8 +52,7 @@ class UserRepository {
   }
 
   Future<bool> hasToken() async {
-    await Future.delayed(duration);
-    return false;
+    return storage.containsKey(key: "jwt");
   }
 
   Future<GoogleSignInAuthentication?> googleSignIn() async {
@@ -49,37 +63,6 @@ class UserRepository {
         return googleSignInAccount.authentication;
       }else{
         return null;
-      }
-    } catch (error) {
-      print(error);
-      return null;
-    }
-  }
-
-  Future<FacebookLoginResult?> facebookSignIn() async {
-    try {
-      final res = await _facebookLogin.logIn(permissions: [
-        FacebookPermission.publicProfile,
-        FacebookPermission.email,
-      ]);
-
-      switch (res.status) {
-        case FacebookLoginStatus.success:
-        // Logged in
-
-        // Send access token to server for validation and auth
-          return res;
-          break;
-        case FacebookLoginStatus.cancel:
-        // User cancel log in
-          print('Log in cancelled');
-          return null;
-          break;
-        case FacebookLoginStatus.error:
-        // Log in failed
-          print('Error while log in: ${res.error}');
-          return null;
-          break;
       }
     } catch (error) {
       print(error);
