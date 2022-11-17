@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studentlounge_mobile/Lesson/LessonRepository.dart';
-import 'Authentication/AuthenticationBloc.dart';
-import 'Authentication/AuthenticationEvents.dart';
-import 'Authentication/AuthenticationState.dart';
-import 'Lesson/LessonPage.dart';
-import 'Login/LoginPage.dart';
-import 'Page/LoadingIndicator.dart';
-import 'Page/SplashPage.dart';
-import 'Authentication/UserRepository.dart';
+import 'package:studentlounge_mobile/Lesson/lesson_repository.dart';
+import 'Authentication/authentication_bloc.dart';
+import 'Authentication/authentication_events.dart';
+import 'Authentication/authentication_state.dart';
+import 'Lesson/lesson_page.dart';
+import 'Login/login_page.dart';
+import 'lounge/lounge.dart';
+import 'Page/loading_indicator.dart';
+import 'Page/splash_page.dart';
+import 'Authentication/user_repository.dart';
 
 class SimpleBlocDelegate extends BlocObserver {
   @override
@@ -63,19 +64,7 @@ class _AppState extends State<App> {
       child: MaterialApp(
         home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (BuildContext context, AuthenticationState state) {
-            if (state is AuthenticationUninitialized) {
-              return const SplashPage();
-            }
-            if (state is AuthenticationAuthenticated) {
-              return LessonPage(lessonRepository: lessonRepository,);
-            }
-            if (state is AuthenticationUnauthenticated) {
-              return LoginPage(userRepository: userRepository);
-            }
-            if (state is AuthenticationLoading) {
-              return LoadingIndicator();
-            }
-            return LoadingIndicator();
+            return Lounge();
           },
         ),
       ),

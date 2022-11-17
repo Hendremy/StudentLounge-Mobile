@@ -9,13 +9,10 @@ import 'package:http/http.dart' as http;
 
 class UserRepository {
   var storage = const FlutterSecureStorage();
-<<<<<<< HEAD
-  //var baseUrl = "http://porthos-intra.cg.helmo.be/e190449";
+
+  //var baseUrl = "https://porthos-intra.cg.helmo.be/e190449";
   var baseUrl = "https://localhost:44321";
 
-=======
-  var baseUrl = "https://porthos-intra.cg.helmo.be/e190449";
->>>>>>> ac7955989ae753f16802945c2cea4803980eea9a
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin _facebookLogin = FacebookLogin();
   Duration duration  = const Duration(seconds: 1);
@@ -24,7 +21,6 @@ class UserRepository {
     required String username,
     required String password,
   }) async {
-<<<<<<< HEAD
     var body = jsonEncode({'username':username, 'password':password});
     http.Response response = await http.post(
         Uri.parse('$baseUrl/Auth/Login'),
@@ -33,14 +29,6 @@ class UserRepository {
         },
         body: body);
     return response;
-=======
-    var body = jsonEncode({"username":username, "password":password});
-    return await http.post(
-      Uri.parse('$baseUrl/Auth/Login'),
-      headers: {"Content-Type": "application/json"},
-      body : body,
-    );
->>>>>>> ac7955989ae753f16802945c2cea4803980eea9a
   }
 
   Future<void> deleteToken() async {

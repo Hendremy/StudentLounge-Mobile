@@ -1,17 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../Login/LoginState.dart';
-import 'LessonBloc.dart';
-import 'LessonEvent.dart';
-import 'LessonRepository.dart';
-import 'LessonState.dart';
 
 class LessonPage extends StatefulWidget {
-  final LessonRepository lessonRepository;
+  //final LessonRepository lessonRepository;
 
-  const LessonPage({Key? key, required this.lessonRepository})
+  const LessonPage({Key? key})
       : super(key: key);
 
   @override
