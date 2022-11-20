@@ -4,6 +4,7 @@ import '../authentication/authentication_bloc.dart';
 import 'login_events.dart';
 import 'login_state.dart';
 import 'login_bloc.dart';
+import '../theme.dart' as theme;
 
 class LoginForm extends StatefulWidget {
   final LoginBloc loginBloc;
@@ -30,9 +31,9 @@ class _LoginFormState extends State<LoginForm> {
     return BlocBuilder<LoginBloc, LoginState>(
       bloc: _loginBloc,
       builder: (
-          BuildContext context,
-          LoginState state,
-          ) {
+        BuildContext context,
+        LoginState state,
+      ) {
         if (state is LoginFailure) {
           _onWidgetDidBuild(() {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -51,10 +52,10 @@ class _LoginFormState extends State<LoginForm> {
 
               //email textfield
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                child:Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                  child: Container(
                     decoration: BoxDecoration(
-                      color: const Color.fromRGBO(53, 1, 135, 100),
+                      color: theme.primaryDark,
                       borderRadius: BorderRadius.circular(50),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -62,55 +63,50 @@ class _LoginFormState extends State<LoginForm> {
                       decoration: const InputDecoration(
                           labelText: 'Adresse e-mail',
                           border: InputBorder.none,
-                          floatingLabelStyle: TextStyle(color: Color.fromRGBO(126,87, 255, 100)),
-                          labelStyle: TextStyle(color: Color.fromRGBO(126,87, 255, 100))
-                      ),
+                          floatingLabelStyle: TextStyle(color: theme.primary),
+                          labelStyle: TextStyle(color: theme.primary)),
                       controller: _usernameController,
                       style: const TextStyle(color: Colors.white),
-                      cursorColor: const Color.fromRGBO(126,87, 255, 100),
+                      cursorColor: theme.primary,
                     ),
-                )
-                //controller: _usernameController,
-              ),
+                  )
+                  //controller: _usernameController,
+                  ),
               const SizedBox(height: 20),
 
               //password textfield
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                  child:Container(
+                  child: Container(
                       decoration: BoxDecoration(
-                          color: const Color.fromRGBO(53, 1, 135, 100),
-                          borderRadius: BorderRadius.circular(50)
-                      ),
+                          color: theme.primaryDark,
+                          borderRadius: BorderRadius.circular(50)),
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: TextFormField(
                         decoration: const InputDecoration(
                             labelText: 'Mot de passe',
                             border: InputBorder.none,
-                            floatingLabelStyle: TextStyle(color: Color.fromRGBO(126,87, 255, 100)),
-                            labelStyle: TextStyle(color: Color.fromRGBO(126,87, 255, 100))
-                        ),
+                            floatingLabelStyle: TextStyle(color: theme.primary),
+                            labelStyle: TextStyle(color: theme.primary)),
                         controller: _passwordController,
                         obscureText: true,
                         style: const TextStyle(color: Colors.white),
-                        cursorColor: Color.fromRGBO(126,87, 255, 100),
-                      )
-                  )
-              ),
+                        cursorColor: theme.primary,
+                      ))),
               const SizedBox(height: 20),
 
               //Sign in button
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: const Color.fromRGBO(38, 18, 146, 100),
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  elevation: 5
-                ),
-                onPressed: state is! LoginLoading ? _onLoginButtonPressed : null,
+                    foregroundColor: const Color.fromRGBO(38, 18, 146, 100),
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    elevation: 5),
+                onPressed:
+                    state is! LoginLoading ? _onLoginButtonPressed : null,
                 child: const Text(
                   'Se connecter',
                   style: TextStyle(fontSize: 25, fontFamily: 'Gugi'),
@@ -119,7 +115,7 @@ class _LoginFormState extends State<LoginForm> {
               const SizedBox(height: 20),
               Container(
                 child:
-                state is LoginLoading ? CircularProgressIndicator() : null,
+                    state is LoginLoading ? CircularProgressIndicator() : null,
               ),
             ],
           ),
@@ -136,9 +132,8 @@ class _LoginFormState extends State<LoginForm> {
 
   _onLoginButtonPressed() {
     _loginBloc.add(LoginButtonPressed(
-      username: _usernameController.text,
-      password: _passwordController.text,
-      typeOfConnexion: 1
-    ));
+        username: _usernameController.text,
+        password: _passwordController.text,
+        typeOfConnexion: 1));
   }
 }

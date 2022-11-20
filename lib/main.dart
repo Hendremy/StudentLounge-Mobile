@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studentlounge_mobile/lesson/lesson_repository.dart';
+import 'package:studentlounge_mobile/lessons/lessons_repository.dart';
 import 'authentication/authentication_bloc.dart';
 import 'authentication/authentication_events.dart';
 import 'authentication/authentication_state.dart';
-import 'lesson/lesson_page.dart';
+import 'lessons/lessons_page.dart';
 import 'login/login_page.dart';
-import 'lounge/home.dart';
+import 'home/home.dart';
 import 'page/loading_indicator.dart';
 import 'page/splash_page.dart';
 import 'authentication/user_repository.dart';
@@ -26,14 +26,16 @@ class SimpleBlocDelegate extends BlocObserver {
 
 void main() async {
   //BlocSupervisor.delegate = SimpleBlocDelegate();
-  runApp(App(userRepository: UserRepository(), lessonRepository: LessonRepository()));
+  runApp(App(
+      userRepository: UserRepository(), lessonRepository: LessonsRepository()));
 }
 
 class App extends StatefulWidget {
   final UserRepository userRepository;
-  final LessonRepository lessonRepository;
+  final LessonsRepository lessonRepository;
 
-  App({Key? key, required this.userRepository, required this.lessonRepository}) : super(key: key);
+  App({Key? key, required this.userRepository, required this.lessonRepository})
+      : super(key: key);
 
   @override
   State<App> createState() => _AppState();
@@ -42,7 +44,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   late AuthenticationBloc authenticationBloc;
   UserRepository get userRepository => widget.userRepository;
-  LessonRepository get lessonRepository => widget.lessonRepository;
+  LessonsRepository get lessonRepository => widget.lessonRepository;
 
   @override
   void initState() {
@@ -60,7 +62,8 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AuthenticationBloc>(
-      create: (BuildContext context) => AuthenticationBloc(userRepository: userRepository),
+      create: (BuildContext context) =>
+          AuthenticationBloc(userRepository: userRepository),
       child: MaterialApp(
         home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (BuildContext context, AuthenticationState state) {
