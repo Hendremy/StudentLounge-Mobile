@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studentlounge_mobile/Login/login_events.dart';
-import '../Authentication/authentication_bloc.dart';
+import 'package:studentlounge_mobile/login/login_events.dart';
+import '../authentication/authentication_bloc.dart';
 import 'login_form.dart';
-import '../Authentication/user_repository.dart';
+import '../authentication/user_repository.dart';
 import 'login_bloc.dart';
 
 class LoginPage extends StatefulWidget {

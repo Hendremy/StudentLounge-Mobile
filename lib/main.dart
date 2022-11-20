@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studentlounge_mobile/Lesson/lesson_repository.dart';
-import 'Authentication/authentication_bloc.dart';
-import 'Authentication/authentication_events.dart';
-import 'Authentication/authentication_state.dart';
-import 'Lesson/lesson_page.dart';
-import 'Login/login_page.dart';
-import 'lounge/lounge.dart';
-import 'Page/loading_indicator.dart';
-import 'Page/splash_page.dart';
-import 'Authentication/user_repository.dart';
+import 'package:studentlounge_mobile/lesson/lesson_repository.dart';
+import 'authentication/authentication_bloc.dart';
+import 'authentication/authentication_events.dart';
+import 'authentication/authentication_state.dart';
+import 'lesson/lesson_page.dart';
+import 'login/login_page.dart';
+import 'lounge/home.dart';
+import 'page/loading_indicator.dart';
+import 'page/splash_page.dart';
+import 'authentication/user_repository.dart';
 
 class SimpleBlocDelegate extends BlocObserver {
   @override
@@ -64,7 +64,7 @@ class _AppState extends State<App> {
       child: MaterialApp(
         home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (BuildContext context, AuthenticationState state) {
-            return Lounge();
+            return Home();
           },
         ),
       ),

@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import '../Authentication/authentication_bloc.dart';
-import '../Authentication/authentication_events.dart';
+import '../authentication/authentication_bloc.dart';
+import '../authentication/authentication_events.dart';
 import 'login_events.dart';
 import 'login_state.dart';
-import '../Authentication/user_repository.dart';
+import '../authentication/user_repository.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository userRepository;
