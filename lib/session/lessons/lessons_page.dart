@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../Login/login_state.dart';
+import '../../login/login_state.dart';
 import 'lessons_bloc.dart';
 import 'lessons_event.dart';
 import 'lessons_repository.dart';
