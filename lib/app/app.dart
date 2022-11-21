@@ -24,7 +24,7 @@ class _AppState extends State<App> {
         child: MaterialApp(
             home: BlocBuilder<AppBloc, AppState>(builder: (context, state) {
           if (state is LoggedOff) {
-            return SessionPage();
+            return LoginPage(userRepository: _userRepo);
             // return LoginPage(userRepository: _userRepo);
           } else if (state is LoggedIn) {
             return SessionPage();
