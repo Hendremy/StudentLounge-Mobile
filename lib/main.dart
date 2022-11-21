@@ -67,7 +67,7 @@ class _AppState extends State<App> {
       child: MaterialApp(
         home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (BuildContext context, AuthenticationState state) {
-            return Home();
+            return const Home();
           },
         ),
       ),

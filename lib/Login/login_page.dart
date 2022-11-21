@@ -82,7 +82,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _onLoginGooglePressed() {
-    _loginBloc.add(const LoginButtonPressed(
-        username: "", password: "", typeOfConnexion: 2));
+    //_loginBloc.add(const LoginButtonPressed(username: "", password: "", typeOfConnexion: 2));
   }
 }
