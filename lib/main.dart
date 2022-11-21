@@ -3,17 +3,11 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studentlounge_mobile/lessons/lessons_repository.dart';
+import 'package:studentlounge_mobile/session/lessons/lessons_repository.dart';
 import 'authentication/authentication_bloc.dart';
 import 'authentication/authentication_events.dart';
-import 'authentication/authentication_state.dart';
-import 'lessons/lessons_page.dart';
-import 'login/login_page.dart';
-import 'home/home.dart';
-import 'page/loading_indicator.dart';
-import 'page/splash_page.dart';
+import 'session/session_router.dart';
 import 'authentication/user_repository.dart';
 
 class SimpleBlocDelegate extends BlocObserver {
@@ -42,6 +36,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  final SessionRouter _appRouter = SessionRouter();
   late AuthenticationBloc authenticationBloc;
   UserRepository get userRepository => widget.userRepository;
   LessonsRepository get lessonRepository => widget.lessonRepository;
@@ -54,23 +49,16 @@ class _AppState extends State<App> {
   }
 
   @override
-  void dispose() {
-    authenticationBloc.close();
-    super.dispose();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Student Lounge',
+      onGenerateRoute: _appRouter.onGenerateRoute,
+    );
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider<AuthenticationBloc>(
-      create: (BuildContext context) =>
-          AuthenticationBloc(userRepository: userRepository),
-      child: MaterialApp(
-        home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-          builder: (BuildContext context, AuthenticationState state) {
-            return const Home();
-          },
-        ),
-      ),
-    );
+  void dispose() {
+    _appRouter.dispose();
+    super.dispose();
   }
 }
