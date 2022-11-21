@@ -13,10 +13,10 @@ class AppStarted extends AuthenticationEvent {
   List<Object> get props => [];
 }
 
-class LoggedIn extends AuthenticationEvent {
+class AuthenticationSuccess extends AuthenticationEvent {
   final String token;
 
-  LoggedIn({required this.token}) : super([token]);
+  AuthenticationSuccess({required this.token}) : super([token]);
 
   @override
   String toString() => 'LoggedIn { token: $token }';
@@ -25,10 +25,11 @@ class LoggedIn extends AuthenticationEvent {
   List<Object> get props => [token];
 }
 
-class LoggedOut extends AuthenticationEvent {
-  @override
-  String toString() => 'LoggedOut';
+//Evenement de déconnexion devrait devenir de la Session
+// class LoggedOut extends AuthenticationEvent {
+//   @override
+//   String toString() => 'LoggedOut';
 
-  @override
-  List<Object> get props => [];
-}
+//   @override
+//   List<Object> get props => [];
+// }

@@ -9,10 +9,10 @@ import 'lessons_repository.dart';
 import 'lessons_state.dart';
 
 class LessonsPage extends StatefulWidget {
-  final LessonsRepository lessonRepository;
+  //final LessonsRepository lessonRepository;
 
-  const LessonsPage({Key? key, required this.lessonRepository})
-      : super(key: key);
+  // const LessonsPage({Key? key, required this.lessonRepository})
+  //     : super(key: key);
 
   @override
   State<LessonsPage> createState() => _LessonsPageState();
@@ -20,11 +20,11 @@ class LessonsPage extends StatefulWidget {
 
 class _LessonsPageState extends State<LessonsPage> {
   late LessonsBloc _lessonBloc;
-  LessonsRepository get _lessonRepository => widget.lessonRepository;
+  // LessonsRepository get _lessonRepository => widget.lessonRepository;
 
   @override
   void initState() {
-    _lessonBloc = LessonsBloc(lessonRepository: _lessonRepository);
+    // _lessonBloc = LessonsBloc(lessonRepository: _lessonRepository);
     super.initState();
   }
 

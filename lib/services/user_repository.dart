@@ -15,15 +15,14 @@ class UserRepository {
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin _facebookLogin = FacebookLogin();
-  Duration duration  = const Duration(seconds: 1);
+  Duration duration = const Duration(seconds: 1);
 
   Future<dynamic> authenticate({
     required String username,
     required String password,
   }) async {
-    var body = jsonEncode({'username':username, 'password':password});
-    http.Response response = await http.post(
-        Uri.parse('$baseUrl/Auth/Login'),
+    var body = jsonEncode({'username': username, 'password': password});
+    http.Response response = await http.post(Uri.parse('$baseUrl/Auth/Login'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -36,7 +35,7 @@ class UserRepository {
   }
 
   Future<void> persistToken(String token) async {
-    storage.write(key:"jwt", value:token);
+    storage.write(key: "jwt", value: token);
   }
 
   Future<bool> hasToken() async {
@@ -45,11 +44,13 @@ class UserRepository {
 
   Future<GoogleSignInAuthentication?> googleSignIn() async {
     try {
-      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
-
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+      //TODO: JWT Google ok, mais il faut appeler le backend pour obtenir le JWT de notre application
+      // (Appel à url/ExtAuth)
       if (googleSignInAccount != null) {
         return googleSignInAccount.authentication;
-      }else{
+      } else {
         return null;
       }
     } catch (error) {

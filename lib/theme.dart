@@ -1,5 +1,5 @@
 import 'dart:ui';
 
-const primary = Color.fromRGBO(126, 87, 255, 100);
-const primaryDark = Color.fromRGBO(53, 1, 135, 100);
-const activeIcon = Color.fromRGBO(255, 155, 251, 100);
+const primary = Color.fromARGB(255, 126, 87, 255);
+const primaryDark = Color.fromARGB(255, 52, 1, 135);
+const activeIcon = Color.fromARGB(255, 255, 155, 252);

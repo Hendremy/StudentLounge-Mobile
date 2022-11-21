@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studentlounge_mobile/login/login_events.dart';
-import '../authentication/authentication_bloc.dart';
+import 'authentication/authentication_bloc.dart';
 import 'login_form.dart';
-import '../authentication/user_repository.dart';
+import '../services/user_repository.dart';
 import 'login_bloc.dart';
 import '../theme.dart' as theme;
 
@@ -82,6 +82,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _onLoginGooglePressed() {
-    //_loginBloc.add(const LoginButtonPressed(username: "", password: "", typeOfConnexion: 2));
+    _loginBloc.add(const LoginButtonPressed(
+        username: "", password: "", typeOfConnexion: 2));
   }
 }

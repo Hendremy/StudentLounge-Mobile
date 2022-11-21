@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import '../authentication/authentication_bloc.dart';
-import '../authentication/authentication_events.dart';
+import 'authentication/authentication_bloc.dart';
+import 'authentication/authentication_events.dart';
 import 'login_events.dart';
 import 'login_state.dart';
-import '../authentication/user_repository.dart';
+import '../services/user_repository.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository userRepository;
@@ -13,11 +13,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({
     required this.userRepository,
     required this.authenticationBloc,
-  })  : super(LoginInitial()){
+  }) : super(LoginInitial()) {
     on<LoginButtonPressed>((event, emit) async {
       emit(LoginLoading());
       try {
-        switch(event.typeOfConnexion){
+        switch (event.typeOfConnexion) {
           case 1:
             await basicLogin(event, emit);
             break;
@@ -34,24 +34,25 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<void> googleLogin(Emitter<LoginState> emit) async {
     var auth = await userRepository.googleSignIn();
     var token = auth?.accessToken;
-    if(token != null) {
-      authenticationBloc.add(LoggedIn(token: token));
+    if (token != null) {
+      authenticationBloc.add(AuthenticationSuccess(token: token));
       emit(LoginInitial());
-    } else{
+    } else {
       emit(const LoginFailure(error: "Non authentifié"));
     }
   }
 
-  Future<void> basicLogin(LoginButtonPressed event, Emitter<LoginState> emit) async {
+  Future<void> basicLogin(
+      LoginButtonPressed event, Emitter<LoginState> emit) async {
     final response = await userRepository.authenticate(
       username: event.username,
       password: event.password,
     );
 
-    if(response.statusCode == 200) {
-      authenticationBloc.add(LoggedIn(token: response.body));
+    if (response.statusCode == 200) {
+      authenticationBloc.add(AuthenticationSuccess(token: response.body));
       emit(LoginInitial());
-    } else{
+    } else {
       emit(const LoginFailure(error: "Non authentifié"));
     }
   }

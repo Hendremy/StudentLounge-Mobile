@@ -7,7 +7,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   late AppUser user;
 
   AppBloc() : super(LoggedOff()) {
-    on<AuthenticationSuccess>((event, emit) {
+    on<UserAuthenticated>((event, emit) {
       emit(LoggedIn(user: event.user));
     });
     on<UserSignedOff>((event, emit) {
