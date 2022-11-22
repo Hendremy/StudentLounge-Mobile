@@ -25,7 +25,6 @@ class _AppState extends State<App> {
             home: BlocBuilder<AppBloc, AppState>(builder: (context, state) {
           if (state is LoggedOff) {
             return LoginPage(userRepository: _userRepo);
-            // return LoginPage(userRepository: _userRepo);
           } else if (state is LoggedIn) {
             return SessionPage();
           }

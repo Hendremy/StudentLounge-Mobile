@@ -18,8 +18,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
 class AppUser {
   final String token;
-  final String username;
-  final String userId;
+  //final String username;
+  //final String userId;
 
-  const AppUser(this.token, this.userId, this.username);
+  const AppUser(this.token/*, this.userId, this.username*/);
 }

@@ -10,8 +10,8 @@ import 'package:http/http.dart' as http;
 class UserRepository {
   var storage = const FlutterSecureStorage();
 
-  //var baseUrl = "https://porthos-intra.cg.helmo.be/e190449";
-  var baseUrl = "https://localhost:44321";
+  var baseUrl = "https://porthos-intra.cg.helmo.be/e190449";
+  // var baseUrl = "https://localhost:44321";
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin _facebookLogin = FacebookLogin();

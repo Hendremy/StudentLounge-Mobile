@@ -1,18 +1,17 @@
 import 'package:bloc/bloc.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'authentication/authentication_bloc.dart';
-import 'authentication/authentication_events.dart';
+import '../app/app_bloc.dart';
+import '../app/app_events.dart';
 import 'login_events.dart';
 import 'login_state.dart';
 import '../services/user_repository.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository userRepository;
-  final AuthenticationBloc authenticationBloc;
+  final AppBloc appBloc;
 
   LoginBloc({
     required this.userRepository,
-    required this.authenticationBloc,
+    required this.appBloc,
   }) : super(LoginInitial()) {
     on<LoginButtonPressed>((event, emit) async {
       emit(LoginLoading());
@@ -35,7 +34,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     var auth = await userRepository.googleSignIn();
     var token = auth?.accessToken;
     if (token != null) {
-      authenticationBloc.add(AuthenticationSuccess(token: token));
+      appBloc.add(UserAuthenticated(user: AppUser(token)));
       emit(LoginInitial());
     } else {
       emit(const LoginFailure(error: "Non authentifié"));
@@ -50,7 +49,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
 
     if (response.statusCode == 200) {
-      authenticationBloc.add(AuthenticationSuccess(token: response.body));
+      appBloc.add(UserAuthenticated(user: AppUser(response.body)));
       emit(LoginInitial());
     } else {
       emit(const LoginFailure(error: "Non authentifié"));

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studentlounge_mobile/login/login_events.dart';
-import 'authentication/authentication_bloc.dart';
+import '../app/app_bloc.dart';
+import 'login_events.dart';
 import 'login_form.dart';
 import '../services/user_repository.dart';
 import 'login_bloc.dart';
@@ -18,17 +18,14 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   late LoginBloc _loginBloc;
-  late AuthenticationBloc _authenticationBloc;
+  late AppBloc _appBloc;
 
   UserRepository get _userRepository => widget.userRepository;
 
   @override
   void initState() {
-    _authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
-    _loginBloc = LoginBloc(
-      userRepository: _userRepository,
-      authenticationBloc: _authenticationBloc,
-    );
+    _appBloc = BlocProvider.of<AppBloc>(context);
+    _loginBloc = LoginBloc(userRepository: UserRepository(), appBloc: _appBloc);
     super.initState();
   }
 
@@ -54,7 +51,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 //Form
                 LoginForm(
-                  authenticationBloc: _authenticationBloc,
                   loginBloc: _loginBloc,
                 ),
                 const SizedBox(height: 30),
@@ -82,6 +78,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _onLoginGooglePressed() {
-    //_loginBloc.add(const LoginButtonPressed(username: "", password: "", typeOfConnexion: 2));
+    _loginBloc.add(const LoginButtonPressed(username: "", password: "", typeOfConnexion: 2));
   }
 }
