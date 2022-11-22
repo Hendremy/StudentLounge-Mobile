@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
-import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:http/http.dart' as http;
+import 'package:studentlounge_mobile/app/app_bloc.dart';
 
 class UserRepository {
   var storage = const FlutterSecureStorage();
@@ -17,17 +16,9 @@ class UserRepository {
   final FacebookLogin _facebookLogin = FacebookLogin();
   Duration duration = const Duration(seconds: 1);
 
-  Future<dynamic> authenticate({
-    required String username,
-    required String password,
-  }) async {
+  Future<dynamic> authenticate({ required String username, required String password,}) async {
     var body = jsonEncode({'username': username, 'password': password});
-    http.Response response = await http.post(Uri.parse('$baseUrl/Auth/Login'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: body);
-    return response;
+    return await retrieveUser('Auth/Login', body);
   }
 
   Future<void> deleteToken() async {
@@ -42,20 +33,32 @@ class UserRepository {
     return storage.containsKey(key: "jwt");
   }
 
-  Future<GoogleSignInAuthentication?> googleSignIn() async {
+  Future<dynamic> googleSignIn() async {
     try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
-      //TODO: JWT Google ok, mais il faut appeler le backend pour obtenir le JWT de notre application
-      // (Appel à url/ExtAuth)
+      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
       if (googleSignInAccount != null) {
-        return googleSignInAccount.authentication;
-      } else {
-        return null;
+        GoogleSignInAuthentication? auth = await googleSignInAccount.authentication;
+        dynamic token = auth.accessToken;
+        var body = jsonEncode({'provider': 'Google', 'token': token});
+        return await retrieveUser('Auth/External', body);
       }
+      return null;
     } catch (error) {
       print(error);
       return null;
     }
+  }
+
+  Future<dynamic> retrieveUser(String methodUrl, String body) async {
+    http.Response response = await http.post(Uri.parse('$baseUrl/$methodUrl'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: body);
+    if(response.statusCode == 200){
+      dynamic user = jsonDecode(response.body);
+      return AppUser(user['userid'], user['token'], user['fullname'], user['image']);
+    }
+    return null;
   }
 }

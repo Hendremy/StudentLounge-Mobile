@@ -31,10 +31,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> googleLogin(Emitter<LoginState> emit) async {
-    var auth = await userRepository.googleSignIn();
-    var token = auth?.accessToken;
-    if (token != null) {
-      appBloc.add(UserAuthenticated(user: AppUser(token)));
+    AppUser userInfo = await userRepository.googleSignIn();
+    if (userInfo != null) {
+      appBloc.add(UserAuthenticated(user: userInfo));
       emit(LoginInitial());
     } else {
       emit(const LoginFailure(error: "Non authentifié"));
@@ -43,13 +42,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Future<void> basicLogin(
       LoginButtonPressed event, Emitter<LoginState> emit) async {
-    final response = await userRepository.authenticate(
+    final userInfo = await userRepository.authenticate(
       username: event.username,
       password: event.password,
     );
 
-    if (response.statusCode == 200) {
-      appBloc.add(UserAuthenticated(user: AppUser(response.body)));
+    if (userInfo != null) {
+      appBloc.add(UserAuthenticated(user: userInfo));
       emit(LoginInitial());
     } else {
       emit(const LoginFailure(error: "Non authentifié"));
