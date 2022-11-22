@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:studentlounge_mobile/login/login_events.dart';
 import '../app/app_bloc.dart';
 import '../app/app_events.dart';
 import 'login_events.dart';
 import 'login_state.dart';
-import '../services/user_repository.dart';
+import '../services/authentication_repository.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository userRepository;
@@ -16,11 +17,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginButtonPressed>((event, emit) async {
       emit(LoginLoading());
       try {
-        switch (event.typeOfConnexion) {
-          case 1:
+        switch (event.authType) {
+          case AuthType.Basic:
             await basicLogin(event, emit);
             break;
-          case 2:
+          case AuthType.Google:
             await googleLogin(emit);
             break;
         }
@@ -31,7 +32,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> googleLogin(Emitter<LoginState> emit) async {
-    dynamic userInfo = await userRepository.googleSignIn();
+    dynamic userInfo = await userRepository.authenticateWithGoogle();
     if (userInfo != null) {
       appBloc.add(UserAuthenticated(user: userInfo));
       emit(LoginInitial());

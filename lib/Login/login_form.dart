@@ -8,10 +8,7 @@ import '../theme.dart' as theme;
 class LoginForm extends StatefulWidget {
   final LoginBloc loginBloc;
 
-  LoginForm({
-    Key? key,
-    required this.loginBloc
-  }) : super(key: key);
+  LoginForm({Key? key, required this.loginBloc}) : super(key: key);
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -131,6 +128,6 @@ class _LoginFormState extends State<LoginForm> {
     _loginBloc.add(LoginButtonPressed(
         username: _usernameController.text,
         password: _passwordController.text,
-        typeOfConnexion: 1));
+        authType: AuthType.Basic));
   }
 }

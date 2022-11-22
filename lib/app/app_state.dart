@@ -1,11 +1,31 @@
-import 'app_bloc.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
 
-abstract class AppState {}
+import 'package:studentlounge_mobile/app/app_user.dart';
 
-class LoggedIn extends AppState {
-  final AppUser user;
+class AppState {
+  AppUser? user;
 
-  LoggedIn({required this.user});
+  AppState({user});
+
+  bool get isLoggedIn => user != null;
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'user': user?.toMap(),
+    };
+  }
+
+  factory AppState.fromMap(Map<String, dynamic> map) {
+    return AppState(
+      user: map['user'] != null
+          ? AppUser.fromMap(map['user'] as Map<String, dynamic>)
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory AppState.fromJson(String source) =>
+      AppState.fromMap(json.decode(source) as Map<String, dynamic>);
 }
-
-class LoggedOff extends AppState {}

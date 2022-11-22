@@ -1,4 +1,4 @@
-import 'app_bloc.dart';
+import 'app_user.dart';
 
 abstract class AppEvent {
   const AppEvent([List props = const []]);

@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../app/app_bloc.dart';
 import 'login_events.dart';
 import 'login_form.dart';
-import '../services/user_repository.dart';
+import '../services/authentication_repository.dart';
 import 'login_bloc.dart';
 import '../theme.dart' as theme;
 
 class LoginPage extends StatefulWidget {
-  final UserRepository userRepository;
+  final AuthenticationRepository userRepository;
 
   const LoginPage({Key? key, required this.userRepository}) : super(key: key);
 
@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   late LoginBloc _loginBloc;
   late AppBloc _appBloc;
 
-  UserRepository get _userRepository => widget.userRepository;
+  AuthenticationRepository get _userRepository => widget.userRepository;
 
   @override
   void initState() {
@@ -78,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _onLoginGooglePressed() {
-    _loginBloc.add(const LoginButtonPressed(username: "", password: "", typeOfConnexion: 2));
+    _loginBloc.add(const LoginButtonPressed(
+        username: "", password: "", authType: AuthType.Google));
   }
 }
