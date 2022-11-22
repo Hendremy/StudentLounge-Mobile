@@ -31,7 +31,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> googleLogin(Emitter<LoginState> emit) async {
-    AppUser userInfo = await userRepository.googleSignIn();
+    dynamic userInfo = await userRepository.googleSignIn();
     if (userInfo != null) {
       appBloc.add(UserAuthenticated(user: userInfo));
       emit(LoginInitial());
