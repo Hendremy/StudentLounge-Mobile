@@ -6,7 +6,7 @@ import 'package:studentlounge_mobile/app/app_user.dart';
 class AppState {
   AppUser? user;
 
-  AppState({user});
+  AppState({this.user});
 
   bool get isLoggedIn => user != null;
 

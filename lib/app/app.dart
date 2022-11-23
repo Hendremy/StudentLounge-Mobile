@@ -18,7 +18,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AppBloc>(
-        create: (BuildContext context) => AppBloc(widget.services.authStorage),
+        create: (BuildContext context) => AppBloc(),
         child: MaterialApp(
             home: BlocBuilder<AppBloc, AppState>(builder: (context, state) {
           if (state.isLoggedIn) {
