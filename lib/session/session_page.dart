@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:studentlounge_mobile/services/api_service.dart';
+import 'package:studentlounge_mobile/session/lessons/lessons_bloc.dart';
 import 'package:studentlounge_mobile/session/profile/profile_page.dart';
 
 import '../theme.dart' as theme;
@@ -20,7 +22,7 @@ class SessionPage extends StatefulWidget {
 class _SessionPageState extends State<SessionPage> {
   final List<Widget> _pages = [
     ChatPage(),
-    LessonsPage(),
+    LessonsPage(lessonsBloc: BlocProvider.of<LessonsBloc>(context)),
     SchedulePage(),
     ProfilePage()
   ];

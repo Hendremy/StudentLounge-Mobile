@@ -6,6 +6,10 @@ import 'lessons_bloc.dart';
 import 'lessons_state.dart';
 
 class LessonsPage extends StatefulWidget {
+  final LessonsBloc lessonsBloc;
+
+  LessonsPage({required this.lessonsBloc});
+  
   @override
   State<LessonsPage> createState() => _LessonsPageState();
 }
