@@ -4,8 +4,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:http/http.dart' as http;
 import 'package:studentlounge_mobile/app/app_user.dart';
+import 'package:studentlounge_mobile/services/api_service.dart';
 
-abstract class UserRepository {
+abstract class UserRepository extends ApiService {
+  UserRepository({required super.apiUrl});
+
   Future<AppUser?> authenticate(
       {required String username, required String password});
 
@@ -13,12 +16,10 @@ abstract class UserRepository {
 }
 
 class AppUserRepository extends UserRepository {
-  final String baseUrl;
-
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin _facebookLogin = FacebookLogin();
 
-  AppUserRepository({required this.baseUrl});
+  AppUserRepository({required super.apiUrl});
   
   @override
   Future<AppUser?> authenticate({
@@ -49,7 +50,7 @@ class AppUserRepository extends UserRepository {
   }
 
   Future<AppUser?> _retrieveUser(String methodUrl, String body) async {
-    http.Response response = await http.post(Uri.parse('$baseUrl/$methodUrl'),
+    http.Response response = await http.post(Uri.parse('$apiUrl/$methodUrl'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

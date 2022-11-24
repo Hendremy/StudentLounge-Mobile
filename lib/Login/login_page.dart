@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studentlounge_mobile/services/services_provider.dart';
+import 'package:studentlounge_mobile/services/services_providers.dart';
 import '../app/app_bloc.dart';
 import 'login_events.dart';
 import 'login_form.dart';
@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     _appBloc = BlocProvider.of<AppBloc>(context);
-    _loginBloc = LoginBloc(userRepository: context.read<ServicesProvider>().userRepo, appBloc: _appBloc);
+    _loginBloc = LoginBloc(userRepository: context.read<AppAnonymServices>().userRepo, appBloc: _appBloc);
     super.initState();
   }
 

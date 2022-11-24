@@ -17,5 +17,5 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory());
-  runApp(App());
+  runApp(const App(key: Key("app") ,apiUrl: "https://porthos-intra.cg.helmo.be/e190449/"));
 }

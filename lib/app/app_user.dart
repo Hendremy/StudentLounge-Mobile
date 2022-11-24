@@ -8,6 +8,13 @@ class AppUser {
 
   AppUser(this.userId, this.token, this.fullname, this.image);
 
+  AppUser.empty(){
+    token = "";
+    fullname = "";
+    userId = "";
+    image = null;
+  }
+
   AppUser.fromJson(String json) {
     dynamic jsonUser = jsonDecode(json);
     userId = jsonUser['id'];

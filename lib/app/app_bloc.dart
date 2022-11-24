@@ -9,13 +9,13 @@ import 'app_user.dart';
 class AppBloc extends HydratedBloc<AppEvent, AppState> {
   late AppUser user;
 
-  AppBloc() : super(AppState()) {
+  AppBloc() : super(AppState(user: AppUser.empty())) {
     on<UserAuthenticated>((event, emit) {
       emit(AppState(user: event.user));
     });
 
     on<UserSignedOff>((event, emit) {
-      emit(AppState());
+      emit(AppState(user: AppUser.empty()));
     });
   }
 
