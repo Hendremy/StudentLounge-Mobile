@@ -5,21 +5,21 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:http/http.dart' as http;
 import 'package:studentlounge_mobile/app/app_user.dart';
 
-abstract class AuthenticationRepository {
+abstract class UserRepository {
   Future<AppUser?> authenticate(
       {required String username, required String password});
 
   Future<AppUser?> authenticateWithGoogle();
 }
 
-class UserRepository extends AuthenticationRepository {
-  final baseUrl = "https://porthos-intra.cg.helmo.be/e190449";
-  // var baseUrl = "https://localhost:44321";
+class AppUserRepository extends UserRepository {
+  final String baseUrl;
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin _facebookLogin = FacebookLogin();
-  Duration duration = const Duration(seconds: 1);
 
+  AppUserRepository({required this.baseUrl});
+  
   @override
   Future<AppUser?> authenticate({
     required String username,

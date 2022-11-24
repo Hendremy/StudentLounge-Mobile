@@ -2,18 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:studentlounge_mobile/services/services_provider.dart';
 import '../../login/login_state.dart';
 import 'lessons_bloc.dart';
 import 'lessons_event.dart';
-import 'lessons_repository.dart';
+import '../../services/lessons_repository.dart';
 import 'lessons_state.dart';
 
 class LessonsPage extends StatefulWidget {
-  //final LessonsRepository lessonRepository;
-
-  // const LessonsPage({Key? key, required this.lessonRepository})
-  //     : super(key: key);
-
   @override
   State<LessonsPage> createState() => _LessonsPageState();
 }
@@ -22,7 +18,7 @@ class _LessonsPageState extends State<LessonsPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LessonsBloc>(
-      create: (context) => LessonsBloc(lessonRepository: LessonsRepository()),
+      create: (context) => LessonsBloc(lessonRepository: context.read<ServicesProvider>().lessonsRepo),
       child: BlocBuilder<LessonsBloc, LessonState>(builder: (
         BuildContext context,
         LessonState state,

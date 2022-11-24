@@ -11,9 +11,7 @@ import 'session_bloc.dart';
 import 'session_state.dart';
 
 class SessionPage extends StatefulWidget {
-  //final AppBloc
-
-  const SessionPage({super.key} /*, AppBloc*/);
+  const SessionPage({super.key});
 
   @override
   State<SessionPage> createState() => _SessionPageState();

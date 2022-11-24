@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'login_events.dart';
-import 'login_state.dart';
-import 'login_bloc.dart';
+import 'package:studentlounge_mobile/login/login_bloc.dart';
+import 'package:studentlounge_mobile/login/login_events.dart';
+import 'package:studentlounge_mobile/login/login_state.dart';
 import '../theme.dart' as theme;
 
 class LoginForm extends StatefulWidget {

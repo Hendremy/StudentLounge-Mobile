@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:studentlounge_mobile/services/services_provider.dart';
 import '../app/app_bloc.dart';
 import 'login_events.dart';
 import 'login_form.dart';
-import '../services/authentication_repository.dart';
+import '../services/user_repository.dart';
 import 'login_bloc.dart';
 import '../theme.dart' as theme;
 
 class LoginPage extends StatefulWidget {
-  final AuthenticationRepository userRepository;
 
-  const LoginPage({Key? key, required this.userRepository}) : super(key: key);
+  //const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -20,12 +20,10 @@ class _LoginPageState extends State<LoginPage> {
   late LoginBloc _loginBloc;
   late AppBloc _appBloc;
 
-  AuthenticationRepository get _userRepository => widget.userRepository;
-
   @override
   void initState() {
     _appBloc = BlocProvider.of<AppBloc>(context);
-    _loginBloc = LoginBloc(userRepository: UserRepository(), appBloc: _appBloc);
+    _loginBloc = LoginBloc(userRepository: context.read<ServicesProvider>().userRepo, appBloc: _appBloc);
     super.initState();
   }
 

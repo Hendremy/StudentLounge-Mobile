@@ -1,10 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:studentlounge_mobile/login/login_events.dart';
+import 'package:studentlounge_mobile/login/login_state.dart';
+import 'package:studentlounge_mobile/services/user_repository.dart';
 import '../app/app_bloc.dart';
 import '../app/app_events.dart';
-import 'login_events.dart';
-import 'login_state.dart';
-import '../services/authentication_repository.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository userRepository;
