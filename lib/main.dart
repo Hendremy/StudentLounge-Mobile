@@ -16,5 +16,6 @@ void main() async {
   HydratedBloc.storage = await HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory());
   runApp(const App(
-      key: Key("app"), apiUrl: "https://porthos-intra.cg.helmo.be/e190449/"));
+      key: Key("app"), apiUrl: "https://porthos-intra.cg.helmo.be/e190449"));
+  // key: Key("app"), apiUrl: "https://10.0.2.2:44321/"));
 }

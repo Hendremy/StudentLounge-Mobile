@@ -18,10 +18,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         switch (event.authType) {
           case AuthType.Basic:
-            await basicLogin(event, emit);
+            await _basicLogin(event, emit);
             break;
           case AuthType.Google:
-            await googleLogin(emit);
+            await _googleLogin(emit);
             break;
         }
       } catch (error) {
@@ -30,7 +30,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
   }
 
-  Future<void> googleLogin(Emitter<LoginState> emit) async {
+  Future<void> _googleLogin(Emitter<LoginState> emit) async {
     dynamic userInfo = await userRepository.authenticateWithGoogle();
     if (userInfo != null) {
       appBloc.add(UserAuthenticated(user: userInfo));
@@ -40,7 +40,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  Future<void> basicLogin(
+  Future<void> _basicLogin(
       LoginButtonPressed event, Emitter<LoginState> emit) async {
     final userInfo = await userRepository.authenticate(
       username: event.username,

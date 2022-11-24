@@ -1,6 +1,4 @@
-import 'dart:html';
 import 'dart:io';
-
 import 'package:studentlounge_mobile/repositories/api_service.dart';
 import 'package:http/http.dart' as http;
 

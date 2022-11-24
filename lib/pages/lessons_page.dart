@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studentlounge_mobile/blocs/lessons/lessons_bloc.dart';
-import 'package:studentlounge_mobile/blocs/lessons/lessons_state.dart';
+import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_bloc.dart';
+import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_state.dart';
 import 'package:studentlounge_mobile/blocs/login/login_state.dart';
 import 'package:studentlounge_mobile/repositories/services_providers.dart';
+import 'package:studentlounge_mobile/theme.dart' as theme;
 
 class LessonsPage extends StatefulWidget {
   @override
@@ -16,16 +17,16 @@ class _LessonsPageState extends State<LessonsPage> {
     return BlocProvider<LessonsBloc>(
       create: (context) => LessonsBloc(
           lessonRepository: context.read<AppStudentServices>().lessonsRepo),
-      child: BlocBuilder<LessonsBloc, LessonState>(builder: (
+      child: BlocBuilder<LessonsBloc, LessonListState>(builder: (
         BuildContext context,
-        LessonState state,
+        LessonListState state,
       ) {
-        if (state is LessonFailure) {
+        if (state is LessonListLoadingFailed) {
           _onWidgetDidBuild(() {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('${state.error}'),
-                backgroundColor: Colors.red,
+                backgroundColor: theme.error,
               ),
             );
           });
@@ -33,7 +34,7 @@ class _LessonsPageState extends State<LessonsPage> {
 
         return Scaffold(
             appBar: AppBar(
-                backgroundColor: const Color.fromRGBO(38, 18, 146, 100),
+                backgroundColor: theme.primary,
                 title: const Center(
                     child: Text('Cours',
                         style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
@@ -47,7 +48,7 @@ class _LessonsPageState extends State<LessonsPage> {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: Colors.blue,
+                          backgroundColor: theme.secondary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),

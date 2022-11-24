@@ -18,8 +18,11 @@ abstract class UserRepository extends ApiService {
 class AppUserRepository extends UserRepository {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin _facebookLogin = FacebookLogin();
+  late String controllerUrl;
 
-  AppUserRepository({required super.apiUrl});
+  AppUserRepository({required super.apiUrl}) {
+    controllerUrl = '$apiUrl/Auth';
+  }
 
   @override
   Future<AppUser?> authenticate({
@@ -27,7 +30,7 @@ class AppUserRepository extends UserRepository {
     required String password,
   }) async {
     var body = jsonEncode({'username': username, 'password': password});
-    return await _retrieveUser('Auth/Login', body);
+    return await _retrieveUser('Login', body);
   }
 
   @override
@@ -40,7 +43,7 @@ class AppUserRepository extends UserRepository {
             await googleSignInAccount.authentication;
         dynamic token = auth.accessToken;
         var body = jsonEncode({'provider': 'Google', 'token': token});
-        return await _retrieveUser('Auth/External', body);
+        return await _retrieveUser('External', body);
       }
       return null;
     } catch (error) {
@@ -49,12 +52,13 @@ class AppUserRepository extends UserRepository {
     }
   }
 
-  Future<AppUser?> _retrieveUser(String methodUrl, String body) async {
-    http.Response response = await http.post(Uri.parse('$apiUrl/$methodUrl'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: body);
+  Future<AppUser?> _retrieveUser(String action, String body) async {
+    http.Response response =
+        await http.post(Uri.parse('$controllerUrl/$action'),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: body);
     if (response.statusCode == 200) {
       return AppUser.fromJson(response.body);
     }

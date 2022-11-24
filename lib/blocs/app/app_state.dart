@@ -8,7 +8,7 @@ class AppState {
 
   AppState({required this.user});
 
-  bool get isLoggedIn => user != null;
+  bool get isLoggedIn => user.id.isNotEmpty;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

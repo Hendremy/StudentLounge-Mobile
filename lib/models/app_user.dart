@@ -3,32 +3,32 @@ import 'dart:convert';
 class AppUser {
   late String token;
   late String fullname;
-  late String userId;
+  late String id;
   late String? image;
 
-  AppUser(this.userId, this.token, this.fullname, this.image);
+  AppUser(this.id, this.token, this.fullname, this.image);
 
-  AppUser.empty(){
+  AppUser.empty() {
     token = "";
     fullname = "";
-    userId = "";
+    id = "";
     image = null;
   }
 
   AppUser.fromJson(String json) {
     dynamic jsonUser = jsonDecode(json);
-    userId = jsonUser['id'];
+    id = jsonUser['id'];
     token = jsonUser['token'];
     fullname = jsonUser['fullname'];
     image = jsonUser['image'];
   }
 
   Map<String, dynamic> toMap() {
-    return {'id': userId, 'token': token, 'fullname': fullname, 'image': image};
+    return {'id': id, 'token': token, 'fullname': fullname, 'image': image};
   }
 
   AppUser.fromMap(Map<String, dynamic> map) {
-    userId = map['id'];
+    id = map['id'];
     token = map['token'];
     fullname = map['fullname'];
     image = map['image'];

@@ -27,5 +27,5 @@ class AppStudentServices extends StudentServicesProvider {
 
   @override
   LessonsRepository get lessonsRepo => AppLessonsRepository(
-      studentId: user.userId, token: user.token, apiUrl: apiUrl);
+      studentId: user.id, token: user.token, apiUrl: apiUrl);
 }
