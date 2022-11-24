@@ -22,18 +22,19 @@ class _AppState extends State<App> {
     return BlocProvider<AppBloc>(
         create: (BuildContext context) => AppBloc(),
         child: MaterialApp(
+            theme: ThemeData(fontFamily: "Exo2"),
             home: BlocBuilder<AppBloc, AppState>(builder: (context, state) {
-          if (state.isLoggedIn) {
-            return Provider(
-                create: (_) =>
-                    AppStudentServices(apiUrl: widget.apiUrl, user: state.user),
-                child: const SessionPage());
-          } else {
-            return Provider(
-                create: (_) => AppAnonymServices(apiUrl: widget.apiUrl),
-                child: LoginPage());
-          }
-        })));
+              if (state.isLoggedIn) {
+                return Provider(
+                    create: (_) => AppStudentServices(
+                        apiUrl: widget.apiUrl, user: state.user),
+                    child: const SessionPage());
+              } else {
+                return Provider(
+                    create: (_) => AppAnonymServices(apiUrl: widget.apiUrl),
+                    child: LoginPage());
+              }
+            })));
   }
 
   @override

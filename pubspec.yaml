@@ -96,6 +96,10 @@ flutter:
      - family: Gugi
        fonts:
          - asset: fonts/Gugi-Regular.ttf
+         
+     - family: Exo2
+       fonts:
+         - asset: fonts/Exo2-Regular.otf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
