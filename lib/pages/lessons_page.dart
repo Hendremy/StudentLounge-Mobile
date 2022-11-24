@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_bloc.dart';
 import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_state.dart';
-import 'package:studentlounge_mobile/blocs/login/login_state.dart';
 import 'package:studentlounge_mobile/repositories/services_providers.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
+import 'package:studentlounge_mobile/widgets/center_message.dart';
+import 'package:studentlounge_mobile/widgets/lesson_button_list.dart';
+import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
+import 'package:studentlounge_mobile/widgets/retry_message.dart';
 
 class LessonsPage extends StatefulWidget {
   @override
@@ -21,52 +24,29 @@ class _LessonsPageState extends State<LessonsPage> {
         BuildContext context,
         LessonListState state,
       ) {
-        if (state is LessonListLoadingFailed) {
-          _onWidgetDidBuild(() {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('${state.error}'),
-                backgroundColor: theme.error,
-              ),
-            );
-          });
-        }
-
         return Scaffold(
             appBar: AppBar(
                 backgroundColor: theme.primary,
                 title: const Center(
                     child: Text('Cours',
                         style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
-            body: SingleChildScrollView(
-                child: Container(
-                    child: Center(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: theme.secondary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 90, vertical: 20),
-                          elevation: 5),
-                      onPressed: state is! LoginLoading
-                          ? _onLessonButtonPressed
-                          : null,
-                      child: const Text(
-                        'Mathématiques',
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                  ]),
-            ))));
+            body: _renderBody(state));
       }),
     );
+  }
+
+  _renderBody(LessonListState state) {
+    if (state is LessonListLoaded) {
+      return LessonButtonList(
+          lessonList: state.lessonList, onPressed: _onLessonButtonPressed);
+    } else if (state is LessonListEmpty) {
+      return const CenterMessage(text: "Vous n'êtes inscrit à aucun cours");
+    } else if (state is LessonListLoading) {
+      return LoadingIndicator();
+    } else {
+      return RetryMessage(
+          text: "Erreur lors du chargement de vos cours", retry: _retry);
+    }
   }
 
   _onWidgetDidBuild(Function callback) {
@@ -75,7 +55,9 @@ class _LessonsPageState extends State<LessonsPage> {
     });
   }
 
-  _onLessonButtonPressed() {
+  _onLessonButtonPressed(int id) {
     //_lessonBloc.add(const LessonButtonPressed("Mathématique"));
   }
+
+  _retry() {}
 }
