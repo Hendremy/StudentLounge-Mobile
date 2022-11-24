@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:studentlounge_mobile/services/api_service.dart';
-import 'package:studentlounge_mobile/session/lessons/lessons_bloc.dart';
-import 'package:studentlounge_mobile/session/profile/profile_page.dart';
-
-import '../theme.dart' as theme;
-import 'chat/chat_page.dart';
-import 'lessons/lessons_page.dart';
-import 'schedule/schedule_page.dart';
-import 'session_bloc.dart';
-import 'session_state.dart';
+import 'package:studentlounge_mobile/blocs/session/session_bloc.dart';
+import 'package:studentlounge_mobile/blocs/session/session_state.dart';
+import 'package:studentlounge_mobile/pages/chat_page.dart';
+import 'package:studentlounge_mobile/pages/lessons_page.dart';
+import 'package:studentlounge_mobile/pages/profile_page.dart';
+import 'package:studentlounge_mobile/pages/schedule_page.dart';
+import 'package:studentlounge_mobile/theme.dart' as theme;
 
 class SessionPage extends StatefulWidget {
   const SessionPage({super.key});
@@ -22,7 +19,7 @@ class SessionPage extends StatefulWidget {
 class _SessionPageState extends State<SessionPage> {
   final List<Widget> _pages = [
     ChatPage(),
-    LessonsPage(lessonsBloc: BlocProvider.of<LessonsBloc>(context)),
+    LessonsPage(),
     SchedulePage(),
     ProfilePage()
   ];

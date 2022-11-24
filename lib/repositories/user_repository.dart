@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:http/http.dart' as http;
-import 'package:studentlounge_mobile/app/app_user.dart';
-import 'package:studentlounge_mobile/services/api_service.dart';
+import 'package:studentlounge_mobile/models/app_user.dart';
+import 'package:studentlounge_mobile/repositories/api_service.dart';
 
 abstract class UserRepository extends ApiService {
   UserRepository({required super.apiUrl});
@@ -20,7 +20,7 @@ class AppUserRepository extends UserRepository {
   final FacebookLogin _facebookLogin = FacebookLogin();
 
   AppUserRepository({required super.apiUrl});
-  
+
   @override
   Future<AppUser?> authenticate({
     required String username,

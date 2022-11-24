@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'lessons_event.dart';
-import '../../services/lessons_repository.dart';
-import 'lessons_state.dart';
+import 'package:studentlounge_mobile/blocs/lessons/lessons_event.dart';
+import 'package:studentlounge_mobile/blocs/lessons/lessons_state.dart';
+import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
 
 class LessonsBloc extends Bloc<LessonEvent, LessonState> {
   final LessonsRepository lessonRepository;

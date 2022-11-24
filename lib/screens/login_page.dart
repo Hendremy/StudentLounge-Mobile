@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studentlounge_mobile/services/services_providers.dart';
-import '../app/app_bloc.dart';
-import 'login_events.dart';
-import 'login_form.dart';
-import '../services/user_repository.dart';
-import 'login_bloc.dart';
-import '../theme.dart' as theme;
+import 'package:studentlounge_mobile/blocs/app/app_bloc.dart';
+import 'package:studentlounge_mobile/blocs/login/login_bloc.dart';
+import 'package:studentlounge_mobile/blocs/login/login_events.dart';
+import 'package:studentlounge_mobile/repositories/services_providers.dart';
+import 'package:studentlounge_mobile/theme.dart' as theme;
+import 'package:studentlounge_mobile/widgets/login_form.dart';
 
 class LoginPage extends StatefulWidget {
-
-  //const LoginPage({Key? key}) : super(key: key);
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -23,7 +19,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     _appBloc = BlocProvider.of<AppBloc>(context);
-    _loginBloc = LoginBloc(userRepository: context.read<AppAnonymServices>().userRepo, appBloc: _appBloc);
+    _loginBloc = LoginBloc(
+        userRepository: context.read<AppAnonymServices>().userRepo,
+        appBloc: _appBloc);
     super.initState();
   }
 

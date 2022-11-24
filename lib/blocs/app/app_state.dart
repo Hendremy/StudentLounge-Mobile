@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:studentlounge_mobile/app/app_user.dart';
+import 'package:studentlounge_mobile/models/app_user.dart';
 
 class AppState {
   final AppUser user;
@@ -17,9 +17,7 @@ class AppState {
   }
 
   factory AppState.fromMap(Map<String, dynamic> map) {
-    return AppState(
-      user: AppUser.fromMap(map['user'] as Map<String, dynamic>)
-    );
+    return AppState(user: AppUser.fromMap(map['user'] as Map<String, dynamic>));
   }
 
   String toJson() => json.encode(toMap());

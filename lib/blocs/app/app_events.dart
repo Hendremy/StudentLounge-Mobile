@@ -1,4 +1,4 @@
-import 'app_user.dart';
+import 'package:studentlounge_mobile/models/app_user.dart';
 
 abstract class AppEvent {
   const AppEvent([List props = const []]);

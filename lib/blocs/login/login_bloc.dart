@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:studentlounge_mobile/login/login_events.dart';
-import 'package:studentlounge_mobile/login/login_state.dart';
-import 'package:studentlounge_mobile/services/user_repository.dart';
-import '../app/app_bloc.dart';
-import '../app/app_events.dart';
+import 'package:studentlounge_mobile/blocs/app/app_bloc.dart';
+import 'package:studentlounge_mobile/blocs/app/app_events.dart';
+import 'package:studentlounge_mobile/blocs/login/login_events.dart';
+import 'package:studentlounge_mobile/blocs/login/login_state.dart';
+import 'package:studentlounge_mobile/repositories/user_repository.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository userRepository;
