@@ -15,14 +15,6 @@ class AppUser {
     image = null;
   }
 
-  AppUser.fromJson(String json) {
-    dynamic jsonUser = jsonDecode(json);
-    id = jsonUser['id'];
-    token = jsonUser['token'];
-    fullname = jsonUser['fullname'];
-    image = jsonUser['image'];
-  }
-
   Map<String, dynamic> toMap() {
     return {'id': id, 'token': token, 'fullname': fullname, 'image': image};
   }

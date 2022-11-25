@@ -15,6 +15,8 @@ class LessonsPage extends StatefulWidget {
 }
 
 class _LessonsPageState extends State<LessonsPage> {
+  late LessonsBloc lessonBloc;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LessonsBloc>(
@@ -27,6 +29,11 @@ class _LessonsPageState extends State<LessonsPage> {
         return Scaffold(
             appBar: AppBar(
                 backgroundColor: theme.primary,
+                actions: [
+                  IconButton(
+                      onPressed: _displayJoinLessons,
+                      icon: const Icon(Icons.add))
+                ],
                 title: const Center(
                     child: Text('Cours',
                         style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
@@ -49,15 +56,11 @@ class _LessonsPageState extends State<LessonsPage> {
     }
   }
 
-  _onWidgetDidBuild(Function callback) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      callback();
-    });
-  }
-
   _onLessonButtonPressed(int id) {
     //_lessonBloc.add(const LessonButtonPressed("Mathématique"));
   }
 
   _retry() {}
+
+  _displayJoinLessons() {}
 }

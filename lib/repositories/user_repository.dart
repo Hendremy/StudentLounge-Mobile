@@ -60,7 +60,8 @@ class AppUserRepository extends UserRepository {
             },
             body: body);
     if (response.statusCode == 200) {
-      return AppUser.fromJson(response.body);
+      Map<String, dynamic> jsonMap = jsonDecode(response.body);
+      return AppUser.fromMap(jsonMap);
     }
     return null;
   }

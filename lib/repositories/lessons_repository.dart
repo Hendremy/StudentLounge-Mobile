@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:studentlounge_mobile/models/lesson_model.dart';
 import 'package:studentlounge_mobile/repositories/api_service.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,19 +28,24 @@ class AppLessonsRepository extends LessonsRepository {
 
   @override
   Future<dynamic> getAllLessons() async {
-    return null;
+    return await getLessonList(null);
   }
 
   @override
   Future<dynamic> getUserLessons() async {
+    return await getLessonList(studentId);
+  }
+
+  Future<List<Lesson>?> getLessonList(String? userId) async {
+    String userIdRouteParam = userId == null ? "/user/$userId" : "";
     http.Response response = await http.get(
-        Uri.parse('$controllerUrl/user/$studentId'),
+        Uri.parse('$controllerUrl$userIdRouteParam'),
         headers: <String, String>{
           HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: 'Bearer $token'
         });
     if (response.statusCode == 200) {
-      //TODO: Continuer
+      return convertJSONLessonList(response.body);
     }
     return null;
   }
@@ -52,5 +59,14 @@ class AppLessonsRepository extends LessonsRepository {
           HttpHeaders.authorizationHeader: 'Bearer $token'
         });
     return response.statusCode == 200;
+  }
+
+  List<Lesson> convertJSONLessonList(String jsonList) {
+    List<dynamic> lessonMapList = jsonDecode(jsonList);
+    List<Lesson> lessonList = [];
+    for (var lessonMap in lessonMapList) {
+      lessonList.add(Lesson.fromMap(lessonMap));
+    }
+    return lessonList;
   }
 }
