@@ -8,7 +8,7 @@ class RetryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-        onPressed: retry(),
+        onPressed: () => retry(),
         icon: const Icon(Icons.refresh, size: 24),
         label: Text(text));
   }

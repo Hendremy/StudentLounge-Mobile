@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_bloc.dart';
 import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_event.dart';
 import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_state.dart';
-import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
 import 'package:studentlounge_mobile/repositories/services_providers.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 import 'package:studentlounge_mobile/widgets/center_message.dart';
@@ -33,21 +31,18 @@ class _LessonsPageState extends State<LessonsPage> {
         BuildContext context,
         LessonListState state,
       ) {
-        return Provider<LessonsRepository>(
-          create: (_) => lessonBloc.lessonRepository,
-          child: Scaffold(
-              appBar: AppBar(
-                  backgroundColor: theme.primary,
-                  actions: [
-                    IconButton(
-                        onPressed: _displayJoinLessons,
-                        icon: const Icon(Icons.add))
-                  ],
-                  title: const Center(
-                      child: Text('Cours',
-                          style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
-              body: _renderBody(state)),
-        );
+        return Scaffold(
+            appBar: AppBar(
+                backgroundColor: theme.primary,
+                actions: [
+                  IconButton(
+                      onPressed: _displayJoinLessons,
+                      icon: const Icon(Icons.add))
+                ],
+                title: const Center(
+                    child: Text('Cours',
+                        style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
+            body: _renderBody(state));
       }),
     );
   }
@@ -76,6 +71,6 @@ class _LessonsPageState extends State<LessonsPage> {
 
   _displayJoinLessons() {
     showDialog(
-        context: context, builder: (context) => const ManageLessonsDialog());
+        context: context, builder: (context) => ManageLessonsDialog(lessonsRepository: lessonBloc.lessonRepository));
   }
 }

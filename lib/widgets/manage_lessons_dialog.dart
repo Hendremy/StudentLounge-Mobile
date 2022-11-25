@@ -10,7 +10,8 @@ import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
 import 'package:studentlounge_mobile/widgets/retry_message.dart';
 
 class ManageLessonsDialog extends StatefulWidget {
-  const ManageLessonsDialog({super.key});
+  final LessonsRepository lessonsRepository;
+  const ManageLessonsDialog({super.key, required this.lessonsRepository});
 
   @override
   State<ManageLessonsDialog> createState() => _ManageLessonsDialogState();
@@ -23,7 +24,7 @@ class _ManageLessonsDialogState extends State<ManageLessonsDialog> {
   Widget build(BuildContext context) {
     return BlocProvider(create: (context) {
       manageLessonBloc = ManageLessonsBloc(
-          lessonsRepo: context.read<LessonsRepository>());
+          lessonsRepo: widget.lessonsRepository);
       return manageLessonBloc;
     }, child: BlocBuilder<ManageLessonsBloc, ManageLessonsState>(
       builder: (context, state) {
