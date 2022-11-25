@@ -8,7 +8,7 @@ import 'package:studentlounge_mobile/theme.dart' as theme;
 import 'package:studentlounge_mobile/widgets/center_message.dart';
 import 'package:studentlounge_mobile/widgets/lesson_button_list.dart';
 import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
-import 'package:studentlounge_mobile/widgets/manage_lessons_dialog.dart';
+import 'package:studentlounge_mobile/pages/manage_lessons_dialog.dart';
 import 'package:studentlounge_mobile/widgets/retry_message.dart';
 
 class LessonsPage extends StatefulWidget {
