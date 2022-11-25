@@ -8,4 +8,9 @@ class Lesson {
     id = map['id'];
     name = map['name'];
   }
+
+  Lesson.empty() {
+    name = "";
+    id = 0;
+  }
 }

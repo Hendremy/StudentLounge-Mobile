@@ -11,7 +11,8 @@ abstract class LessonsRepository extends StudentApiService {
   Future<dynamic> getLesson(String lessonName);
   Future<dynamic> getAllLessons();
   Future<dynamic> getUserLessons();
-  Future<bool> joinLesson(int lessonId);
+  Future<Lesson> joinLesson(int lessonId);
+  Future<Lesson> leaveLesson(int lessonId);
 }
 
 class AppLessonsRepository extends LessonsRepository {
@@ -28,7 +29,7 @@ class AppLessonsRepository extends LessonsRepository {
 
   @override
   Future<dynamic> getAllLessons() async {
-    return await getLessonList(null);
+    return await getLessonList("");
   }
 
   @override
@@ -36,8 +37,8 @@ class AppLessonsRepository extends LessonsRepository {
     return await getLessonList(studentId);
   }
 
-  Future<List<Lesson>?> getLessonList(String? userId) async {
-    String userIdRouteParam = userId == null ? "/user/$userId" : "";
+  Future<List<Lesson>?> getLessonList(String userId) async {
+    String userIdRouteParam = userId.isEmpty ? "/user/$userId" : "";
     http.Response response = await http.get(
         Uri.parse('$controllerUrl$userIdRouteParam'),
         headers: <String, String>{
@@ -51,14 +52,27 @@ class AppLessonsRepository extends LessonsRepository {
   }
 
   @override
-  Future<bool> joinLesson(int lessonId) async {
-    http.Response response = await http.put(
-        Uri.parse('$controllerUrl/$lessonId/user/$studentId'),
-        headers: <String, String>{
+  Future<Lesson> joinLesson(int lessonId) async {
+    return await manageLesson(true, lessonId);
+  }
+
+  @override
+  Future<Lesson> leaveLesson(int lessonId) async {
+    return await manageLesson(false, lessonId);
+  }
+
+  Future<Lesson> manageLesson(bool join, int lessonId) async {
+    Uri uri = Uri.parse('$controllerUrl/$lessonId/user/$studentId');
+    Map<String, String> headers = {
           HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: 'Bearer $token'
-        });
-    return response.statusCode == 200;
+        };
+    http.Response response = join ? await http.put(uri, headers: headers) : await http.delete(uri, headers: headers);
+    if(response.statusCode == 200){
+      Map<String, dynamic> jsonMap = jsonDecode(response.body);
+      return Lesson.fromMap(jsonMap);
+    }
+    return Lesson.empty();
   }
 
   List<Lesson> convertJSONLessonList(String jsonList) {
