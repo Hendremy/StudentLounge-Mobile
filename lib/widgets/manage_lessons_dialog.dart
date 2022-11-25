@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studentlounge_mobile/blocs/manage_lessons/manage_lessons_bloc.dart';
 import 'package:studentlounge_mobile/blocs/manage_lessons/manage_lessons_events.dart';
 import 'package:studentlounge_mobile/blocs/manage_lessons/manage_lessons_state.dart';
+import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
 import 'package:studentlounge_mobile/repositories/services_providers.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
@@ -22,7 +23,7 @@ class _ManageLessonsDialogState extends State<ManageLessonsDialog> {
   Widget build(BuildContext context) {
     return BlocProvider(create: (context) {
       manageLessonBloc = ManageLessonsBloc(
-          lessonsRepo: context.read<AppStudentServices>().lessonsRepo);
+          lessonsRepo: context.read<LessonsRepository>());
       return manageLessonBloc;
     }, child: BlocBuilder<ManageLessonsBloc, ManageLessonsState>(
       builder: (context, state) {

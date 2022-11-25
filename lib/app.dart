@@ -25,12 +25,12 @@ class _AppState extends State<App> {
             theme: ThemeData(fontFamily: "Exo2"),
             home: BlocBuilder<AppBloc, AppState>(builder: (context, state) {
               if (state.isLoggedIn) {
-                return Provider(
+                return Provider<AppStudentServices>(
                     create: (_) => AppStudentServices(
                         apiUrl: widget.apiUrl, user: state.user),
                     child: const SessionPage());
               } else {
-                return Provider(
+                return Provider<AppAnonymServices>(
                     create: (_) => AppAnonymServices(apiUrl: widget.apiUrl),
                     child: LoginPage());
               }
