@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_bloc.dart';
+import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_event.dart';
 import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_state.dart';
 import 'package:studentlounge_mobile/repositories/services_providers.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 import 'package:studentlounge_mobile/widgets/center_message.dart';
 import 'package:studentlounge_mobile/widgets/lesson_button_list.dart';
 import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
+import 'package:studentlounge_mobile/widgets/manage_lessons_dialog.dart';
 import 'package:studentlounge_mobile/widgets/retry_message.dart';
 
 class LessonsPage extends StatefulWidget {
@@ -20,8 +22,11 @@ class _LessonsPageState extends State<LessonsPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LessonsBloc>(
-      create: (context) => LessonsBloc(
-          lessonRepository: context.read<AppStudentServices>().lessonsRepo),
+      create: (context) {
+        lessonBloc = LessonsBloc(
+            lessonRepository: context.read<AppStudentServices>().lessonsRepo);
+        return lessonBloc;
+      },
       child: BlocBuilder<LessonsBloc, LessonListState>(builder: (
         BuildContext context,
         LessonListState state,
@@ -60,7 +65,12 @@ class _LessonsPageState extends State<LessonsPage> {
     //_lessonBloc.add(const LessonButtonPressed("Mathématique"));
   }
 
-  _retry() {}
+  _retry() {
+    lessonBloc.add(LessonListLoadRetry());
+  }
 
-  _displayJoinLessons() {}
+  _displayJoinLessons() {
+    showDialog(
+        context: context, builder: (context) => const ManageLessonsDialog());
+  }
 }

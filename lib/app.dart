@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:studentlounge_mobile/blocs/app/app_bloc.dart';
 import 'package:studentlounge_mobile/blocs/app/app_state.dart';
 import 'package:studentlounge_mobile/repositories/services_providers.dart';
-import 'package:studentlounge_mobile/screens/login_page.dart';
-import 'package:studentlounge_mobile/screens/session_page.dart';
+import 'package:studentlounge_mobile/screens/login_screen.dart';
+import 'package:studentlounge_mobile/screens/session_screen.dart';
 
 class App extends StatefulWidget {
   final String apiUrl;
