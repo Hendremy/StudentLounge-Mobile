@@ -38,7 +38,7 @@ class AppLessonsRepository extends LessonsRepository {
   }
 
   Future<List<Lesson>?> getLessonList(String userId) async {
-    String userIdRouteParam = userId.isEmpty ? "/user/$userId" : "";
+    String userIdRouteParam = userId.isNotEmpty ? "/user/$userId" : "";
     http.Response response = await http.get(
         Uri.parse('$controllerUrl$userIdRouteParam'),
         headers: <String, String>{

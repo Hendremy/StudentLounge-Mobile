@@ -6,6 +6,7 @@ import 'package:studentlounge_mobile/blocs/manage_lessons/manage_lessons_state.d
 import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
 import 'package:studentlounge_mobile/repositories/services_providers.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
+import 'package:studentlounge_mobile/widgets/join_lesson_list.dart';
 import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
 import 'package:studentlounge_mobile/widgets/retry_message.dart';
 
@@ -34,7 +35,11 @@ class _ManageLessonsDialogState extends State<ManageLessonsDialog> {
             style: TextStyle(color: theme.white),
           ),
           backgroundColor: theme.primary,
-          content: _renderContent(state),
+          content: SizedBox(
+            child: _renderContent(state),
+            width: 300,
+            height: 400,
+            ),
         );
       },
     ));
@@ -44,7 +49,7 @@ class _ManageLessonsDialogState extends State<ManageLessonsDialog> {
     if (state is ManageLessonsLoading) {
       return LoadingIndicator();
     } else if (state is ManageLessonsLoaded) {
-      return Text("Youpi");
+      return JoinLessonList(lessonList: state.lessons, lessonsRepository: widget.lessonsRepository);
     } else {
       return RetryMessage(
           text: "Erreur lors du chargement des cours", retry: _retry);

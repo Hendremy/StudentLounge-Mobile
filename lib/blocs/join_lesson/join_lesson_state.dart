@@ -10,12 +10,12 @@ class JoinLessonInitial extends JoinLessonState{
   JoinLessonInitial({required super.lesson});
 }
 
-class LessonJoined extends JoinLessonState {
-  LessonJoined({required super.lesson});
+class LessonLeavable extends JoinLessonState {
+  LessonLeavable({required super.lesson});
 }
 
-class LessonLeft extends JoinLessonState {
-  LessonLeft({required super.lesson});
+class LessonJoinable extends JoinLessonState {
+  LessonJoinable({required super.lesson});
 }
 
 class JoinLessonLoading extends JoinLessonState{
