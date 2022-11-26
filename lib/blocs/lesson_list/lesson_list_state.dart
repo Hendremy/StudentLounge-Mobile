@@ -17,5 +17,3 @@ class LessonListLoaded extends LessonListState {
 
   LessonListLoaded({required this.lessonList});
 }
-
-class LessonListEmpty extends LessonListState {}

@@ -31,11 +31,7 @@ class LessonsBloc extends Bloc<LessonEvent, LessonListState> {
     emit(LessonListLoading());
     List<Lesson>? lessonList = await lessonRepository.getUserLessons();
     if (lessonList != null) {
-      if (lessonList.isNotEmpty) {
-        emit(LessonListLoaded(lessonList: lessonList));
-      } else {
-        emit(LessonListEmpty());
-      }
+      emit(LessonListLoaded(lessonList: lessonList));
     } else {
       emit(LessonListLoadingFailed(
           error: "Erreur lors du chargement des cours"));

@@ -8,7 +8,11 @@ class JoinLessonBloc extends Bloc<JoinLessonEvent, JoinLessonState> {
   final Lesson lesson;
   final LessonsRepository lessonsRepository;
 
-  JoinLessonBloc({required this.lesson, required this.lessonsRepository}) : super(JoinLessonInitial(lesson: lesson)) {
+  JoinLessonBloc(
+      {required this.lesson,
+      required this.lessonsRepository,
+      required JoinLessonState joinLessonState})
+      : super(joinLessonState) {
     on<TryJoinLesson>((event, emit) {
       _joinLesson();
     });
@@ -21,9 +25,9 @@ class JoinLessonBloc extends Bloc<JoinLessonEvent, JoinLessonState> {
   _leaveLesson() async {
     emit(JoinLessonLoading(lesson: lesson));
     Lesson result = await lessonsRepository.leaveLesson(lesson.id);
-    if(result.id == 0){
+    if (result.id == 0) {
       emit(LessonLeavable(lesson: lesson));
-    }else{
+    } else {
       emit(LessonJoinable(lesson: lesson));
     }
   }
@@ -31,9 +35,9 @@ class JoinLessonBloc extends Bloc<JoinLessonEvent, JoinLessonState> {
   _joinLesson() async {
     emit(JoinLessonLoading(lesson: lesson));
     Lesson result = await lessonsRepository.joinLesson(lesson.id);
-    if(result.id == 0){
+    if (result.id == 0) {
       emit(LessonJoinable(lesson: lesson));
-    }else{
+    } else {
       emit(LessonLeavable(lesson: lesson));
     }
   }

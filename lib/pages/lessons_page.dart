@@ -35,9 +35,11 @@ class _LessonsPageState extends State<LessonsPage> {
             appBar: AppBar(
                 backgroundColor: theme.primary,
                 actions: [
-                  IconButton(
-                      onPressed: _displayJoinLessons,
-                      icon: const Icon(Icons.add))
+                  if (state is! LessonListLoadingFailed)
+                    IconButton(
+                      onPressed: () => _displayJoinLessons(state),
+                      icon: const Icon(Icons.add),
+                    )
                 ],
                 title: const Center(
                     child: Text('Cours',
@@ -49,10 +51,12 @@ class _LessonsPageState extends State<LessonsPage> {
 
   _renderBody(LessonListState state) {
     if (state is LessonListLoaded) {
-      return LessonButtonList(
-          lessonList: state.lessonList, onPressed: _onLessonButtonPressed);
-    } else if (state is LessonListEmpty) {
-      return const CenterMessage(text: "Vous n'êtes inscrit à aucun cours");
+      if (state.lessonList.isEmpty) {
+        return const CenterMessage(text: "Vous n'êtes inscrit à aucun cours");
+      } else {
+        return LessonButtonList(
+            lessonList: state.lessonList, onPressed: _onLessonButtonPressed);
+      }
     } else if (state is LessonListLoading) {
       return LoadingIndicator();
     } else {
@@ -69,8 +73,14 @@ class _LessonsPageState extends State<LessonsPage> {
     lessonBloc.add(LessonListLoadRetry());
   }
 
-  _displayJoinLessons() {
-    showDialog(
-        context: context, builder: (context) => ManageLessonsDialog(lessonsRepository: lessonBloc.lessonRepository));
+  _displayJoinLessons(state) {
+    if (state is LessonListLoaded) {
+      showDialog(
+          context: context,
+          builder: (context) => ManageLessonsDialog(
+                lessonsRepository: lessonBloc.lessonRepository,
+                joinedLessons: state.lessonList,
+              ));
+    }
   }
 }

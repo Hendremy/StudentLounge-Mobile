@@ -1,4 +1,6 @@
-class Lesson {
+import 'package:equatable/equatable.dart';
+
+class Lesson extends Equatable {
   late String name;
   late int id;
 
@@ -13,4 +15,7 @@ class Lesson {
     name = "";
     id = 0;
   }
+
+  @override
+  List<Object?> get props => [id, name];
 }
