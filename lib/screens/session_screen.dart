@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:studentlounge_mobile/blocs/session/session_bloc.dart';
 import 'package:studentlounge_mobile/blocs/session/session_state.dart';
-import 'package:studentlounge_mobile/pages/chat_page.dart';
-import 'package:studentlounge_mobile/pages/lessons_page.dart';
-import 'package:studentlounge_mobile/pages/profile_page.dart';
-import 'package:studentlounge_mobile/pages/schedule_page.dart';
+import 'package:studentlounge_mobile/tabs/chat_tab.dart';
+import 'package:studentlounge_mobile/tabs/lessons_tab.dart';
+import 'package:studentlounge_mobile/tabs/profile_tab.dart';
+import 'package:studentlounge_mobile/tabs/schedule_tab.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 
 class SessionPage extends StatefulWidget {
@@ -18,10 +18,10 @@ class SessionPage extends StatefulWidget {
 
 class _SessionPageState extends State<SessionPage> {
   final List<Widget> _pages = [
-    ChatPage(),
-    LessonListPage(),
-    SchedulePage(),
-    ProfilePage()
+    ChatTab(),
+    LessonsTab(),
+    ScheduleTab(),
+    ProfileTab()
   ];
   int _currentTab = 0;
 
@@ -31,7 +31,7 @@ class _SessionPageState extends State<SessionPage> {
     });
   }
 
-  //widget.appBloc pour accéder au token de l'user
+  //TODO: Utiliser PageView pour naviguer entre les pages pour garder leur état
 
   @override
   Widget build(BuildContext context) {

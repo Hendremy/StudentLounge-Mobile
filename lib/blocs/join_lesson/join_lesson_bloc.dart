@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:studentlounge_mobile/blocs/join_lesson/join_lesson_events.dart';
 import 'package:studentlounge_mobile/blocs/join_lesson/join_lesson_state.dart';
-import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_bloc.dart';
-import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_event.dart';
 import 'package:studentlounge_mobile/models/lesson_model.dart';
 import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
 

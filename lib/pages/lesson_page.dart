@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:studentlounge_mobile/models/lesson_file_model.dart';
 import 'package:studentlounge_mobile/models/lesson_model.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
+import 'package:studentlounge_mobile/widgets/file_table.dart';
 
 class LessonPage extends StatefulWidget {
   final Lesson lesson;
@@ -15,6 +15,21 @@ class LessonPage extends StatefulWidget {
 }
 
 class _LessonPageState extends State<LessonPage> {
+  final List<LessonFile> fakeFiles = [
+    LessonFile(
+        id: 1,
+        name: 'Fake.pdf',
+        user: 'Test',
+        date: DateTime.now(),
+        type: FileType.summary),
+    LessonFile(
+        id: 2,
+        name: 'Fake.txt',
+        user: 'Toto',
+        date: DateTime.now(),
+        type: FileType.notes),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +38,7 @@ class _LessonPageState extends State<LessonPage> {
           title: Center(
               child: Text(widget.lessonName,
                   style: const TextStyle(fontSize: 30)))),
+      body: SingleChildScrollView(child: FileTable(files: fakeFiles)),
     );
   }
 }

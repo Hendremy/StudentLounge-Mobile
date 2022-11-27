@@ -4,14 +4,14 @@ import 'package:studentlounge_mobile/blocs/app/app_bloc.dart';
 import 'package:studentlounge_mobile/blocs/app/app_events.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class ProfileTab extends StatefulWidget {
+  const ProfileTab({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<ProfileTab> createState() => _ProfileTabState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfileTabState extends State<ProfileTab> {
   late AppBloc appBloc;
 
   @override

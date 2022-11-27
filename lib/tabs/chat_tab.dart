@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 
-class SchedulePage extends StatefulWidget {
-  const SchedulePage({super.key});
+class ChatTab extends StatefulWidget {
+  const ChatTab({super.key});
 
   @override
-  State<SchedulePage> createState() => _SchedulePageState();
+  State<ChatTab> createState() => _ChatTabState();
 }
 
-class _SchedulePageState extends State<SchedulePage> {
+class _ChatTabState extends State<ChatTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
             backgroundColor: theme.primary,
             title: const Center(
-                child: Text('Horaire',
+                child: Text('Messagerie',
                     style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
-        body: Center(child: Text('Horaire ')));
+        body: Center(child: Text('Messagerie')));
   }
 }
