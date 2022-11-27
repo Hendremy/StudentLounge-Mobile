@@ -4,7 +4,7 @@ import 'package:studentlounge_mobile/widgets/lesson_button.dart';
 
 class LessonButtonList extends StatefulWidget {
   List<Lesson> lessonList;
-  final Function(int id) onPressed;
+  final Function(Lesson lesson) onPressed;
   LessonButtonList(
       {super.key, required this.lessonList, required this.onPressed});
 
@@ -15,12 +15,9 @@ class LessonButtonList extends StatefulWidget {
 class _LessonButtonListState extends State<LessonButtonList> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <LessonButton>[
-          for (Lesson lesson in widget.lessonList)
-            LessonButton(lesson: lesson, onPressed: widget.onPressed)
-        ]));
+    return ListView(padding: const EdgeInsets.all(8), children: <LessonButton>[
+      for (Lesson lesson in widget.lessonList)
+        LessonButton(lesson: lesson, onPressed: widget.onPressed)
+    ]);
   }
 }

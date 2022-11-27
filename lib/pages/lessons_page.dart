@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_bloc.dart';
 import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_event.dart';
 import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_state.dart';
+import 'package:studentlounge_mobile/models/lesson_model.dart';
+import 'package:studentlounge_mobile/pages/lesson_page.dart';
 import 'package:studentlounge_mobile/repositories/services_providers.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 import 'package:studentlounge_mobile/widgets/center_message.dart';
@@ -11,12 +13,14 @@ import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
 import 'package:studentlounge_mobile/pages/manage_lessons_dialog.dart';
 import 'package:studentlounge_mobile/widgets/retry_message.dart';
 
-class LessonsPage extends StatefulWidget {
+class LessonListPage extends StatefulWidget {
+  const LessonListPage({super.key});
+
   @override
-  State<LessonsPage> createState() => _LessonsPageState();
+  State<LessonListPage> createState() => _LessonListPageState();
 }
 
-class _LessonsPageState extends State<LessonsPage> {
+class _LessonListPageState extends State<LessonListPage> {
   late LessonListBloc lessonListBloc;
 
   @override
@@ -65,8 +69,14 @@ class _LessonsPageState extends State<LessonsPage> {
     }
   }
 
-  _onLessonButtonPressed(int id) {
+  _onLessonButtonPressed(Lesson lesson) {
     //_lessonBloc.add(const LessonButtonPressed("Mathématique"));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => LessonPage(
+                  lesson: lesson,
+                )));
   }
 
   _retry() {

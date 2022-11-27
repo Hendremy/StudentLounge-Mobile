@@ -19,7 +19,7 @@ class SessionPage extends StatefulWidget {
 class _SessionPageState extends State<SessionPage> {
   final List<Widget> _pages = [
     ChatPage(),
-    LessonsPage(),
+    LessonListPage(),
     SchedulePage(),
     ProfilePage()
   ];

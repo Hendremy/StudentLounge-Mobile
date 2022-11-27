@@ -4,27 +4,23 @@ import 'package:studentlounge_mobile/theme.dart' as theme;
 
 class LessonButton extends StatelessWidget {
   final Lesson lesson;
-  final Function(int id) onPressed;
+  final Function(Lesson lesson) onPressed;
 
   const LessonButton(
       {super.key, required this.lesson, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: theme.secondary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 90, vertical: 20),
-          elevation: 5),
-      onPressed: onPressed(lesson.id),
-      child: Text(
-        lesson.name,
-        style: const TextStyle(fontSize: 30),
-      ),
-    );
+    return Card(
+        color: theme.secondary,
+        child: ListTile(
+            onTap: () => onPressed(lesson),
+            trailing: const Icon(
+              Icons.chevron_right,
+              size: 40,
+              color: theme.white,
+            ),
+            title: Text(lesson.name,
+                style: const TextStyle(color: theme.white, fontSize: 30))));
   }
 }
