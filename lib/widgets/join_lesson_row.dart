@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studentlounge_mobile/blocs/join_lesson/join_lesson_bloc.dart';
 import 'package:studentlounge_mobile/blocs/join_lesson/join_lesson_events.dart';
 import 'package:studentlounge_mobile/blocs/join_lesson/join_lesson_state.dart';
+import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_bloc.dart';
 import 'package:studentlounge_mobile/models/lesson_model.dart';
 import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
 import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
@@ -35,7 +36,8 @@ class _JoinLessonRowState extends State<JoinLessonRow> {
         joinLessonBloc = JoinLessonBloc(
             lesson: widget.lesson,
             lessonsRepository: widget.lessonsRepository,
-            joinLessonState: widget.state);
+            joinLessonState: widget.state,
+            lessonListBloc: BlocProvider.of<LessonListBloc>(context));
         return joinLessonBloc;
       },
       child: BlocBuilder<JoinLessonBloc, JoinLessonState>(

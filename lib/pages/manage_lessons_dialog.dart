@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_bloc.dart';
+import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_event.dart';
 import 'package:studentlounge_mobile/blocs/manage_lessons/manage_lessons_bloc.dart';
 import 'package:studentlounge_mobile/blocs/manage_lessons/manage_lessons_events.dart';
 import 'package:studentlounge_mobile/blocs/manage_lessons/manage_lessons_state.dart';
@@ -24,14 +26,21 @@ class ManageLessonsDialog extends StatefulWidget {
 }
 
 class _ManageLessonsDialogState extends State<ManageLessonsDialog> {
-  late ManageLessonsBloc manageLessonBloc;
+  late ManageLessonsBloc manageLessonsBloc;
+  late LessonListBloc lessonListBloc;
+
+  @override
+  void initState() {
+    lessonListBloc = BlocProvider.of<LessonListBloc>(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(create: (context) {
-      manageLessonBloc =
+      manageLessonsBloc =
           ManageLessonsBloc(lessonsRepo: widget.lessonsRepository);
-      return manageLessonBloc;
+      return manageLessonsBloc;
     }, child: BlocBuilder<ManageLessonsBloc, ManageLessonsState>(
       builder: (context, state) {
         return AlertDialog(
@@ -66,10 +75,19 @@ class _ManageLessonsDialogState extends State<ManageLessonsDialog> {
     if (state is ManageLessonsLoading) {
       return LoadingIndicator();
     } else if (state is ManageLessonsLoaded) {
-      return JoinLessonList(
-        lessonList: state.lessons,
-        lessonsRepository: widget.lessonsRepository,
-        joinedLessons: widget.joinedLessons,
+      return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => manageLessonsBloc,
+          ),
+          BlocProvider(
+            create: (context) => lessonListBloc,
+          ),
+        ],
+        child: JoinLessonList(
+            lessonList: state.lessons,
+            lessonsRepository: widget.lessonsRepository,
+            joinedLessons: widget.joinedLessons),
       );
     } else {
       return RetryMessage(
@@ -78,6 +96,6 @@ class _ManageLessonsDialogState extends State<ManageLessonsDialog> {
   }
 
   _retry() {
-    manageLessonBloc.add(RetryLoadLessonsEvent());
+    manageLessonsBloc.add(RetryLoadLessonsEvent());
   }
 }

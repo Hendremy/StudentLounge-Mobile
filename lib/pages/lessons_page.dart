@@ -17,17 +17,17 @@ class LessonsPage extends StatefulWidget {
 }
 
 class _LessonsPageState extends State<LessonsPage> {
-  late LessonsBloc lessonBloc;
+  late LessonListBloc lessonListBloc;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LessonsBloc>(
+    return BlocProvider<LessonListBloc>(
       create: (context) {
-        lessonBloc = LessonsBloc(
+        lessonListBloc = LessonListBloc(
             lessonRepository: context.read<AppStudentServices>().lessonsRepo);
-        return lessonBloc;
+        return lessonListBloc;
       },
-      child: BlocBuilder<LessonsBloc, LessonListState>(builder: (
+      child: BlocBuilder<LessonListBloc, LessonListState>(builder: (
         BuildContext context,
         LessonListState state,
       ) {
@@ -70,16 +70,18 @@ class _LessonsPageState extends State<LessonsPage> {
   }
 
   _retry() {
-    lessonBloc.add(LessonListLoadRetry());
+    lessonListBloc.add(LessonListLoadRetry());
   }
 
   _displayJoinLessons(state) {
     if (state is LessonListLoaded) {
       showDialog(
           context: context,
-          builder: (context) => ManageLessonsDialog(
-                lessonsRepository: lessonBloc.lessonRepository,
-                joinedLessons: state.lessonList,
+          builder: (context) => BlocProvider(
+                create: (context) => lessonListBloc,
+                child: ManageLessonsDialog(
+                    lessonsRepository: lessonListBloc.lessonRepository,
+                    joinedLessons: state.lessonList),
               ));
     }
   }

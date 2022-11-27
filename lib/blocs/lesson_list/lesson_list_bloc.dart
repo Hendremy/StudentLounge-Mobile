@@ -4,10 +4,11 @@ import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_state.dart';
 import 'package:studentlounge_mobile/models/lesson_model.dart';
 import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
 
-class LessonsBloc extends Bloc<LessonEvent, LessonListState> {
+class LessonListBloc extends Bloc<LessonListEvent, LessonListState> {
   final LessonsRepository lessonRepository;
+  List<Lesson> lessonList = [];
 
-  LessonsBloc({
+  LessonListBloc({
     required this.lessonRepository,
   }) : super(LessonListInitial()) {
     on<LessonSelected>((event, emit) async {
@@ -19,18 +20,35 @@ class LessonsBloc extends Bloc<LessonEvent, LessonListState> {
       }
     });
 
+    on<LessonAdded>((event, emit) {
+      if (state is LessonListLoaded) {
+        lessonList.add(event.lesson);
+        emit(LessonListLoaded(lessonList: lessonList));
+      }
+    });
+
+    on<LessonRemoved>(
+      (event, emit) {
+        if (state is LessonListLoaded) {
+          lessonList.remove(event.lesson);
+          emit(LessonListLoaded(lessonList: lessonList));
+        }
+      },
+    );
+
     on<LessonListLoadRetry>((event, emit) => _getUserLessons());
 
     _getUserLessons();
   }
 
   Future<void> _getLesson(
-      LessonEvent event, Emitter<LessonListState> emit) async {}
+      LessonListEvent event, Emitter<LessonListState> emit) async {}
 
   Future<void> _getUserLessons() async {
     emit(LessonListLoading());
-    List<Lesson>? lessonList = await lessonRepository.getUserLessons();
-    if (lessonList != null) {
+    List<Lesson>? loadedLessons = await lessonRepository.getUserLessons();
+    if (loadedLessons != null) {
+      lessonList = List.from(loadedLessons);
       emit(LessonListLoaded(lessonList: lessonList));
     } else {
       emit(LessonListLoadingFailed(

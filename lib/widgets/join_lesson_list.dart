@@ -9,11 +9,12 @@ class JoinLessonList extends StatefulWidget {
   List<Lesson> joinedLessons;
   LessonsRepository lessonsRepository;
 
-  JoinLessonList(
-      {super.key,
-      required this.lessonList,
-      required this.lessonsRepository,
-      required this.joinedLessons});
+  JoinLessonList({
+    super.key,
+    required this.lessonList,
+    required this.lessonsRepository,
+    required this.joinedLessons,
+  });
 
   @override
   State<JoinLessonList> createState() => _JoinLessonListState();
