@@ -63,12 +63,10 @@ class AppLessonsRepository extends LessonsRepository {
 
   Future<Lesson> manageLesson(bool join, int lessonId) async {
     Uri uri = Uri.parse('$controllerUrl/$lessonId/user/$studentId');
-    Map<String, String> headers = {
-          HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
-          HttpHeaders.authorizationHeader: 'Bearer $token'
-        };
-    http.Response response = join ? await http.put(uri, headers: headers) : await http.delete(uri, headers: headers);
-    if(response.statusCode == 200){
+    http.Response response = join
+        ? await http.put(uri, headers: headers)
+        : await http.delete(uri, headers: headers);
+    if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = jsonDecode(response.body);
       return Lesson.fromMap(jsonMap);
     }

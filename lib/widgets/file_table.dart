@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:studentlounge_mobile/models/lesson_file_model.dart';
+import 'package:studentlounge_mobile/theme.dart' as theme;
 
 class FileTable extends StatefulWidget {
   final List<LessonFile> files;
@@ -13,14 +14,15 @@ class FileTable extends StatefulWidget {
 class _FileTableState extends State<FileTable> {
   final List<DataColumn> columns = <DataColumn>[
     const DataColumn(label: Expanded(child: Text('Type'))),
-    const DataColumn(label: Expanded(child: Text('Nom'))),
-    const DataColumn(label: Expanded(child: Text('Utilisateur'))),
+    const DataColumn(label: Text('Nom')),
+    const DataColumn(label: Text('Auteur')),
     const DataColumn(label: Expanded(child: Text('Date'))),
+    const DataColumn(label: Text('Actions'))
   ];
 
   @override
   Widget build(BuildContext context) {
-    return DataTable(columns: columns, rows: <DataRow>[
+    return DataTable(columnSpacing: 25, columns: columns, rows: <DataRow>[
       for (LessonFile file in widget.files) _createFileRow(file)
     ]);
   }
@@ -32,7 +34,12 @@ class _FileTableState extends State<FileTable> {
           : Icons.insert_drive_file)),
       DataCell(Text(file.name)),
       DataCell(Text(file.user)),
-      DataCell(Text(DateFormat.yMd().format(file.date)))
+      DataCell(Text(DateFormat.yMd().format(file.date))),
+      DataCell(IconButton(
+        color: theme.primary,
+        icon: const Icon(Icons.download),
+        onPressed: () {},
+      ))
     ]);
   }
 }
