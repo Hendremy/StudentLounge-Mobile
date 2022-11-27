@@ -9,13 +9,11 @@ import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
 class JoinLessonBloc extends Bloc<JoinLessonEvent, JoinLessonState> {
   final Lesson lesson;
   final LessonsRepository lessonsRepository;
-  final LessonListBloc lessonListBloc;
 
   JoinLessonBloc(
       {required this.lesson,
       required this.lessonsRepository,
-      required JoinLessonState joinLessonState,
-      required this.lessonListBloc})
+      required JoinLessonState joinLessonState})
       : super(joinLessonState) {
     on<TryJoinLesson>((event, emit) {
       _joinLesson();
@@ -31,10 +29,8 @@ class JoinLessonBloc extends Bloc<JoinLessonEvent, JoinLessonState> {
     Lesson result = await lessonsRepository.leaveLesson(lesson.id);
     if (result.id == 0) {
       emit(LessonLeavable(lesson: lesson));
-      lessonListBloc.add(LessonAdded(lesson: lesson));
     } else {
       emit(LessonJoinable(lesson: lesson));
-      lessonListBloc.add(LessonRemoved(lesson: lesson));
     }
   }
 
@@ -43,12 +39,8 @@ class JoinLessonBloc extends Bloc<JoinLessonEvent, JoinLessonState> {
     Lesson result = await lessonsRepository.joinLesson(lesson.id);
     if (result.id == 0) {
       emit(LessonJoinable(lesson: lesson));
-      lessonListBloc.add(LessonRemoved(lesson: lesson));
     } else {
       emit(LessonLeavable(lesson: lesson));
-      lessonListBloc.add(LessonAdded(lesson: lesson));
-      //TODO: Lessonlistbloc est fermé, faudrait p-e recharger les lessons de l'user
-      // au moment de la fermeture du pop-up
     }
   }
 }

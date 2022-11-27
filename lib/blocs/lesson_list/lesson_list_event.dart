@@ -10,14 +10,8 @@ class LessonSelected extends LessonListEvent {
 
 class LessonListLoadRetry extends LessonListEvent {}
 
-class LessonAdded extends LessonListEvent {
-  final Lesson lesson;
+class LessonListUpdated extends LessonListEvent {
+  final List<Lesson> lessonList;
 
-  LessonAdded({required this.lesson});
-}
-
-class LessonRemoved extends LessonListEvent {
-  final Lesson lesson;
-
-  LessonRemoved({required this.lesson});
+  LessonListUpdated({required this.lessonList});
 }

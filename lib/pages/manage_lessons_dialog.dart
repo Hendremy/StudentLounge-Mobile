@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_bloc.dart';
-import 'package:studentlounge_mobile/blocs/lesson_list/lesson_list_event.dart';
 import 'package:studentlounge_mobile/blocs/manage_lessons/manage_lessons_bloc.dart';
 import 'package:studentlounge_mobile/blocs/manage_lessons/manage_lessons_events.dart';
 import 'package:studentlounge_mobile/blocs/manage_lessons/manage_lessons_state.dart';
 import 'package:studentlounge_mobile/models/lesson_model.dart';
 import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
-import 'package:studentlounge_mobile/repositories/services_providers.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 import 'package:studentlounge_mobile/widgets/join_lesson_list.dart';
 import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
@@ -27,13 +24,6 @@ class ManageLessonsDialog extends StatefulWidget {
 
 class _ManageLessonsDialogState extends State<ManageLessonsDialog> {
   late ManageLessonsBloc manageLessonsBloc;
-  late LessonListBloc lessonListBloc;
-
-  @override
-  void initState() {
-    lessonListBloc = BlocProvider.of<LessonListBloc>(context);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +52,7 @@ class _ManageLessonsDialogState extends State<ManageLessonsDialog> {
                 "Ok",
                 style: TextStyle(fontSize: 30, color: theme.white),
               ),
-              onPressed: () => Navigator.pop(context, 'Ok'),
+              onPressed: () => Navigator.pop(context),
             )
           ],
           actionsAlignment: MainAxisAlignment.center,
@@ -75,15 +65,8 @@ class _ManageLessonsDialogState extends State<ManageLessonsDialog> {
     if (state is ManageLessonsLoading) {
       return LoadingIndicator();
     } else if (state is ManageLessonsLoaded) {
-      return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => manageLessonsBloc,
-          ),
-          BlocProvider(
-            create: (context) => lessonListBloc,
-          ),
-        ],
+      return BlocProvider(
+        create: (context) => manageLessonsBloc,
         child: JoinLessonList(
             lessonList: state.lessons,
             lessonsRepository: widget.lessonsRepository,

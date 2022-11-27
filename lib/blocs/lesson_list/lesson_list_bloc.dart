@@ -20,21 +20,8 @@ class LessonListBloc extends Bloc<LessonListEvent, LessonListState> {
       }
     });
 
-    on<LessonAdded>((event, emit) {
-      if (state is LessonListLoaded) {
-        lessonList.add(event.lesson);
-        emit(LessonListLoaded(lessonList: lessonList));
-      }
-    });
-
-    on<LessonRemoved>(
-      (event, emit) {
-        if (state is LessonListLoaded) {
-          lessonList.remove(event.lesson);
-          emit(LessonListLoaded(lessonList: lessonList));
-        }
-      },
-    );
+    on<LessonListUpdated>(
+        (event, emit) => emit(LessonListLoaded(lessonList: event.lessonList)));
 
     on<LessonListLoadRetry>((event, emit) => _getUserLessons());
 

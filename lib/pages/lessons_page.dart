@@ -76,13 +76,11 @@ class _LessonsPageState extends State<LessonsPage> {
   _displayJoinLessons(state) {
     if (state is LessonListLoaded) {
       showDialog(
-          context: context,
-          builder: (context) => BlocProvider(
-                create: (context) => lessonListBloc,
-                child: ManageLessonsDialog(
-                    lessonsRepository: lessonListBloc.lessonRepository,
-                    joinedLessons: state.lessonList),
-              ));
+              context: context,
+              builder: (context) => ManageLessonsDialog(
+                  lessonsRepository: lessonListBloc.lessonRepository,
+                  joinedLessons: state.lessonList))
+          .then((_) => {lessonListBloc.add(LessonListLoadRetry())});
     }
   }
 }

@@ -34,10 +34,10 @@ class _JoinLessonRowState extends State<JoinLessonRow> {
     return BlocProvider(
       create: (context) {
         joinLessonBloc = JoinLessonBloc(
-            lesson: widget.lesson,
-            lessonsRepository: widget.lessonsRepository,
-            joinLessonState: widget.state,
-            lessonListBloc: BlocProvider.of<LessonListBloc>(context));
+          lesson: widget.lesson,
+          lessonsRepository: widget.lessonsRepository,
+          joinLessonState: widget.state,
+        );
         return joinLessonBloc;
       },
       child: BlocBuilder<JoinLessonBloc, JoinLessonState>(
