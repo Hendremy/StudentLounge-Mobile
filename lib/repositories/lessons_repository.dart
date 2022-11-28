@@ -7,7 +7,6 @@ abstract class LessonsRepository extends StudentApiService {
   LessonsRepository(
       {required super.studentId, required super.token, required super.apiUrl});
 
-  Future<dynamic> getLesson(String lessonName);
   Future<dynamic> getAllLessons();
   Future<dynamic> getUserLessons();
   Future<Lesson> joinLesson(int lessonId);
@@ -18,12 +17,7 @@ class AppLessonsRepository extends LessonsRepository {
   late String controllerUrl;
   AppLessonsRepository(
       {required super.studentId, required super.token, required super.apiUrl}) {
-    controllerUrl = '$apiUrl/Lessons';
-  }
-
-  @override
-  Future<dynamic> getLesson(String lessonName) async {
-    return null;
+    controllerUrl = '$apiUrl/Lesson';
   }
 
   @override
@@ -37,9 +31,8 @@ class AppLessonsRepository extends LessonsRepository {
   }
 
   Future<List<Lesson>?> getLessonList(String options) async {
-    http.Response response = await http.get(
-        Uri.parse('$controllerUrl$options'),
-        headers: headers);
+    http.Response response =
+        await http.get(Uri.parse('$controllerUrl$options'), headers: headers);
     if (response.statusCode == 200) {
       return convertJSONLessonList(response.body);
     }

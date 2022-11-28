@@ -10,6 +10,12 @@ class AppState {
 
   bool get isLoggedIn => user.id.isNotEmpty;
 
+  String get fullame => user.fullname;
+  List<String> get roles => user.roles;
+  String get token => user.token;
+  String? get image => user.image;
+  String get id => user.id;
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'user': user.toMap(),

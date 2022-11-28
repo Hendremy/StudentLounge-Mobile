@@ -28,11 +28,11 @@ class _AppState extends State<App> {
                 return Provider<AppStudentServices>(
                     create: (_) => AppStudentServices(
                         apiUrl: widget.apiUrl, user: state.user),
-                    child: const SessionPage());
+                    child: SessionScreen());
               } else {
                 return Provider<AppAnonymServices>(
                     create: (_) => AppAnonymServices(apiUrl: widget.apiUrl),
-                    child: LoginPage());
+                    child: const LoginPage());
               }
             })));
   }

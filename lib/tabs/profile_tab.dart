@@ -28,13 +28,21 @@ class _ProfileTabState extends State<ProfileTab> {
             title: const Center(
                 child: Text('Profil',
                     style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
-        body: ListView(
-            children:[
-              Card(child: ListTile(title: Text(appBloc.user.fullname))),
-              Card(child: ListTile(title: Text(appBloc.user.roles.join(',')))),
-              Card(child: ListTile(title: const Text('Se déconnecter'), trailing: const Icon(Icons.chevron_right), onTap: _signOff,),)
-            ]
-            ));
+        body: ListView(children: [
+          Card(
+              child: ListTile(
+                  title: Text('Utilisateur : ${appBloc.state.fullame}'))),
+          Card(
+              child: ListTile(
+                  title: Text('Rôles : ${appBloc.state.roles.join(',')}'))),
+          Card(
+            child: ListTile(
+              title: const Text('Se déconnecter'),
+              trailing: const Icon(Icons.logout),
+              onTap: _signOff,
+            ),
+          )
+        ]));
   }
 
   _signOff() {

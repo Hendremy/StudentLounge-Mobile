@@ -3,20 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:studentlounge_mobile/blocs/session/session_bloc.dart';
 import 'package:studentlounge_mobile/blocs/session/session_state.dart';
+import 'package:studentlounge_mobile/models/app_user.dart';
 import 'package:studentlounge_mobile/tabs/chat_tab.dart';
 import 'package:studentlounge_mobile/tabs/lessons_tab.dart';
 import 'package:studentlounge_mobile/tabs/profile_tab.dart';
 import 'package:studentlounge_mobile/tabs/schedule_tab.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 
-class SessionPage extends StatefulWidget {
-  const SessionPage({super.key});
+class SessionScreen extends StatefulWidget {
+  const SessionScreen({super.key});
 
   @override
-  State<SessionPage> createState() => _SessionPageState();
+  State<SessionScreen> createState() => _SessionScreenState();
 }
 
-class _SessionPageState extends State<SessionPage> {
+class _SessionScreenState extends State<SessionScreen> {
   final List<Widget> _pages = [
     ChatTab(),
     LessonsTab(),

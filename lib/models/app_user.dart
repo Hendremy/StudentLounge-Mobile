@@ -18,7 +18,13 @@ class AppUser {
   }
 
   Map<String, dynamic> toMap() {
-    return {'id': id, 'token': token, 'fullname': fullname, 'image': image, 'roles': jsonEncode(roles)};
+    return {
+      'id': id,
+      'token': token,
+      'fullname': fullname,
+      'image': image,
+      'roles': roles
+    };
   }
 
   AppUser.fromMap(Map<String, dynamic> map) {
@@ -29,9 +35,9 @@ class AppUser {
     roles = _rolesFromList(map['roles']);
   }
 
-  List<String> _rolesFromList(List<dynamic> roles){
+  List<String> _rolesFromList(List<dynamic> roles) {
     List<String> rolesString = [];
-    for(var role in roles){
+    for (var role in roles) {
       String roleString = role as String;
       rolesString.add(roleString);
     }

@@ -4,8 +4,6 @@ import 'package:studentlounge_mobile/blocs/app/app_state.dart';
 import 'package:studentlounge_mobile/models/app_user.dart';
 
 class AppBloc extends HydratedBloc<AppEvent, AppState> {
-  late AppUser user;
-
   AppBloc() : super(AppState(user: AppUser.empty())) {
     on<UserAuthenticated>((event, emit) {
       emit(AppState(user: event.user));
