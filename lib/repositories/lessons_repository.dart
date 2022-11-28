@@ -9,8 +9,8 @@ abstract class LessonsRepository extends StudentApiService {
 
   Future<dynamic> getAllLessons();
   Future<dynamic> getUserLessons();
-  Future<Lesson> joinLesson(int lessonId);
-  Future<Lesson> leaveLesson(int lessonId);
+  Future<Lesson> joinLesson(String lessonId);
+  Future<Lesson> leaveLesson(String lessonId);
 }
 
 class AppLessonsRepository extends LessonsRepository {
@@ -31,8 +31,8 @@ class AppLessonsRepository extends LessonsRepository {
   }
 
   Future<List<Lesson>?> getLessonList(String options) async {
-    http.Response response =
-        await http.get(Uri.parse('$controllerUrl$options'), headers: headers);
+    http.Response response = await http.get(Uri.parse('$controllerUrl$options'),
+        headers: jsonHeaders);
     if (response.statusCode == 200) {
       return convertJSONLessonList(response.body);
     }
@@ -40,20 +40,20 @@ class AppLessonsRepository extends LessonsRepository {
   }
 
   @override
-  Future<Lesson> joinLesson(int lessonId) async {
+  Future<Lesson> joinLesson(String lessonId) async {
     return await manageLesson(true, lessonId);
   }
 
   @override
-  Future<Lesson> leaveLesson(int lessonId) async {
+  Future<Lesson> leaveLesson(String lessonId) async {
     return await manageLesson(false, lessonId);
   }
 
-  Future<Lesson> manageLesson(bool join, int lessonId) async {
+  Future<Lesson> manageLesson(bool join, String lessonId) async {
     Uri uri = Uri.parse('$controllerUrl/$lessonId');
     http.Response response = join
-        ? await http.put(uri, headers: headers)
-        : await http.delete(uri, headers: headers);
+        ? await http.put(uri, headers: jsonHeaders)
+        : await http.delete(uri, headers: jsonHeaders);
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonMap = jsonDecode(response.body);
       return Lesson.fromMap(jsonMap);

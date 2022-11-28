@@ -10,7 +10,7 @@ abstract class StudentApiService extends ApiService {
   final String studentId;
   final String token;
 
-  Map<String, String> get headers => <String, String>{
+  Map<String, String> get jsonHeaders => <String, String>{
         HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
         HttpHeaders.authorizationHeader: 'Bearer $token'
       };

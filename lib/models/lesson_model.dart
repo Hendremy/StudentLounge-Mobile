@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class Lesson extends Equatable {
   late String name;
-  late int id;
+  late String id;
 
   Lesson({required this.id, required this.name});
 
@@ -13,7 +13,7 @@ class Lesson extends Equatable {
 
   Lesson.empty() {
     name = "";
-    id = 0;
+    id = "";
   }
 
   @override

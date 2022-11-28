@@ -17,13 +17,13 @@ class LessonPage extends StatefulWidget {
 class _LessonPageState extends State<LessonPage> {
   final List<LessonFile> fakeFiles = [
     LessonFile(
-        id: 1,
+        id: "test",
         name: 'Fake.pdf',
         user: 'Test',
         date: DateTime.now(),
         type: FileType.summary),
     LessonFile(
-        id: 2,
+        id: "test2",
         name: 'Fake.txt',
         user: 'Toto',
         date: DateTime.now(),

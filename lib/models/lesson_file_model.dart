@@ -1,5 +1,5 @@
 class LessonFile {
-  late int id;
+  late String id;
   late FileType type;
   late String name;
   late String user;
