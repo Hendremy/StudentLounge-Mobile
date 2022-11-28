@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:studentlounge_mobile/models/lesson_model.dart';
 import 'package:studentlounge_mobile/repositories/api_service.dart';
 import 'package:http/http.dart' as http;
@@ -29,22 +28,18 @@ class AppLessonsRepository extends LessonsRepository {
 
   @override
   Future<dynamic> getAllLessons() async {
-    return await getLessonList("");
+    return await getLessonList("/all");
   }
 
   @override
   Future<dynamic> getUserLessons() async {
-    return await getLessonList(studentId);
+    return await getLessonList("");
   }
 
-  Future<List<Lesson>?> getLessonList(String userId) async {
-    String userIdRouteParam = userId.isNotEmpty ? "/user/$userId" : "";
+  Future<List<Lesson>?> getLessonList(String options) async {
     http.Response response = await http.get(
-        Uri.parse('$controllerUrl$userIdRouteParam'),
-        headers: <String, String>{
-          HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
-          HttpHeaders.authorizationHeader: 'Bearer $token'
-        });
+        Uri.parse('$controllerUrl$options'),
+        headers: headers);
     if (response.statusCode == 200) {
       return convertJSONLessonList(response.body);
     }
@@ -62,7 +57,7 @@ class AppLessonsRepository extends LessonsRepository {
   }
 
   Future<Lesson> manageLesson(bool join, int lessonId) async {
-    Uri uri = Uri.parse('$controllerUrl/$lessonId/user/$studentId');
+    Uri uri = Uri.parse('$controllerUrl/$lessonId');
     http.Response response = join
         ? await http.put(uri, headers: headers)
         : await http.delete(uri, headers: headers);
