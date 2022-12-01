@@ -53,12 +53,13 @@ class _FileTableState extends State<FileTable> {
             _displayFailedToDownload(state.fileName);
           } else if (state is DownloadFileSuccess) {
             _displayDownloadSuccess(state.fileName);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => PDFView(
-                        filePath: state.filePath,
-                      )),
+            showDialog(
+              context: context,
+              builder: (context) => Scaffold(
+                body: PDFView(
+                  filePath: state.filePath,
+                ),
+              ),
             );
           }
         },
