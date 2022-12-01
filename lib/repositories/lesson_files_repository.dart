@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:flutter_downloader/flutter_downloader.dart';
+import 'dart:io' as io;
 import 'package:studentlounge_mobile/models/lesson_file_model.dart';
 import 'package:studentlounge_mobile/repositories/api_service.dart';
 import 'package:http/http.dart' as http;
@@ -15,7 +14,7 @@ abstract class LessonFilesRepository extends StudentApiService {
 
   Future<List<LessonFile>?> getLessonFiles(String lessonId);
 
-  Future<void> downloadFile(String fileId);
+  Future<String> downloadFile(String fileId);
 }
 
 class AppLessonFilesRepository extends LessonFilesRepository {
@@ -48,18 +47,16 @@ class AppLessonFilesRepository extends LessonFilesRepository {
   }
 
   @override
-  Future<void> downloadFile(String fileId) async {
-    String testUrl =
-        "https://unece.org/fileadmin/DAM/env/pp/documents/cep43f.pdf";
+  Future<String> downloadFile(String fileId) async {
     if (downloadPath.isEmpty) {
       throw Exception("Can't download - Access to directory denied");
     }
-    await FlutterDownloader.enqueue(
-        //url: '$controllerUrl/$fileId',
-        url: testUrl,
-        headers: tokenHeader,
-        showNotification: true,
-        openFileFromNotification: true,
-        savedDir: downloadPath);
+    Uri testUrl = Uri.parse("https://www.ibm.com/downloads/cas/GJ5QVQ7X");
+    http.Response response = await http.get(testUrl /*, headers: tokenHeader*/);
+
+    io.File file = io.File("$downloadPath/$fileId.pdf");
+    var result = await file.writeAsBytes(response.bodyBytes,
+        mode: io.FileMode.write, flush: true);
+    return result.path;
   }
 }

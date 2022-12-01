@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:intl/intl.dart';
-import 'package:studentlounge_mobile/blocs/download_file/download_file.dart';
+import 'package:studentlounge_mobile/blocs/download_file/download_file_cubit.dart';
 import 'package:studentlounge_mobile/blocs/download_file/download_file_state.dart';
 import 'package:studentlounge_mobile/models/lesson_file_model.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
@@ -52,6 +53,13 @@ class _FileTableState extends State<FileTable> {
             _displayFailedToDownload(state.fileName);
           } else if (state is DownloadFileSuccess) {
             _displayDownloadSuccess(state.fileName);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PDFView(
+                        filePath: state.filePath,
+                      )),
+            );
           }
         },
         child: SingleChildScrollView(

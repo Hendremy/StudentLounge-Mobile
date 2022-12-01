@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studentlounge_mobile/blocs/download_file/download_file.dart';
+import 'package:studentlounge_mobile/blocs/download_file/download_file_cubit.dart';
 import 'package:studentlounge_mobile/blocs/lesson/lesson_bloc.dart';
 import 'package:studentlounge_mobile/blocs/lesson/lesson_events.dart';
 import 'package:studentlounge_mobile/blocs/lesson/lesson_state.dart';
