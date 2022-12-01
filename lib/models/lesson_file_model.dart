@@ -31,7 +31,12 @@ class LessonFile {
     };
   }
 
-  _convertFileType(int id) {}
+  FileType _convertFileType(int id) {
+    switch(id){
+      case 1: return FileType.notes;
+      default: return FileType.summary;
+    }
+  }
 }
 
 enum FileType {
