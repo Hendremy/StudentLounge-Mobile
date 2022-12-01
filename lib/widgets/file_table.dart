@@ -14,15 +14,15 @@ class FileTable extends StatefulWidget {
 class _FileTableState extends State<FileTable> {
   final List<DataColumn> columns = <DataColumn>[
     const DataColumn(label: Expanded(child: Text('Type'))),
-    const DataColumn(label: Text('Nom')),
-    const DataColumn(label: Text('Auteur')),
+    const DataColumn(label: Expanded(child: Text('Nom'))),
+    const DataColumn(label: Expanded(child: Text('Auteur'))),
     const DataColumn(label: Expanded(child: Text('Date'))),
-    const DataColumn(label: Text('Actions'))
+    const DataColumn(label: Expanded(child: Text('Actions')))
   ];
 
   @override
   Widget build(BuildContext context) {
-    return DataTable(columnSpacing: 25, columns: columns, rows: <DataRow>[
+    return DataTable(columnSpacing: 45, columns: columns, rows: <DataRow>[
       for (LessonFile file in widget.files) _createFileRow(file)
     ]);
   }

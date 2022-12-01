@@ -22,7 +22,7 @@ class AppLessonFilesRepository extends LessonFilesRepository {
 
   @override
   Future<List<LessonFile>?> getLessonFiles(String lessonId) async {
-    Uri uri = Uri.parse(controllerUrl);
+    Uri uri = Uri.parse("$controllerUrl/Lesson/$lessonId");
     http.Response response = await http.get(uri, headers: jsonHeaders);
     if (response.statusCode == 200) {
       return convertJSONFileList(response.body);
