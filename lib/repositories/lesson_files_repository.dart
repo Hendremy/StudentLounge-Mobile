@@ -1,12 +1,17 @@
 import 'dart:convert';
 
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:studentlounge_mobile/models/lesson_file_model.dart';
 import 'package:studentlounge_mobile/repositories/api_service.dart';
 import 'package:http/http.dart' as http;
 
 abstract class LessonFilesRepository extends StudentApiService {
+  final String downloadPath;
   LessonFilesRepository(
-      {required super.studentId, required super.token, required super.apiUrl});
+      {required super.studentId,
+      required super.token,
+      required super.apiUrl,
+      required this.downloadPath});
 
   Future<List<LessonFile>?> getLessonFiles(String lessonId);
 
@@ -16,9 +21,12 @@ abstract class LessonFilesRepository extends StudentApiService {
 class AppLessonFilesRepository extends LessonFilesRepository {
   late String controllerUrl;
   AppLessonFilesRepository(
-      {required super.studentId, required super.token, required super.apiUrl}){
-        controllerUrl = '$apiUrl/LessonFile';
-      }
+      {required super.studentId,
+      required super.token,
+      required super.apiUrl,
+      required super.downloadPath}) {
+    controllerUrl = '$apiUrl/LessonFile';
+  }
 
   @override
   Future<List<LessonFile>?> getLessonFiles(String lessonId) async {
@@ -40,8 +48,18 @@ class AppLessonFilesRepository extends LessonFilesRepository {
   }
 
   @override
-  Future<void> downloadFile(String fileId) {
-    // TODO: implement downloadFile
-    throw UnimplementedError();
+  Future<void> downloadFile(String fileId) async {
+    String testUrl =
+        "https://unece.org/fileadmin/DAM/env/pp/documents/cep43f.pdf";
+    if (downloadPath.isEmpty) {
+      throw Exception("Can't download - Access to directory denied");
+    }
+    await FlutterDownloader.enqueue(
+        //url: '$controllerUrl/$fileId',
+        url: testUrl,
+        headers: tokenHeader,
+        showNotification: true,
+        openFileFromNotification: true,
+        savedDir: downloadPath);
   }
 }

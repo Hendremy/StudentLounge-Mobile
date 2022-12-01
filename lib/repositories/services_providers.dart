@@ -23,15 +23,20 @@ abstract class StudentServicesProvider {
 
 class AppStudentServices extends StudentServicesProvider {
   final String apiUrl;
+  final String downloadPath;
   final AppUser user;
 
-  AppStudentServices({required this.apiUrl, required this.user});
+  AppStudentServices(
+      {required this.apiUrl, required this.user, required this.downloadPath});
 
   @override
-  LessonsRepository get lessonsRepo 
-  => AppLessonsRepository(studentId: user.id, token: user.token, apiUrl: apiUrl);
-      
+  LessonsRepository get lessonsRepo => AppLessonsRepository(
+      studentId: user.id, token: user.token, apiUrl: apiUrl);
+
   @override
-  LessonFilesRepository get lessonFilesRepo 
-  => AppLessonFilesRepository(studentId: user.id, token: user.token, apiUrl: apiUrl);
+  LessonFilesRepository get lessonFilesRepo => AppLessonFilesRepository(
+      studentId: user.id,
+      token: user.token,
+      apiUrl: apiUrl,
+      downloadPath: downloadPath);
 }

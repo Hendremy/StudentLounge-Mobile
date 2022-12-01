@@ -15,6 +15,9 @@ abstract class StudentApiService extends ApiService {
         HttpHeaders.authorizationHeader: 'Bearer $token'
       };
 
+  Map<String, String> get tokenHeader =>
+      <String, String>{HttpHeaders.authorizationHeader: 'Bearer $token'};
+
   StudentApiService(
       {required this.studentId, required this.token, required super.apiUrl});
 }

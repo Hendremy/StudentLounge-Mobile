@@ -10,6 +10,7 @@ import 'package:studentlounge_mobile/widgets/join_lesson_list.dart';
 import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
 import 'package:studentlounge_mobile/widgets/retry_message.dart';
 
+// ignore: must_be_immutable
 class ManageLessonsDialog extends StatefulWidget {
   final LessonsRepository lessonsRepository;
   List<Lesson> joinedLessons;

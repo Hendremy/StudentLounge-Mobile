@@ -9,8 +9,9 @@ import 'package:studentlounge_mobile/screens/session_screen.dart';
 
 class App extends StatefulWidget {
   final String apiUrl;
+  final String downloadPath;
 
-  const App({super.key, required this.apiUrl});
+  const App({super.key, required this.apiUrl, required this.downloadPath});
 
   @override
   State<App> createState() => _AppState();
@@ -27,7 +28,9 @@ class _AppState extends State<App> {
               if (state.isLoggedIn) {
                 return Provider<AppStudentServices>(
                     create: (_) => AppStudentServices(
-                        apiUrl: widget.apiUrl, user: state.user),
+                        apiUrl: widget.apiUrl,
+                        user: state.user,
+                        downloadPath: widget.downloadPath),
                     child: SessionScreen());
               } else {
                 return Provider<AppAnonymServices>(

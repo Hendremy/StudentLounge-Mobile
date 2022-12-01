@@ -39,13 +39,14 @@ dependencies:
   flutter_login: ^4.0.0
   flutter_bloc: ^8.1.1
   http: ^0.13.5
-  flutter_secure_storage: ^6.0.0
+  # flutter_secure_storage: ^6.0.0
   google_sign_in: ^5.4.2
   google_nav_bar: ^5.0.6
   flutter_login_facebook: ^1.6.2
   sign_in_with_apple: ^4.2.0
-  dio: ^4.0.6
+  # dio: ^4.0.6
   intl: ^0.17.0
+  flutter_downloader: ^1.9.1
 
 
   # The following adds the Cupertino Icons font to your application.

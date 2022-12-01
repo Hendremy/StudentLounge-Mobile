@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:studentlounge_mobile/blocs/download_file/download_file.dart';
 import 'package:studentlounge_mobile/blocs/lesson/lesson_bloc.dart';
 import 'package:studentlounge_mobile/blocs/lesson/lesson_events.dart';
 import 'package:studentlounge_mobile/blocs/lesson/lesson_state.dart';
@@ -29,10 +30,11 @@ class _LessonPageState extends State<LessonPage> {
     return BlocProvider(
       create: (context) {
         lessonBloc = LessonBloc(
-          lesson: widget.lesson, 
-          lessonFilesRepository: context.read<AppStudentServices>().lessonFilesRepo
-        );
-        return lessonBloc;},
+            lesson: widget.lesson,
+            lessonFilesRepository:
+                context.read<AppStudentServices>().lessonFilesRepo);
+        return lessonBloc;
+      },
       child: BlocBuilder<LessonBloc, LessonState>(
         builder: (context, state) {
           return Scaffold(
@@ -48,17 +50,22 @@ class _LessonPageState extends State<LessonPage> {
     );
   }
 
-  _renderBody(LessonState state){
-    if(state is LessonFilesLoaded){
-      return SingleChildScrollView(child: FileTable(files: state.lessonFiles));
-    }else if(state is LessonFilesLoadFailed){
-      return RetryMessage(text: "Erreur lors du chargement des fichiers", retry: _retryLoad);
-    }else{
+  _renderBody(LessonState state) {
+    if (state is LessonFilesLoaded) {
+      return BlocProvider(
+        create: (context) => DownloadFileCubit(
+            lessonFilesRepository: lessonBloc.lessonFilesRepository),
+        child: FileTable(files: state.lessonFiles),
+      );
+    } else if (state is LessonFilesLoadFailed) {
+      return RetryMessage(
+          text: "Erreur lors du chargement des fichiers", retry: _retryLoad);
+    } else {
       return LoadingIndicator();
     }
   }
 
-  _retryLoad(){
+  _retryLoad() {
     lessonBloc.add(RetryFileLoad());
   }
 }
