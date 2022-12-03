@@ -41,33 +41,33 @@ class _FileTableState extends State<FileTable> {
   ];
 
   @override
+  void initState() {
+    downloadFileCubit = BlocProvider.of<DownloadFileCubit>(context);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        downloadFileCubit = BlocProvider.of<DownloadFileCubit>(context);
-        return downloadFileCubit;
-      },
-      child: BlocListener<DownloadFileCubit, DownloadFileState>(
-        listener: (context, state) {
-          if (state is DownloadFileFailed) {
-            _displayFailedToDownload(state.fileName);
-          } else if (state is DownloadFileSuccess) {
-            _displayDownloadSuccess(state.fileName);
-            showDialog(
-              context: context,
-              builder: (context) => Scaffold(
-                body: PDFView(
-                  filePath: state.filePath,
-                ),
+    return BlocListener<DownloadFileCubit, DownloadFileState>(
+      listener: (context, state) {
+        if (state is DownloadFileFailed) {
+          _displayFailedToDownload(state.fileName);
+        } else if (state is DownloadFileSuccess) {
+          _displayDownloadSuccess(state.fileName);
+          showDialog(
+            context: context,
+            builder: (context) => Scaffold(
+              body: PDFView(
+                filePath: state.filePath,
               ),
-            );
-          }
-        },
-        child: SingleChildScrollView(
-          child: DataTable(columnSpacing: 25, columns: columns, rows: <DataRow>[
-            for (LessonFile file in widget.fakeFiles) _createFileRow(file)
-          ]),
-        ),
+            ),
+          );
+        }
+      },
+      child: SingleChildScrollView(
+        child: DataTable(columnSpacing: 25, columns: columns, rows: <DataRow>[
+          for (LessonFile file in widget.fakeFiles) _createFileRow(file)
+        ]),
       ),
     );
   }
