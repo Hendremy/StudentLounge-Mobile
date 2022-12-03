@@ -17,7 +17,6 @@ abstract class UserRepository extends ApiService {
 
 class AppUserRepository extends UserRepository {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FacebookLogin _facebookLogin = FacebookLogin();
   late String controllerUrl;
 
   AppUserRepository({required super.apiUrl}) {

@@ -9,21 +9,20 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
   final Lesson lesson;
   final LessonFilesRepository lessonFilesRepository;
 
-  LessonBloc({required this.lessonFilesRepository, required this.lesson}) : super(LessonInitial()) {
-    
+  LessonBloc({required this.lessonFilesRepository, required this.lesson})
+      : super(LessonInitial()) {
     on<RetryFileLoad>((event, emit) {
       _loadLessonFiles();
     });
-
-    _loadLessonFiles();
   }
 
   _loadLessonFiles() async {
     emit(LessonFilesLoading());
-    List<LessonFile>? lessonFiles = await lessonFilesRepository.getLessonFiles(lesson.id);
-    if(lessonFiles != null){
+    List<LessonFile>? lessonFiles =
+        await lessonFilesRepository.getLessonFiles(lesson.id);
+    if (lessonFiles != null) {
       emit(LessonFilesLoaded(lessonFiles: lessonFiles));
-    }else{
+    } else {
       emit(LessonFilesLoadFailed());
     }
   }

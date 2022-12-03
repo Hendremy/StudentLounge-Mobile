@@ -11,6 +11,9 @@ import 'package:studentlounge_mobile/theme.dart' as theme;
 import 'package:studentlounge_mobile/widgets/file_table.dart';
 import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
 import 'package:studentlounge_mobile/widgets/retry_message.dart';
+import 'package:studentlounge_mobile/widgets/tutorat_button.dart';
+
+import '../blocs/tutorat/tutorat_cubit.dart';
 
 class LessonPage extends StatefulWidget {
   final Lesson lesson;
@@ -24,6 +27,7 @@ class LessonPage extends StatefulWidget {
 
 class _LessonPageState extends State<LessonPage> {
   late LessonBloc lessonBloc;
+  late TutoratCubit tutoratCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +43,12 @@ class _LessonPageState extends State<LessonPage> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-                backgroundColor: theme.primary,
-                title: Center(
-                    child: Text(widget.lessonName,
-                        style: const TextStyle(fontSize: 30)))),
+              backgroundColor: theme.primary,
+              title: Center(
+                  child: Text(widget.lessonName,
+                      style: const TextStyle(fontSize: 30))),
+              actions: <Widget>[TutoratButton(tutorLesson: _askTutorat())],
+            ),
             body: _renderBody(state),
           );
         },
@@ -67,5 +73,9 @@ class _LessonPageState extends State<LessonPage> {
 
   _retryLoad() {
     lessonBloc.add(RetryFileLoad());
+  }
+
+  _askTutorat() {
+    AskTutorat();
   }
 }
