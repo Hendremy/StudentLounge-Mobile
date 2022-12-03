@@ -14,6 +14,7 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
     on<RetryFileLoad>((event, emit) {
       _loadLessonFiles();
     });
+    _loadLessonFiles();
   }
 
   _loadLessonFiles() async {

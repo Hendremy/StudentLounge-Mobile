@@ -1,6 +1,7 @@
 import 'package:studentlounge_mobile/models/app_user.dart';
 import 'package:studentlounge_mobile/repositories/lesson_files_repository.dart';
 import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
+import 'package:studentlounge_mobile/repositories/tutorat_repository.dart';
 import 'package:studentlounge_mobile/repositories/user_repository.dart';
 
 abstract class AnonymServicesProvider {
@@ -19,6 +20,7 @@ class AppAnonymServices extends AnonymServicesProvider {
 abstract class StudentServicesProvider {
   LessonsRepository get lessonsRepo;
   LessonFilesRepository get lessonFilesRepo;
+  TutoratRepository get tutoratRepo;
 }
 
 class AppStudentServices extends StudentServicesProvider {
@@ -39,4 +41,8 @@ class AppStudentServices extends StudentServicesProvider {
       token: user.token,
       apiUrl: apiUrl,
       downloadPath: downloadPath);
+
+  @override
+  TutoratRepository get tutoratRepo => AppTutoratRepository(
+      studentId: user.id, token: user.token, apiUrl: apiUrl);
 }

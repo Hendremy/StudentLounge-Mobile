@@ -7,10 +7,14 @@ class TutoratCubit extends Cubit<TutoratState> {
   final TutoratRepository tutoratRepository;
   TutoratCubit({required this.tutoratRepository}) : super(TutoratInitial());
 
-  void AskTutorat(String lessonId) async {
+  void askTutorat(String lessonId) async {
     try {
       bool asked = await tutoratRepository.askTutorat(lessonId);
-      emit(AskTutoratSuccess(lessonId: lessonId));
+      if (asked) {
+        emit(AskTutoratSuccess(lessonId: lessonId));
+      } else {
+        emit(AskTutoratFailed(lessonId: lessonId));
+      }
     } catch (ex) {
       emit(AskTutoratFailed(lessonId: lessonId));
     }
