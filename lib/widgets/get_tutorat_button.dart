@@ -6,19 +6,19 @@ import '../blocs/tutorat/tutorat_state.dart';
 import '../repositories/services_providers.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 
-class AskTutoratButton extends StatefulWidget {
+class GetTutoratButton extends StatefulWidget {
   final Lesson lesson;
-  const AskTutoratButton({super.key, required this.lesson});
+  const GetTutoratButton({super.key, required this.lesson});
 
   @override
-  State<StatefulWidget> createState() => _AskTutoratButtonState(lesson);
+  State<StatefulWidget> createState() => _GetTutoratButtonState(lesson);
 }
 
-class _AskTutoratButtonState extends State<AskTutoratButton> {
+class _GetTutoratButtonState extends State<GetTutoratButton> {
   late TutoratCubit tutoratCubit;
   final Lesson lesson;
 
-  _AskTutoratButtonState(this.lesson);
+  _GetTutoratButtonState(this.lesson);
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +31,9 @@ class _AskTutoratButtonState extends State<AskTutoratButton> {
         },
         child: BlocListener<TutoratCubit, TutoratState>(
           listener: (context, state) {
-            if (state is AskTutoratSuccess) {
+            if (state is AcceptTutoratSuccess) {
               _displaySuccessTutorat(context);
-            } else if (state is AskTutoratFailed) {
+            } else if (state is AcceptTutoratFailed) {
               _displayFailedTutorat(context);
             }
           },
@@ -44,14 +44,14 @@ class _AskTutoratButtonState extends State<AskTutoratButton> {
   _action(lessonID) {
     return IconButton(
         onPressed: () {
-          tutoratCubit.askTutorat(lessonID);
+          tutoratCubit.getTutorats(lessonID);
         },
-        icon: const Icon(Icons.school_rounded, size: 24));
+        icon: const Icon(Icons.how_to_reg_rounded, size: 24));
   }
 
   _displaySuccessTutorat(BuildContext context) {
     const success = SnackBar(
-        content: Text("La demande de tutorat a été envoyé"),
+        content: Text("les tutorat seront affiché"),
         backgroundColor: theme.success);
     ScaffoldMessenger.of(context).showSnackBar(success);
   }
@@ -59,7 +59,7 @@ class _AskTutoratButtonState extends State<AskTutoratButton> {
 
 _displayFailedTutorat(BuildContext context) {
   const fail = SnackBar(
-      content: Text("La demande de tutorat a échoué"),
+      content: Text("Le chargement des tutorats a échoué"),
       backgroundColor: theme.error);
   ScaffoldMessenger.of(context).showSnackBar(fail);
 }

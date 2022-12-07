@@ -12,6 +12,7 @@ import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
 import 'package:studentlounge_mobile/widgets/retry_message.dart';
 import 'package:studentlounge_mobile/widgets/tutorat_button.dart';
 import '../blocs/tutorat/tutorat_cubit.dart';
+import '../widgets/get_tutorat_button.dart';
 
 class LessonPage extends StatefulWidget {
   final Lesson lesson;
@@ -43,7 +44,10 @@ class _LessonPageState extends State<LessonPage> {
             title: Center(
                 child: Text(widget.lessonName,
                     style: const TextStyle(fontSize: 30))),
-            actions: [_askTutorat(lessonBloc.lesson)],
+            actions: [
+              _getTutorat(lessonBloc.lesson),
+              _askTutorat(lessonBloc.lesson)
+            ],
           ),
           body: _renderBody(state),
         );
@@ -74,7 +78,15 @@ class _LessonPageState extends State<LessonPage> {
     return BlocProvider(
       create: ((context) => TutoratCubit(
           tutoratRepository: context.read<AppStudentServices>().tutoratRepo)),
-      child: TutoratButton(lesson: lesson),
+      child: AskTutoratButton(lesson: lesson),
+    );
+  }
+
+  _getTutorat(Lesson lesson) {
+    return BlocProvider(
+      create: ((context) => TutoratCubit(
+          tutoratRepository: context.read<AppStudentServices>().tutoratRepo)),
+      child: GetTutoratButton(lesson: lesson),
     );
   }
 }

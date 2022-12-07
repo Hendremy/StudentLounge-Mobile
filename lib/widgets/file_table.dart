@@ -6,6 +6,7 @@ import 'package:studentlounge_mobile/blocs/download_file/download_file_cubit.dar
 import 'package:studentlounge_mobile/blocs/download_file/download_file_state.dart';
 import 'package:studentlounge_mobile/models/lesson_file_model.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class FileTable extends StatefulWidget {
   final List<LessonFile> fakeFiles = [
@@ -30,62 +31,149 @@ class FileTable extends StatefulWidget {
   State<FileTable> createState() => _FileTableState();
 }
 
+class FileDataSource extends DataGridSource {
+  late DownloadFileCubit myDownloadFileCubit;
+  List<DataGridRow> dataGridRows = [];
+
+  @override
+  List<DataGridRow> get rows => dataGridRows;
+
+  @override
+  DataGridRowAdapter? buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+        cells: row.getCells().map<Widget>((dataGridCell) {
+      return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: dataGridCell.columnName == 'Action'
+              ? IconButton(
+                  color: theme.primary,
+                  icon: const Icon(Icons.download),
+                  onPressed: () => myDownloadFileCubit.downloadFile(
+                      row.getCells()[0].value.toString(),
+                      row.getCells()[2].value.toString()))
+              : dataGridCell.columnName == 'Type'
+                  ? Icon(
+                      row.getCells()[1] == FileType.notes //Modifier l'icon ici
+                          ? Icons.text_fields
+                          : Icons.insert_drive_file)
+                  : Center(
+                      child: Text(
+                      dataGridCell.value.toString(),
+                      overflow: TextOverflow.ellipsis,
+                    )));
+    }).toList());
+  }
+
+  FileDataSource({required List<LessonFile> files, context}) {
+    myDownloadFileCubit = BlocProvider.of<DownloadFileCubit>(context);
+    dataGridRows = files
+        .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
+              DataGridCell<String>(columnName: 'Id', value: dataGridRow.id),
+              const DataGridCell<Widget>(columnName: 'Type', value: null),
+              DataGridCell<String>(columnName: 'Nom', value: dataGridRow.name),
+              DataGridCell<String>(
+                  columnName: 'Auteur', value: dataGridRow.user),
+              DataGridCell<String>(
+                  columnName: 'Date',
+                  value: DateFormat.yMd().format(dataGridRow.date)),
+              const DataGridCell<Widget>(columnName: 'Action', value: null)
+            ]))
+        .toList();
+  }
+}
+
 class _FileTableState extends State<FileTable> {
   late DownloadFileCubit downloadFileCubit;
-  final List<DataColumn> columns = <DataColumn>[
-    const DataColumn(label: Expanded(child: Text('Type'))),
-    const DataColumn(label: Expanded(child: Text('Nom'))),
-    const DataColumn(label: Expanded(child: Text('Auteur'))),
-    const DataColumn(label: Expanded(child: Text('Date'))),
-    const DataColumn(label: Expanded(child: Text('Actions')))
+  late FileDataSource fileDataSource;
+
+  final List<GridColumn> columns = <GridColumn>[
+    GridColumn(
+        columnName: 'Id',
+        label: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            alignment: Alignment.center,
+            child: const Text(
+              'Id',
+              overflow: TextOverflow.ellipsis,
+            ))),
+    GridColumn(
+        columnName: 'Type',
+        label: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            alignment: Alignment.center,
+            child: const Text(
+              'Type',
+              overflow: TextOverflow.ellipsis,
+            ))),
+    GridColumn(
+        columnName: 'Nom',
+        label: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            alignment: Alignment.center,
+            child: const Text(
+              'Nom',
+              overflow: TextOverflow.ellipsis,
+            ))),
+    GridColumn(
+        columnName: 'Auteur',
+        label: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            alignment: Alignment.center,
+            child: const Text(
+              'Auteur',
+              overflow: TextOverflow.ellipsis,
+            ))),
+    GridColumn(
+        columnName: 'Date',
+        label: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            alignment: Alignment.center,
+            child: const Text(
+              'Date',
+              overflow: TextOverflow.ellipsis,
+            ))),
+    GridColumn(
+        columnName: 'Actions',
+        label: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            alignment: Alignment.center,
+            child: const Text(
+              'Actions',
+              overflow: TextOverflow.ellipsis,
+            ))),
   ];
 
   @override
   void initState() {
-    downloadFileCubit = BlocProvider.of<DownloadFileCubit>(context);
+    fileDataSource = FileDataSource(files: widget.fakeFiles, context: context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<DownloadFileCubit, DownloadFileState>(
-      listener: (context, state) {
-        if (state is DownloadFileFailed) {
-          _displayFailedToDownload(state.fileName);
-        } else if (state is DownloadFileSuccess) {
-          _displayDownloadSuccess(state.fileName);
-          showDialog(
-            context: context,
-            builder: (context) => Scaffold(
-              body: PDFView(
-                filePath: state.filePath,
+        listener: (context, state) {
+          if (state is DownloadFileFailed) {
+            _displayFailedToDownload(state.fileName);
+          } else if (state is DownloadFileSuccess) {
+            _displayDownloadSuccess(state.fileName);
+            showDialog(
+              context: context,
+              builder: (context) => Scaffold(
+                body: PDFView(
+                  filePath: state.filePath,
+                ),
               ),
-            ),
-          );
-        }
-      },
-      child: SingleChildScrollView(
-        child: DataTable(columnSpacing: 25, columns: columns, rows: <DataRow>[
-          for (LessonFile file in widget.fakeFiles) _createFileRow(file)
-        ]),
-      ),
-    );
-  }
-
-  _createFileRow(LessonFile file) {
-    return DataRow(cells: [
-      DataCell(Icon(file.type == FileType.notes
-          ? Icons.text_fields
-          : Icons.insert_drive_file)),
-      DataCell(Text(file.name)),
-      DataCell(Text(file.user)),
-      DataCell(Text(DateFormat.yMd().format(file.date))),
-      DataCell(IconButton(
-        color: theme.primary,
-        icon: const Icon(Icons.download),
-        onPressed: () => downloadFileCubit.downloadFile(file.id, file.name),
-      ))
-    ]);
+            );
+          }
+        },
+        child: SingleChildScrollView(
+          child: SfDataGrid(
+            columnWidthMode: ColumnWidthMode.fill,
+            columns: columns,
+            source: fileDataSource,
+          ),
+        ));
   }
 
   _displayFailedToDownload(String fileName) {
