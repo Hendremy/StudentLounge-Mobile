@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:studentlounge_mobile/blocs/tutorat_list/tutorat_list_bloc.dart';
 import 'package:studentlounge_mobile/models/lesson_model.dart';
 import '../blocs/tutorat/tutorat_cubit.dart';
 import '../blocs/tutorat/tutorat_state.dart';
+import '../pages/manage_tutorat_dialog.dart';
 import '../repositories/services_providers.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 
@@ -31,9 +33,9 @@ class _GetTutoratButtonState extends State<GetTutoratButton> {
         },
         child: BlocListener<TutoratCubit, TutoratState>(
           listener: (context, state) {
-            if (state is AcceptTutoratSuccess) {
-              _displaySuccessTutorat(context);
-            } else if (state is AcceptTutoratFailed) {
+            if (state is GetTutoratSuccess) {
+              _displaySuccessTutorat(state);
+            } else if (state is GetTutoratFailed) {
               _displayFailedTutorat(context);
             }
           },
@@ -49,17 +51,18 @@ class _GetTutoratButtonState extends State<GetTutoratButton> {
         icon: const Icon(Icons.how_to_reg_rounded, size: 24));
   }
 
-  _displaySuccessTutorat(BuildContext context) {
-    const success = SnackBar(
-        content: Text("les tutorat seront affiché"),
-        backgroundColor: theme.success);
-    ScaffoldMessenger.of(context).showSnackBar(success);
+  _displaySuccessTutorat(state) {
+    showDialog(
+        context: context,
+        builder: (context) => ManageTutoratDialog(
+            tutoratRepository: tutoratCubit.tutoratRepository,
+            lessonId: lesson.id));
   }
 }
 
 _displayFailedTutorat(BuildContext context) {
   const fail = SnackBar(
-      content: Text("Le chargement des tutorats a échoué"),
+      content: Text("Le chargement des tutorats à échoué"),
       backgroundColor: theme.error);
   ScaffoldMessenger.of(context).showSnackBar(fail);
 }

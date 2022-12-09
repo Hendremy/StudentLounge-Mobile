@@ -51,16 +51,11 @@ class FileDataSource extends DataGridSource {
                   onPressed: () => myDownloadFileCubit.downloadFile(
                       row.getCells()[0].value.toString(),
                       row.getCells()[2].value.toString()))
-              : dataGridCell.columnName == 'Type'
-                  ? Icon(
-                      row.getCells()[1] == FileType.notes //Modifier l'icon ici
-                          ? Icons.text_fields
-                          : Icons.insert_drive_file)
-                  : Center(
-                      child: Text(
-                      dataGridCell.value.toString(),
-                      overflow: TextOverflow.ellipsis,
-                    )));
+              : Center(
+                  child: Text(
+                  dataGridCell.value.toString(),
+                  overflow: TextOverflow.ellipsis,
+                )));
     }).toList());
   }
 
@@ -69,7 +64,6 @@ class FileDataSource extends DataGridSource {
     dataGridRows = files
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell<String>(columnName: 'Id', value: dataGridRow.id),
-              const DataGridCell<Widget>(columnName: 'Type', value: null),
               DataGridCell<String>(columnName: 'Nom', value: dataGridRow.name),
               DataGridCell<String>(
                   columnName: 'Auteur', value: dataGridRow.user),
@@ -96,7 +90,7 @@ class _FileTableState extends State<FileTable> {
               'Id',
               overflow: TextOverflow.ellipsis,
             ))),
-    GridColumn(
+    /*GridColumn(
         columnName: 'Type',
         label: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -104,7 +98,7 @@ class _FileTableState extends State<FileTable> {
             child: const Text(
               'Type',
               overflow: TextOverflow.ellipsis,
-            ))),
+            ))),*/
     GridColumn(
         columnName: 'Nom',
         label: Container(

@@ -33,16 +33,16 @@ class TutoratCubit extends Cubit<TutoratState> {
     }
   }
 
-  void getTutorats(tutoratId) async {
+  void getTutorats(lessonId) async {
     try {
-      bool accepted = await tutoratRepository.acceptTutorat(tutoratId);
-      if (accepted) {
-        emit(GetTutoratSuccess(tutoratId: tutoratId));
+      var get = await tutoratRepository.getTutorats(lessonId: lessonId);
+      if (get != null) {
+        emit(GetTutoratSuccess(lessonId: lessonId));
       } else {
-        emit(GetTutoratFailed(tutoratId: tutoratId));
+        emit(GetTutoratFailed(lessonId: lessonId));
       }
     } catch (ex) {
-      emit(GetTutoratFailed(tutoratId: tutoratId));
+      emit(GetTutoratFailed(lessonId: lessonId));
     }
   }
 }

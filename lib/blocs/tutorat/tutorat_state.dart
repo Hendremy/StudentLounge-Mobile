@@ -27,13 +27,13 @@ class AcceptTutoratFailed extends TutoratState {
 }
 
 class GetTutoratSuccess extends TutoratState {
-  final String tutoratId;
+  final String lessonId;
 
-  GetTutoratSuccess({required this.tutoratId});
+  GetTutoratSuccess({required this.lessonId});
 }
 
 class GetTutoratFailed extends TutoratState {
-  final String tutoratId;
+  final String lessonId;
 
-  GetTutoratFailed({required this.tutoratId});
+  GetTutoratFailed({required this.lessonId});
 }

@@ -11,7 +11,8 @@ abstract class TutoratRepository extends StudentApiService {
 
   Future<dynamic> askTutorat(String lessonId);
 
-  Future<dynamic> acceptTutorat(tutoratId);
+  Future<dynamic> acceptTutorat(int tutoratId);
+  Future<dynamic> getTutorats({required lessonId});
 }
 
 class AppTutoratRepository extends TutoratRepository {
@@ -23,7 +24,7 @@ class AppTutoratRepository extends TutoratRepository {
 
   @override
   Future<dynamic> askTutorat(String lessonId) async {
-    Uri uri = Uri.parse('$controllerUrl/$lessonId');
+    Uri uri = Uri.parse('$controllerUrl/lesson/$lessonId');
     http.Response response = await http.put(uri, headers: jsonHeaders);
     if (response.statusCode == 200) {
       return true;
@@ -34,7 +35,7 @@ class AppTutoratRepository extends TutoratRepository {
   @override
   Future acceptTutorat(tutoratId) async {
     Uri uri = Uri.parse('$controllerUrl/$tutoratId');
-    http.Response response = await http.post(uri, headers: jsonHeaders);
+    http.Response response = await http.put(uri, headers: jsonHeaders);
     if (response.statusCode == 200) {
       return true;
     }
@@ -42,13 +43,13 @@ class AppTutoratRepository extends TutoratRepository {
   }
 
   @override
-  Future getTutorats(lessonId) async {
-    Uri uri = Uri.parse('$controllerUrl/all/$lessonId');
+  Future getTutorats({required lessonId}) async {
+    Uri uri = Uri.parse('$controllerUrl/lesson/$lessonId');
     http.Response response = await http.get(uri, headers: jsonHeaders);
     if (response.statusCode == 200) {
       return convertJSONTutoratList(response.body);
     }
-    return;
+    return null;
   }
 
   List<Tutorat> convertJSONTutoratList(String jsonList) {

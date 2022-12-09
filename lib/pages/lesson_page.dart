@@ -84,9 +84,10 @@ class _LessonPageState extends State<LessonPage> {
 
   _getTutorat(Lesson lesson) {
     return BlocProvider(
-      create: ((context) => TutoratCubit(
-          tutoratRepository: context.read<AppStudentServices>().tutoratRepo)),
-      child: GetTutoratButton(lesson: lesson),
-    );
+        create: ((context) => TutoratCubit(
+            tutoratRepository: context.read<AppStudentServices>().tutoratRepo)),
+        child: GetTutoratButton(
+          lesson: lesson,
+        ));
   }
 }

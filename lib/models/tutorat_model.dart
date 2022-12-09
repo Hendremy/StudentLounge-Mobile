@@ -1,24 +1,26 @@
 import 'package:equatable/equatable.dart';
 
 class Tutorat extends Equatable {
-  late String id;
-  late String tutor;
-  late String tutored;
+  late int id;
+  late String userName;
+  late String? image;
+  late String? tutorName;
 
-  Tutorat({required this.id, required this.tutored, required this.tutor});
+  Tutorat(
+      {required this.id, required this.userName, this.image, this.tutorName});
 
   Tutorat.fromMap(Map<String, dynamic> map) {
     id = map['id'];
-    tutor = map['tutor'];
-    tutored = map['tutored'];
+    userName = map['username'];
+    image = map['userimage'];
+    tutorName = map['tutorname'];
   }
 
   Tutorat.empty() {
-    id = "";
-    tutor = "";
-    tutored = "";
+    id = -1;
+    userName = "";
   }
 
   @override
-  List<Object?> get props => [id, tutor, tutored];
+  List<Object?> get props => [id, userName, image, tutorName];
 }
