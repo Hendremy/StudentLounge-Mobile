@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studentlounge_mobile/pages/chat_page.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 
 class ChatTab extends StatefulWidget {
@@ -17,6 +18,6 @@ class _ChatTabState extends State<ChatTab> {
             title: const Center(
                 child: Text('Messagerie',
                     style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
-        body: Center(child: Text('Messagerie')));
+        body: const ChatPage(email: "test"));
   }
 }
