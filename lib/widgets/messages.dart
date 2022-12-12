@@ -1,22 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:studentlounge_mobile/theme.dart' as theme;
 
 class Messages extends StatefulWidget {
-  final String email;
-  const Messages({super.key, required this.email});
+  final String name;
+  final int chatId;
+  const Messages({super.key, required this.name, required this.chatId});
   @override
   State<Messages> createState() => _MessagesState();
 }
 
 class _MessagesState extends State<Messages> {
-  final Stream<QuerySnapshot> _messageStream = FirebaseFirestore.instance
-      .collection('Messages')
-      .orderBy('time')
-      .snapshots();
   @override
   Widget build(BuildContext context) {
+    final Stream<QuerySnapshot> messageStream = FirebaseFirestore.instance
+        .collection('messages${widget.chatId}')
+        .orderBy('time')
+        .snapshots();
+
     return StreamBuilder(
-      stream: _messageStream,
+      stream: messageStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return const Text("something is wrong");
@@ -39,26 +42,20 @@ class _MessagesState extends State<Messages> {
             return Padding(
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               child: Column(
-                crossAxisAlignment: widget.email == qs['email']
+                crossAxisAlignment: widget.name == qs['name']
                     ? CrossAxisAlignment.end
                     : CrossAxisAlignment.start,
                 children: [
                   SizedBox(
                     width: 300,
                     child: ListTile(
+                      tileColor: widget.name == qs['name']
+                          ? theme.secondary
+                          : theme.grey,
                       shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                          color: Colors.purple,
-                        ),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      title: Text(
-                        qs['email'],
-                        style: const TextStyle(
-                          fontSize: 15,
-                        ),
-                      ),
-                      subtitle: Row(
+                      title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
@@ -67,13 +64,13 @@ class _MessagesState extends State<Messages> {
                               qs['message'],
                               softWrap: true,
                               style: const TextStyle(
-                                fontSize: 15,
-                              ),
+                                  fontSize: 18, color: theme.white),
                             ),
                           ),
                           Text(
                             "${d.hour}:${d.minute}",
-                          )
+                            style: const TextStyle(color: theme.white),
+                          ),
                         ],
                       ),
                     ),

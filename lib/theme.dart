@@ -8,3 +8,5 @@ const error = Colors.red;
 const success = Colors.green;
 const white = Colors.white;
 const black = Colors.black;
+const grey = Colors.grey;
+const lightgrey = Color.fromARGB(255, 211, 211, 211);

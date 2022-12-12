@@ -1,4 +1,6 @@
 import 'package:studentlounge_mobile/models/app_user.dart';
+import 'package:studentlounge_mobile/repositories/chats_repository.dart';
+import 'package:studentlounge_mobile/repositories/chats_repository.dart';
 import 'package:studentlounge_mobile/repositories/lesson_files_repository.dart';
 import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
 import 'package:studentlounge_mobile/repositories/tutorat_repository.dart';
@@ -21,6 +23,7 @@ abstract class StudentServicesProvider {
   LessonsRepository get lessonsRepo;
   LessonFilesRepository get lessonFilesRepo;
   TutoratRepository get tutoratRepo;
+  ChatRepository get chatRepo;
 }
 
 class AppStudentServices extends StudentServicesProvider {
@@ -45,4 +48,8 @@ class AppStudentServices extends StudentServicesProvider {
   @override
   TutoratRepository get tutoratRepo => AppTutoratRepository(
       studentId: user.id, token: user.token, apiUrl: apiUrl);
+
+  @override
+  ChatRepository get chatRepo =>
+      AppChatRepository(studentId: user.id, token: user.token, apiUrl: apiUrl);
 }

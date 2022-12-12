@@ -31,7 +31,7 @@ class _AppState extends State<App> {
                         apiUrl: widget.apiUrl,
                         user: state.user,
                         downloadPath: widget.downloadPath),
-                    child: SessionScreen());
+                    child: const SessionScreen());
               } else {
                 return Provider<AppAnonymServices>(
                     create: (_) => AppAnonymServices(apiUrl: widget.apiUrl),
