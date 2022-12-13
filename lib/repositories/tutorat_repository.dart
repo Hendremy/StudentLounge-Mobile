@@ -5,9 +5,12 @@ import 'package:http/http.dart' as http;
 
 import '../models/tutorat_model.dart';
 
-abstract class TutoratRepository extends StudentApiService {
-  TutoratRepository(
-      {required super.studentId, required super.token, required super.apiUrl});
+abstract class TutoringRepository extends StudentApiService {
+  TutoringRepository(
+      {required super.studentId, 
+      required super.token, 
+      required super.apiUrl,
+      required super.controller});
 
   Future<dynamic> askTutorat(String lessonId);
 
@@ -15,12 +18,9 @@ abstract class TutoratRepository extends StudentApiService {
   Future<dynamic> getTutorats({required lessonId});
 }
 
-class AppTutoratRepository extends TutoratRepository {
-  late String controllerUrl;
-  AppTutoratRepository(
-      {required super.studentId, required super.token, required super.apiUrl}) {
-    controllerUrl = '$apiUrl/Tutoring';
-  }
+class AppTutoringRepository extends TutoringRepository {
+  AppTutoringRepository(
+      {required super.studentId, required super.token, required super.apiUrl, required super.controller});
 
   @override
   Future<dynamic> askTutorat(String lessonId) async {

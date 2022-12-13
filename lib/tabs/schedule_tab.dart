@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studentlounge_mobile/pages/schedule_page.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 
 class ScheduleTab extends StatefulWidget {
@@ -17,6 +18,6 @@ class _ScheduleTabState extends State<ScheduleTab> {
             title: const Center(
                 child: Text('Horaire',
                     style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
-        body: Center(child: Text('Horaire ')));
+        body: const SchedulePage());
   }
 }

@@ -4,7 +4,7 @@ import 'package:studentlounge_mobile/blocs/tutorat/tutorat_state.dart';
 import '../../repositories/tutorat_repository.dart';
 
 class TutoratCubit extends Cubit<TutoratState> {
-  final TutoratRepository tutoratRepository;
+  final TutoringRepository tutoratRepository;
   TutoratCubit({required this.tutoratRepository}) : super(TutoratInitial());
 
   void askTutorat(String lessonId) async {

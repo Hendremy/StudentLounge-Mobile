@@ -10,6 +10,7 @@ abstract class LessonFilesRepository extends StudentApiService {
       {required super.studentId,
       required super.token,
       required super.apiUrl,
+      required super.controller,
       required this.downloadPath});
 
   Future<List<LessonFile>?> getLessonFiles(String lessonId);
@@ -18,18 +19,16 @@ abstract class LessonFilesRepository extends StudentApiService {
 }
 
 class AppLessonFilesRepository extends LessonFilesRepository {
-  late String controllerUrl;
   AppLessonFilesRepository(
       {required super.studentId,
       required super.token,
       required super.apiUrl,
-      required super.downloadPath}) {
-    controllerUrl = '$apiUrl/LessonFile';
-  }
+      required super.controller,
+      required super.downloadPath});
 
   @override
   Future<List<LessonFile>?> getLessonFiles(String lessonId) async {
-    Uri uri = Uri.parse("$controllerUrl/Lesson/$lessonId");
+    Uri uri = Uri.parse("$controllerUrl/lesson/$lessonId");
     http.Response response = await http.get(uri, headers: jsonHeaders);
     if (response.statusCode == 200) {
       return convertJSONFileList(response.body);

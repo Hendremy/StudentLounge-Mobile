@@ -5,7 +5,8 @@ import 'package:http/http.dart' as http;
 
 abstract class LessonsRepository extends StudentApiService {
   LessonsRepository(
-      {required super.studentId, required super.token, required super.apiUrl});
+      {required super.studentId, required super.token,
+       required super.apiUrl, required super.controller});
 
   Future<dynamic> getAllLessons();
   Future<dynamic> getUserLessons();
@@ -14,11 +15,9 @@ abstract class LessonsRepository extends StudentApiService {
 }
 
 class AppLessonsRepository extends LessonsRepository {
-  late String controllerUrl;
   AppLessonsRepository(
-      {required super.studentId, required super.token, required super.apiUrl}) {
-    controllerUrl = '$apiUrl/Lesson';
-  }
+      {required super.studentId, required super.token,
+       required super.apiUrl, required super.controller});
 
   @override
   Future<dynamic> getAllLessons() async {

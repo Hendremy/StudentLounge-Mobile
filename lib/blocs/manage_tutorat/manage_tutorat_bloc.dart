@@ -4,7 +4,7 @@ import 'manage_tutorat_events.dart';
 import 'manage_tutorat_state.dart';
 
 class ManageTutoratBloc extends Bloc<ManageTutoratEvent, ManageTutoratState> {
-  final TutoratRepository tutoratRepo;
+  final TutoringRepository tutoratRepo;
   final String lessonId;
 
   ManageTutoratBloc({required this.tutoratRepo, required this.lessonId})

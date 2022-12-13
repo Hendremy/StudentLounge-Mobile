@@ -7,7 +7,7 @@ import 'join_tutorat_row.dart';
 
 class JoinTutoratList extends StatefulWidget {
   final List<Tutorat> tutoratList;
-  final TutoratRepository tutoratRepository;
+  final TutoringRepository tutoratRepository;
 
   const JoinTutoratList({
     super.key,

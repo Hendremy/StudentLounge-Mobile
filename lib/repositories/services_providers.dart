@@ -16,13 +16,13 @@ class AppAnonymServices extends AnonymServicesProvider {
   AppAnonymServices({required this.apiUrl});
 
   @override
-  UserRepository get userRepo => AppUserRepository(apiUrl: apiUrl);
+  UserRepository get userRepo => AppUserRepository(apiUrl: apiUrl, controller: 'Auth');
 }
 
 abstract class StudentServicesProvider {
   LessonsRepository get lessonsRepo;
   LessonFilesRepository get lessonFilesRepo;
-  TutoratRepository get tutoratRepo;
+  TutoringRepository get tutoratRepo;
   ChatRepository get chatRepo;
 }
 
@@ -36,20 +36,27 @@ class AppStudentServices extends StudentServicesProvider {
 
   @override
   LessonsRepository get lessonsRepo => AppLessonsRepository(
-      studentId: user.id, token: user.token, apiUrl: apiUrl);
+      studentId: user.id, 
+      token: user.token, 
+      apiUrl: apiUrl, 
+      controller: 'Lesson');
 
   @override
   LessonFilesRepository get lessonFilesRepo => AppLessonFilesRepository(
       studentId: user.id,
       token: user.token,
       apiUrl: apiUrl,
+      controller: 'LessonFile',
       downloadPath: downloadPath);
 
   @override
-  TutoratRepository get tutoratRepo => AppTutoratRepository(
-      studentId: user.id, token: user.token, apiUrl: apiUrl);
+  TutoringRepository get tutoratRepo => AppTutoringRepository(
+      studentId: user.id, 
+      token: user.token, 
+      apiUrl: apiUrl,
+      controller: 'Tutoring');
 
   @override
   ChatRepository get chatRepo =>
-      AppChatRepository(studentId: user.id, token: user.token, apiUrl: apiUrl);
+      AppChatRepository(studentId: user.id, token: user.token, apiUrl: apiUrl, controller: 'Tutoring');
 }

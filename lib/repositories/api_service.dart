@@ -2,8 +2,11 @@ import 'dart:io';
 
 abstract class ApiService {
   final String apiUrl;
+  final String controller;
 
-  ApiService({required this.apiUrl});
+  String get controllerUrl => '$apiUrl/$controller';
+
+  ApiService({required this.apiUrl, required this.controller});
 }
 
 abstract class StudentApiService extends ApiService {
@@ -19,5 +22,5 @@ abstract class StudentApiService extends ApiService {
       <String, String>{HttpHeaders.authorizationHeader: 'Bearer $token'};
 
   StudentApiService(
-      {required this.studentId, required this.token, required super.apiUrl});
+      {required this.studentId, required this.token, required super.apiUrl, required super.controller});
 }
