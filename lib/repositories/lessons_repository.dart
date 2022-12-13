@@ -33,22 +33,22 @@ class AppLessonsRepository extends LessonsRepository {
     http.Response response = await http.get(Uri.parse('$controllerUrl$options'),
         headers: jsonHeaders);
     if (response.statusCode == 200) {
-      return convertJSONLessonList(response.body);
+      return _reviveJSONLessonList(response.body);
     }
     return null;
   }
 
   @override
   Future<Lesson> joinLesson(String lessonId) async {
-    return await manageLesson(true, lessonId);
+    return await _manageLesson(true, lessonId);
   }
 
   @override
   Future<Lesson> leaveLesson(String lessonId) async {
-    return await manageLesson(false, lessonId);
+    return await _manageLesson(false, lessonId);
   }
 
-  Future<Lesson> manageLesson(bool join, String lessonId) async {
+  Future<Lesson> _manageLesson(bool join, String lessonId) async {
     Uri uri = Uri.parse('$controllerUrl/$lessonId');
     http.Response response = join
         ? await http.put(uri, headers: jsonHeaders)
@@ -60,7 +60,7 @@ class AppLessonsRepository extends LessonsRepository {
     return Lesson.empty();
   }
 
-  List<Lesson> convertJSONLessonList(String jsonList) {
+  List<Lesson> _reviveJSONLessonList(String jsonList) {
     List<dynamic> lessonMapList = jsonDecode(jsonList);
     List<Lesson> lessonList = [];
     for (var lessonMap in lessonMapList) {
