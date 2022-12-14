@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:studentlounge_mobile/models/agenda.dart';
-import 'package:studentlounge_mobile/models/api_error.dart';
+import 'package:studentlounge_mobile/models/api_exception.dart';
 import 'package:studentlounge_mobile/repositories/api_service.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,7 +24,7 @@ class AppScheduleRepository extends ScheduleRepository {
   @override
   Future<List<Agenda>> getUserAgendas() async {
     Uri uri = Uri.parse(controllerUrl);
-    http.Response response = await http.get(uri);
+    http.Response response = await http.get(uri, headers: jsonHeaders);
     if (response.statusCode == 200) {
       List<dynamic> agendas = jsonDecode(response.body);
       return _reviveAgendas(agendas);

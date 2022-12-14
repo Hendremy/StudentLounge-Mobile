@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:studentlounge_mobile/blocs/schedule/schedule_events.dart';
 import 'package:studentlounge_mobile/blocs/schedule/schedule_state.dart';
 import 'package:studentlounge_mobile/models/agenda.dart';
-import 'package:studentlounge_mobile/models/api_error.dart';
+import 'package:studentlounge_mobile/models/api_exception.dart';
 import 'package:studentlounge_mobile/repositories/schedule_repository.dart';
 
 class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
@@ -18,13 +18,13 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
 
   _loadSchedule() async {
     emit(ScheduleLoading());
-    try{
+    try {
       List<Agenda> agendas = await scheduleRepository.getUserAgendas();
       emit(ScheduleLoadSuccess(agendas: agendas));
-    }on ApiException{
-      emit(ScheduleLoadFailed(error: ));
-    } catch(ex){
-      emit(ScheduleLoadFailed(error: error));
+    } on ApiException catch (e) {
+      emit(ScheduleLoadFailed(message: e.message));
+    } catch (ex) {
+      emit(ScheduleLoadFailed(message: 'Erreur inattendue'));
     }
   }
 }

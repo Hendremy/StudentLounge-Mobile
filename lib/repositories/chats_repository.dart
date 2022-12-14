@@ -5,18 +5,24 @@ import 'package:http/http.dart' as http;
 
 abstract class ChatRepository extends StudentApiService {
   ChatRepository(
-      {required super.studentId, required super.token, required super.apiUrl, required super.controller});
+      {required super.studentId,
+      required super.token,
+      required super.apiUrl,
+      required super.controller});
 
   Future<dynamic> getUserChats();
 }
 
 class AppChatRepository extends ChatRepository {
   AppChatRepository(
-      {required super.studentId, required super.token, required super.apiUrl, required super.controller});
+      {required super.studentId,
+      required super.token,
+      required super.apiUrl,
+      required super.controller});
 
   @override
   Future<dynamic> getUserChats() async {
-    return await getChatList("/Chat");
+    return await getChatList("/chat");
   }
 
   Future<List<Chat>?> getChatList(String options) async {
