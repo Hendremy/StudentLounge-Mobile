@@ -3,6 +3,7 @@ import 'package:studentlounge_mobile/repositories/chats_repository.dart';
 import 'package:studentlounge_mobile/repositories/chats_repository.dart';
 import 'package:studentlounge_mobile/repositories/lesson_files_repository.dart';
 import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
+import 'package:studentlounge_mobile/repositories/schedule_repository.dart';
 import 'package:studentlounge_mobile/repositories/tutorat_repository.dart';
 import 'package:studentlounge_mobile/repositories/user_repository.dart';
 
@@ -16,7 +17,8 @@ class AppAnonymServices extends AnonymServicesProvider {
   AppAnonymServices({required this.apiUrl});
 
   @override
-  UserRepository get userRepo => AppUserRepository(apiUrl: apiUrl, controller: 'Auth');
+  UserRepository get userRepo =>
+      AppUserRepository(apiUrl: apiUrl, controller: 'Auth');
 }
 
 abstract class StudentServicesProvider {
@@ -24,6 +26,7 @@ abstract class StudentServicesProvider {
   LessonFilesRepository get lessonFilesRepo;
   TutoringRepository get tutoratRepo;
   ChatRepository get chatRepo;
+  ScheduleRepository get scheduleRepo;
 }
 
 class AppStudentServices extends StudentServicesProvider {
@@ -36,9 +39,9 @@ class AppStudentServices extends StudentServicesProvider {
 
   @override
   LessonsRepository get lessonsRepo => AppLessonsRepository(
-      studentId: user.id, 
-      token: user.token, 
-      apiUrl: apiUrl, 
+      studentId: user.id,
+      token: user.token,
+      apiUrl: apiUrl,
       controller: 'Lesson');
 
   @override
@@ -51,12 +54,22 @@ class AppStudentServices extends StudentServicesProvider {
 
   @override
   TutoringRepository get tutoratRepo => AppTutoringRepository(
-      studentId: user.id, 
-      token: user.token, 
+      studentId: user.id,
+      token: user.token,
       apiUrl: apiUrl,
       controller: 'Tutoring');
 
   @override
-  ChatRepository get chatRepo =>
-      AppChatRepository(studentId: user.id, token: user.token, apiUrl: apiUrl, controller: 'Tutoring');
+  ChatRepository get chatRepo => AppChatRepository(
+      studentId: user.id,
+      token: user.token,
+      apiUrl: apiUrl,
+      controller: 'Tutoring');
+
+  @override
+  ScheduleRepository get scheduleRepo => AppScheduleRepository(
+      studentId: user.id,
+      token: user.token,
+      apiUrl: apiUrl,
+      controller: 'Agenda');
 }
