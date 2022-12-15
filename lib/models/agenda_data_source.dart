@@ -10,15 +10,14 @@ class ScheduleDataSource extends CalendarDataSource {
     Colors.purple[600],
     Colors.amber[600]
   ];
-  late List<ScheduleDateEvent> events;
 
   ScheduleDataSource(List<Agenda> agendas) {
     int colorIndex = 0;
-    events = [];
+    appointments = [];
     for (Agenda agenda in agendas) {
       var scheduleDates = _convertFromAgenda(agenda, agendaColors[colorIndex]!);
       colorIndex = (colorIndex + 1) % agendaColors.length;
-      events.addAll(scheduleDates);
+      appointments?.addAll(scheduleDates);
     }
   }
 
@@ -30,26 +29,26 @@ class ScheduleDataSource extends CalendarDataSource {
 
   @override
   DateTime getStartTime(int index) {
-    return events[index].startHour;
+    return appointments![index].startHour;
   }
 
   @override
   DateTime getEndTime(int index) {
-    return events[index].endHour;
+    return appointments![index].endHour;
   }
 
   @override
   String getSubject(int index) {
-    return events[index].summary;
+    return appointments![index].summary;
   }
 
   @override
   Color getColor(int index) {
-    return events[index].color;
+    return appointments![index].color;
   }
 
   @override
   bool isAllDay(int index) {
-    return events![index].isAllDay;
+    return appointments![index].isAllDay;
   }
 }

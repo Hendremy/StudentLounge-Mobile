@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studentlounge_mobile/blocs/schedule/schedule_bloc.dart';
-import 'package:studentlounge_mobile/pages/agenda_page.dart';
+import 'package:studentlounge_mobile/pages/schedule_page.dart';
 import 'package:studentlounge_mobile/repositories/services_providers.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 
