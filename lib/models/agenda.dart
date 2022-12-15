@@ -23,8 +23,8 @@ class Agenda {
       id: map['id'] as int,
       name: map['name'] as String,
       events: List<AgendaDateEvent>.from(
-        (map['events'] as List<String>).map<AgendaDateEvent>(
-          (e) => AgendaDateEvent.fromMap(jsonDecode(e)),
+        (map['agendaEvents'] as List<dynamic>).map<AgendaDateEvent>(
+          (e) => AgendaDateEvent.fromMap(e as Map<String, dynamic>),
         ),
       ),
     );

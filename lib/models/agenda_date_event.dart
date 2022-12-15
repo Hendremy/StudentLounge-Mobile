@@ -36,7 +36,6 @@ class AgendaDateEvent {
 
   AgendaDateEvent.fromMap(Map<String, dynamic> map) {
     id = map['id'] as String;
-    label = map['label'] as String;
     description = map['description'] as String;
     location = map['location'] as String;
     summary = map['summary'] as String;
