@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:studentlounge_mobile/models/agenda.dart';
 import 'package:studentlounge_mobile/models/schedule_date_event.dart';
