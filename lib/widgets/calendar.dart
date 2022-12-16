@@ -11,6 +11,7 @@ class Calendar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfCalendar(
         view: CalendarView.schedule,
+        timeZone: "Central Europe Standard Time",
         scheduleViewSettings: const ScheduleViewSettings(
             appointmentItemHeight: 70,
             hideEmptyScheduleWeek: true,

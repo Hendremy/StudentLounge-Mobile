@@ -39,8 +39,8 @@ class AgendaDateEvent {
     description = map['description'] as String;
     location = map['location'] as String;
     summary = map['summary'] as String;
-    startHour = DateTime.parse(map['startHour'] as String);
-    endHour = DateTime.parse(map['endHour'] as String);
-    date = DateTime.parse(map['date'] as String);
+    startHour = DateTime.parse(map['startHour'] as String).toUtc();
+    endHour = DateTime.parse(map['endHour'] as String).toUtc();
+    date = DateTime.parse(map['date'] as String).toUtc();
   }
 }
