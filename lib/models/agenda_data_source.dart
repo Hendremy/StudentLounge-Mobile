@@ -15,8 +15,8 @@ class ScheduleDataSource extends CalendarDataSource {
     int colorIndex = 0;
     appointments = [];
     for (Agenda agenda in agendas) {
-      var scheduleDates = _convertFromAgenda(agenda, agendaColors[colorIndex]!);
-      colorIndex = (colorIndex + 1) % agendaColors.length;
+      var scheduleDates = _convertFromAgenda(
+          agenda, agendaColors[colorIndex++ % agendaColors.length]!);
       appointments?.addAll(scheduleDates);
     }
   }

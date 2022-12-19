@@ -26,18 +26,14 @@ class AppScheduleRepository extends ScheduleRepository {
     Uri uri = Uri.parse(controllerUrl);
     http.Response response = await http.get(uri, headers: jsonHeaders);
     if (response.statusCode == 200) {
-      List<dynamic> agendas = jsonDecode(response.body);
-      return _reviveAgendas(agendas);
+      return _reviveAgendas(response.body);
     } else {
       throw ApiException(status: response.statusCode, message: response.body);
     }
   }
 
-  List<Agenda> _reviveAgendas(List<dynamic> jsonAgendas) {
-    List<Agenda> agendas = [];
-    for (var jsonAgenda in jsonAgendas) {
-      agendas.add(Agenda.fromMap(jsonAgenda));
-    }
-    return agendas;
+  List<Agenda> _reviveAgendas(String jsonAgendas) {
+    List<dynamic> agendas = jsonDecode(jsonAgendas);
+    return agendas.map((agenda) => Agenda.fromMap(agenda)).toList();
   }
 }
