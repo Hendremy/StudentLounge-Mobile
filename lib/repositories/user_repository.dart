@@ -6,7 +6,7 @@ import 'package:studentlounge_mobile/models/app_user.dart';
 import 'package:studentlounge_mobile/repositories/api_service.dart';
 
 abstract class UserRepository extends ApiService {
-  UserRepository({required super.apiUrl});
+  UserRepository({required super.apiUrl, required super.controller});
 
   Future<AppUser?> authenticate(
       {required String username, required String password});
@@ -16,11 +16,8 @@ abstract class UserRepository extends ApiService {
 
 class AppUserRepository extends UserRepository {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  late String controllerUrl;
 
-  AppUserRepository({required super.apiUrl}) {
-    controllerUrl = '$apiUrl/Auth';
-  }
+  AppUserRepository({required super.apiUrl, required super.controller});
 
   @override
   Future<AppUser?> authenticate({

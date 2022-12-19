@@ -6,7 +6,7 @@ import 'join_tutorat_state.dart';
 
 class JoinTutoratBloc extends Bloc<JoinTutoratEvent, JoinTutoratState> {
   final Tutorat tutorat;
-  final TutoratRepository tutoratRepository;
+  final TutoringRepository tutoratRepository;
 
   JoinTutoratBloc({required this.tutorat, required this.tutoratRepository})
       : super(TutoratJoinable(tutorat: tutorat)) {

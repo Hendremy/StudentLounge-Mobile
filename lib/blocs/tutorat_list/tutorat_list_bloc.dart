@@ -6,7 +6,7 @@ import 'package:studentlounge_mobile/models/tutorat_model.dart';
 import '../../repositories/tutorat_repository.dart';
 
 class TutoratListBloc extends Bloc<TutoratListEvent, TutoratListState> {
-  final TutoratRepository tutoratRepository;
+  final TutoringRepository tutoratRepository;
   List<Tutorat> tutoratList = [];
   final String lessonId;
 

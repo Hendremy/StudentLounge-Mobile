@@ -11,7 +11,7 @@ import '../models/tutorat_model.dart';
 
 class JoinTutoratRow extends StatefulWidget {
   final Tutorat tutorat;
-  final TutoratRepository tutoratRepository;
+  final TutoringRepository tutoratRepository;
 
   const JoinTutoratRow({
     super.key,
