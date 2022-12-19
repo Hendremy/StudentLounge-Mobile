@@ -36,8 +36,8 @@ class AppUserRepository extends UserRepository {
       if (googleSignInAccount != null) {
         GoogleSignInAuthentication? auth =
             await googleSignInAccount.authentication;
-        dynamic token = auth.accessToken;
-        var body = jsonEncode({'provider': 'Google', 'token': token});
+        dynamic token = auth.idToken;
+        var body = jsonEncode({'providerName': 'Google', 'token': token});
         return await _retrieveUser('External', body);
       }
       return null;
