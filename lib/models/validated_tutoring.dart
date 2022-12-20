@@ -29,14 +29,14 @@ class ValidatedTutoring {
 
 class TutoringUser {
   final String name;
-  final String image;
+  final String? image;
 
   TutoringUser({required this.image, required this.name});
 
   factory TutoringUser.fromMap(Map<String, dynamic> map) {
     return TutoringUser(
       name: map['name'] as String,
-      image: map['image'] as String,
+      image: map['image'] as String?,
     );
   }
 

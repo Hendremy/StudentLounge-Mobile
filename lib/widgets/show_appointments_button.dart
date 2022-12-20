@@ -6,6 +6,7 @@ import 'package:studentlounge_mobile/blocs/appointment_list/appointment_list_blo
 import 'package:studentlounge_mobile/blocs/appointment_list/appointment_list_events.dart';
 import 'package:studentlounge_mobile/blocs/appointment_list/appointment_list_state.dart';
 import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
+import 'package:studentlounge_mobile/theme.dart' as theme;
 
 import '../models/appointment.dart';
 
@@ -40,7 +41,10 @@ class _ShowAppointmentsButtonState extends State<ShowAppointmentsButton> {
           return LoadingIndicator();
         } else {
           return IconButton(
-            icon: const Icon(Icons.location_off),
+            icon: const Icon(
+              Icons.location_off,
+              color: theme.grey,
+            ),
             onPressed: () {
               _onReloadAppointments();
             },

@@ -26,10 +26,10 @@ class _ChatPageState extends State<ChatPage> {
 
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           backgroundColor: theme.primary,
-          title: Center(
-              child: Text(widget.email,
-                  style: const TextStyle(fontSize: 30, fontFamily: 'Gugi'))),
+          title: Text(widget.email,
+              style: const TextStyle(fontSize: 30, fontFamily: 'Gugi')),
           actions: [
             _askAppointement(widget.chatId),
           ],

@@ -30,11 +30,11 @@ class _SchedulePageState extends State<SchedulePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+            centerTitle: true,
             actions: const [ShowAppointmentsButton()],
             backgroundColor: theme.primary,
-            title: const Center(
-                child: Text('Horaire',
-                    style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
+            title: const Text('Horaire',
+                style: TextStyle(fontSize: 30, fontFamily: 'Gugi'))),
         body: BlocBuilder<ScheduleBloc, ScheduleState>(
           builder: (context, state) {
             return _renderBody(state);

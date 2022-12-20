@@ -23,6 +23,8 @@ class AppointmentListBloc
       List<Appointment> appointments =
           await appointmentRepo.getUserAppointments();
       emit(AppointmentListLoaded(appointments: appointments));
+    } on Error catch (err) {
+      emit(AppointmentListError());
     } catch (ex) {
       emit(AppointmentListLoadFailed(exception: ex as Exception));
     }

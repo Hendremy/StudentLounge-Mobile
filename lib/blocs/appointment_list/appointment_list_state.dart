@@ -18,3 +18,5 @@ class AppointmentListLoadFailed extends AppointmentListState {
 }
 
 class AppointmentListLoading extends AppointmentListState {}
+
+class AppointmentListError extends AppointmentListState {}

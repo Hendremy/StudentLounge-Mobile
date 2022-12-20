@@ -34,10 +34,10 @@ class _ChatListPageState extends State<ChatListPage> {
     ) {
       return Scaffold(
           appBar: AppBar(
+              centerTitle: true,
               backgroundColor: theme.primary,
-              title: const Center(
-                  child: Text('Messages',
-                      style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
+              title: const Text('Messages',
+                  style: TextStyle(fontSize: 30, fontFamily: 'Gugi'))),
           body: _renderBody(state));
     });
   }
