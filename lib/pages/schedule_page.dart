@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studentlounge_mobile/blocs/schedule/schedule_bloc.dart';
 import 'package:studentlounge_mobile/blocs/schedule/schedule_events.dart';
 import 'package:studentlounge_mobile/blocs/schedule/schedule_state.dart';
-import 'package:studentlounge_mobile/models/agenda_data_source.dart';
+import 'package:studentlounge_mobile/models/appointment.dart';
 import 'package:studentlounge_mobile/widgets/calendar.dart';
 import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
 import 'package:studentlounge_mobile/widgets/retry_message.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:studentlounge_mobile/theme.dart' as theme;
+import 'package:studentlounge_mobile/widgets/show_appointments_button.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({super.key});
@@ -27,11 +28,18 @@ class _SchedulePageState extends State<SchedulePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: BlocBuilder<ScheduleBloc, ScheduleState>(
-      builder: (context, state) {
-        return _renderBody(state);
-      },
-    ));
+    return Scaffold(
+        appBar: AppBar(
+            actions: const [ShowAppointmentsButton()],
+            backgroundColor: theme.primary,
+            title: const Center(
+                child: Text('Horaire',
+                    style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
+        body: BlocBuilder<ScheduleBloc, ScheduleState>(
+          builder: (context, state) {
+            return _renderBody(state);
+          },
+        ));
   }
 
   _renderBody(state) {
