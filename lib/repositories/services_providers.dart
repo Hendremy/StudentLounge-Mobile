@@ -1,6 +1,7 @@
 import 'package:studentlounge_mobile/models/app_user.dart';
 import 'package:studentlounge_mobile/repositories/appointement_repository.dart';
 import 'package:studentlounge_mobile/repositories/appointement_repository.dart';
+import 'package:studentlounge_mobile/repositories/appointment_repository.dart';
 import 'package:studentlounge_mobile/repositories/chats_repository.dart';
 import 'package:studentlounge_mobile/repositories/lesson_files_repository.dart';
 import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
@@ -29,6 +30,7 @@ abstract class StudentServicesProvider {
   ChatRepository get chatRepo;
   ScheduleRepository get scheduleRepo;
   AppointementRepository get appointementRepo;
+  AppointmentRepository get appointmentRepository;
 }
 
 class AppStudentServices extends StudentServicesProvider {
@@ -81,4 +83,11 @@ class AppStudentServices extends StudentServicesProvider {
       token: user.token,
       apiUrl: apiUrl,
       controller: 'Appointements');
+
+  @override
+  AppointmentRepository get appointmentRepository => AppAppointmentRepository(
+      studentId: user.id,
+      token: user.token,
+      apiUrl: apiUrl,
+      controller: 'Appointments');
 }

@@ -35,6 +35,7 @@ class _LessonListPageState extends State<LessonListPage> {
     ) {
       return Scaffold(
           appBar: AppBar(
+              centerTitle: true,
               backgroundColor: theme.primary,
               actions: [
                 if (state is! LessonListLoadingFailed)
@@ -43,9 +44,8 @@ class _LessonListPageState extends State<LessonListPage> {
                     icon: const Icon(Icons.add),
                   )
               ],
-              title: const Center(
-                  child: Text('Cours',
-                      style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
+              title: const Text('Cours',
+                  style: TextStyle(fontSize: 30, fontFamily: 'Gugi'))),
           body: _renderBody(state));
     });
   }

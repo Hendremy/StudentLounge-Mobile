@@ -18,19 +18,18 @@ class _LessonsTabState extends State<LessonsTab> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LessonListBloc>(create: (context) {
-      lessonListBloc = LessonListBloc(
-          lessonRepository: context.read<AppStudentServices>().lessonsRepo);
-      return lessonListBloc;
-    }, child: Navigator(onGenerateRoute: ((settings) {
-      Widget page = const LessonListPage();
-      if (settings.name == 'lesson') {
-        Lesson lesson = settings.arguments as Lesson;
-        page = LessonPage(
-          lesson: lesson,
-        );
-      }
-      return MaterialPageRoute(builder: (_) => page);
-    })));
+    return BlocProvider<LessonListBloc>(
+        create: (context) => LessonListBloc(
+            lessonRepository: context.read<AppStudentServices>().lessonsRepo),
+        child: Navigator(onGenerateRoute: ((settings) {
+          Widget page = const LessonListPage();
+          if (settings.name == 'lesson') {
+            Lesson lesson = settings.arguments as Lesson;
+            page = LessonPage(
+              lesson: lesson,
+            );
+          }
+          return MaterialPageRoute(builder: (_) => page);
+        })));
   }
 }

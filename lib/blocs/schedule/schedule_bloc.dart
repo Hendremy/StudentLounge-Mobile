@@ -7,11 +7,14 @@ import 'package:studentlounge_mobile/repositories/schedule_repository.dart';
 
 class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
   final ScheduleRepository scheduleRepository;
+  late List<Agenda> agendas;
 
   ScheduleBloc({required this.scheduleRepository}) : super(ScheduleInitial()) {
     on<RetryLoadSchedule>((event, emit) {
       _loadSchedule();
     });
+
+    on<ScheduleAppointmentsLoaded>((event, emit) {});
 
     _loadSchedule();
   }

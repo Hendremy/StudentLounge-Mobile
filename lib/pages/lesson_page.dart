@@ -40,10 +40,10 @@ class _LessonPageState extends State<LessonPage> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
+            centerTitle: true,
             backgroundColor: theme.primary,
-            title: Center(
-                child: Text(widget.lessonName,
-                    style: const TextStyle(fontSize: 30))),
+            title:
+                Text(widget.lessonName, style: const TextStyle(fontSize: 30)),
             actions: [
               _getTutorat(lessonBloc.lesson),
               _askTutorat(lessonBloc.lesson)
