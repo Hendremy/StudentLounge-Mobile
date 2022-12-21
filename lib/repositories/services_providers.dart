@@ -82,7 +82,7 @@ class AppStudentServices extends StudentServicesProvider {
       studentId: user.id,
       token: user.token,
       apiUrl: apiUrl,
-      controller: 'Appointements');
+      controller: 'Appointments');
 
   @override
   AppointmentRepository get appointmentRepository => AppAppointmentRepository(

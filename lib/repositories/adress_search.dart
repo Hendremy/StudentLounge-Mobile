@@ -33,7 +33,7 @@ class AddressSearch extends SearchDelegate<Suggestion> {
   @override
   Widget buildResults(BuildContext context) {
     return IconButton(
-      tooltip: 'Back',
+      tooltip: 'Result',
       icon: const Icon(Icons.search),
       onPressed: () {},
     );
@@ -56,7 +56,7 @@ class AddressSearch extends SearchDelegate<Suggestion> {
               return ListView.builder(
                 itemBuilder: (context, index) => ListTile(
                   // we will display the data returned from our future here
-                  title: Text(list[index]),
+                  title: Text(list[index].getDescription()),
                   onTap: () {
                     close(context, list[index]);
                   },
