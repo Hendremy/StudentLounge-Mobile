@@ -50,10 +50,9 @@ class AppLessonFilesRepository extends LessonFilesRepository {
     if (downloadPath.isEmpty) {
       throw Exception("Can't download - Access to directory denied");
     }
-    //Uri downloadUrl = Uri.parse("$controllerUrl/$fileId");
-    Uri downloadUrl = Uri.parse("https://www.ibm.com/downloads/cas/GJ5QVQ7X");
-    http.Response response =
-        await http.get(downloadUrl /*, headers: tokenHeader*/);
+    Uri downloadUrl = Uri.parse("$controllerUrl/$fileId");
+    // Uri downloadUrl = Uri.parse("https://www.ibm.com/downloads/cas/GJ5QVQ7X");
+    http.Response response = await http.get(downloadUrl, headers: tokenHeader);
 
     io.File file = io.File("$downloadPath/$fileId.pdf");
     var result = await file.writeAsBytes(response.bodyBytes,

@@ -9,21 +9,6 @@ import 'package:studentlounge_mobile/theme.dart' as theme;
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class FileTable extends StatefulWidget {
-  final List<LessonFile> fakeFiles = [
-    LessonFile(
-        id: "2",
-        name: 'Fake.pdf',
-        user: 'Test',
-        date: DateTime.now(),
-        type: FileType.summary),
-    LessonFile(
-        id: "1",
-        name: 'Fake.txt',
-        user: 'Toto',
-        date: DateTime.now(),
-        type: FileType.notes),
-  ];
-
   final List<LessonFile> files;
   FileTable({super.key, required this.files});
 
@@ -139,7 +124,7 @@ class _FileTableState extends State<FileTable> {
 
   @override
   void initState() {
-    fileDataSource = FileDataSource(files: widget.fakeFiles, context: context);
+    fileDataSource = FileDataSource(files: widget.files, context: context);
     super.initState();
   }
 
