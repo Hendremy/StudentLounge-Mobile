@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:studentlounge_mobile/blocs/appointment_path/appointment_path_bloc.dart';
+import 'package:studentlounge_mobile/blocs/appointment_path/appointment_path_events.dart';
+import 'package:studentlounge_mobile/blocs/appointment_path/appointment_path_state.dart';
 import 'package:studentlounge_mobile/models/appointment.dart';
-import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
+import 'package:studentlounge_mobile/widgets/google_map_path.dart';
+import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
+import 'package:studentlounge_mobile/widgets/retry_message.dart';
 
 class AppointmentPathPage extends StatefulWidget {
   final Appointment appointment;
@@ -14,6 +18,14 @@ class AppointmentPathPage extends StatefulWidget {
 }
 
 class _AppointmentPathPageState extends State<AppointmentPathPage> {
+  late AppointmentPathBloc appointmentPathBloc;
+
+  @override
+  void initState() {
+    appointmentPathBloc = BlocProvider.of<AppointmentPathBloc>(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,14 +34,30 @@ class _AppointmentPathPageState extends State<AppointmentPathPage> {
             bottom: PreferredSize(
                 preferredSize: Size.zero,
                 child: Text(
-                  widget.appointment.summary,
-                  style: const TextStyle(color: theme.white),
+                  "${widget.appointment.date} de ${widget.appointment.startHour} à ${widget.appointment.endHour} \n ${widget.appointment.location}",
+                  style: const TextStyle(fontSize: 12, color: theme.white),
                 )),
             actions: const [],
             backgroundColor: theme.primary,
-            title: const Center(
-                child: Text('Rendez-vous',
-                    style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
-        body: LoadingIndicator());
+            title: Center(
+                child: Text(widget.appointment.summary,
+                    style: const TextStyle(fontSize: 20, fontFamily: 'Gugi')))),
+        body: BlocBuilder<AppointmentPathBloc, AppointmentPathState>(
+          builder: (context, state) {
+            if (state is AppointmentPathLoaded) {
+              return GoogleMapPath(path: state.path);
+            } else if (state is AppointmentPathLoading) {
+              return LoadingIndicator();
+            } else {
+              return RetryMessage(
+                  text: 'Erreur lors de la récupération du chemin',
+                  retry: _retryLoadPath);
+            }
+          },
+        ));
+  }
+
+  _retryLoadPath() {
+    appointmentPathBloc.add(AppointmentPathRetryLoad());
   }
 }
