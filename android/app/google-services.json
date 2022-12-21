@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "617490373514",
+    "firebase_url": "https://studentlounge-android-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "studentlounge-android",
     "storage_bucket": "studentlounge-android.appspot.com"
   },
@@ -19,6 +20,14 @@
           "android_info": {
             "package_name": "com.example.studentlounge_mobile",
             "certificate_hash": "6f6e9f8fdc49d5c253ace3cdb11d379f763bb7ae"
+          }
+        },
+        {
+          "client_id": "617490373514-o6ppcghvbt6cmchr4palrt9d605hjolf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.studentlounge_mobile",
+            "certificate_hash": "906135472e6f33dde03966fc992b2bb27bc78dfe"
           }
         },
         {
