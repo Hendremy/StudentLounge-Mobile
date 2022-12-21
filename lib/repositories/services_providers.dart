@@ -1,13 +1,15 @@
 import 'package:studentlounge_mobile/models/app_user.dart';
 import 'package:studentlounge_mobile/repositories/appointement_repository.dart';
-import 'package:studentlounge_mobile/repositories/appointement_repository.dart';
 import 'package:studentlounge_mobile/repositories/appointment_repository.dart';
 import 'package:studentlounge_mobile/repositories/chats_repository.dart';
+import 'package:studentlounge_mobile/repositories/directions_repository.dart';
 import 'package:studentlounge_mobile/repositories/lesson_files_repository.dart';
 import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
+import 'package:studentlounge_mobile/repositories/location_repository.dart';
 import 'package:studentlounge_mobile/repositories/schedule_repository.dart';
 import 'package:studentlounge_mobile/repositories/tutorat_repository.dart';
 import 'package:studentlounge_mobile/repositories/user_repository.dart';
+import 'package:studentlounge_mobile/.env.dart' as env;
 
 abstract class AnonymServicesProvider {
   UserRepository get userRepo;
@@ -31,6 +33,8 @@ abstract class StudentServicesProvider {
   ScheduleRepository get scheduleRepo;
   AppointementRepository get appointementRepo;
   AppointmentRepository get appointmentRepository;
+  LocationRepository get locationRepository;
+  DirectionsRepository get directionsRepository;
 }
 
 class AppStudentServices extends StudentServicesProvider {
@@ -90,4 +94,12 @@ class AppStudentServices extends StudentServicesProvider {
       token: user.token,
       apiUrl: apiUrl,
       controller: 'Appointments');
+
+  @override
+  LocationRepository get locationRepository => LocationRepository();
+
+  @override
+  DirectionsRepository get directionsRepository => DirectionsRepository(
+      apiUrl: 'https://maps.googleapis.com/maps/api',
+      apiKey: env.googleMapsKey);
 }
