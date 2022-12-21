@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:studentlounge_mobile/models/directions.dart';
 import 'package:studentlounge_mobile/models/map_path.dart';
 
 class GoogleMapPath extends StatefulWidget {
@@ -16,6 +17,8 @@ class _GoogleMapPathState extends State<GoogleMapPath> {
   late GoogleMapController _googleMapController;
   late Marker _origin;
   late Marker _destination;
+  late Directions _info;
+  late Polyline _polyline;
 
   @override
   void initState() {
@@ -32,6 +35,15 @@ class _GoogleMapPathState extends State<GoogleMapPath> {
         position: widget.path.destination,
         icon:
             BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet));
+    _info = widget.path.directions;
+    _polyline = Polyline(
+        polylineId: const PolylineId('path'),
+        color: Colors.cyan,
+        width: 5,
+        points: _info.polylinePoints
+            .map((e) => LatLng(e.latitude, e.longitude))
+            .toList());
+    CameraUpdate.newLatLngBounds(_info.bounds, 100.0);
     super.initState();
   }
 
@@ -44,12 +56,11 @@ class _GoogleMapPathState extends State<GoogleMapPath> {
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-        myLocationButtonEnabled: true,
-        initialCameraPosition: _initialCameraPosition,
-        onMapCreated: (controller) => _googleMapController = controller,
-        markers: {
-          if (_origin != null) _origin,
-          if (_destination != null) _destination
-        });
+      myLocationButtonEnabled: true,
+      initialCameraPosition: _initialCameraPosition,
+      onMapCreated: (controller) => _googleMapController = controller,
+      markers: {_origin, _destination},
+      polylines: {_polyline},
+    );
   }
 }

@@ -18,8 +18,11 @@ class DirectionsRepository {
       'destination': '${destination.latitude},${destination.longitude}',
       'key': apiKey
     };
-    Uri uri = Uri.https(apiUrl, '/directions/json?', queryParams);
-    http.Response response = await http.get(uri);
+    Uri uri = Uri.parse(
+        "$apiUrl/directions/json?origin=${queryParams['origin']}&destination=${queryParams['destination']}&key=${queryParams['key']}");
+    http.Response response = await http.get(
+      uri,
+    );
     if (response.statusCode == 200) {
       return _reviveDirections(response.body);
     } else {
