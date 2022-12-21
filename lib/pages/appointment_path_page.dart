@@ -22,14 +22,14 @@ class _AppointmentPathPageState extends State<AppointmentPathPage> {
             bottom: PreferredSize(
                 preferredSize: Size.zero,
                 child: Text(
-                  widget.appointment.summary,
-                  style: const TextStyle(color: theme.white),
+                  "${widget.appointment.date} de ${widget.appointment.startHour} à ${widget.appointment.endHour} \n ${widget.appointment.location}",
+                  style: const TextStyle(fontSize: 12, color: theme.white),
                 )),
             actions: const [],
             backgroundColor: theme.primary,
-            title: const Center(
-                child: Text('Rendez-vous',
-                    style: TextStyle(fontSize: 30, fontFamily: 'Gugi')))),
+            title: Center(
+                child: Text(widget.appointment.summary,
+                    style: const TextStyle(fontSize: 20, fontFamily: 'Gugi')))),
         body: LoadingIndicator());
   }
 }
