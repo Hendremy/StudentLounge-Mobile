@@ -35,17 +35,14 @@ class AppAppointementRepository extends AppointementRepository {
       required String end,
       required String location}) async {
     var body = jsonEncode({
-      'tutoratId': tutoratId,
+      'tutoringId': tutoratId,
       'start': start,
       'end': end,
       'location': location
     });
+    var url = Uri.parse(controllerUrl);
     http.Response response =
-        await http.post(Uri.parse('$controllerUrl/Appointements'),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: body);
+        await http.post(url, headers: jsonHeaders, body: body);
     if (response.statusCode == 200) {
       return true;
     }

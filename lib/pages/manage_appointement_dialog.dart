@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:studentlounge_mobile/blocs/manage_appointement/manage_appointement_state.dart';
 import 'package:studentlounge_mobile/repositories/adress_search.dart';
 import 'package:studentlounge_mobile/repositories/place_service.dart';
@@ -128,9 +129,9 @@ class _ManageAskAppointementDialogState
           const SizedBox(
             height: 30,
           ),
-          Text(
-            "Début : $starthours:$startminutes      $startday/$startmonth/$startyear",
-            style: const TextStyle(fontSize: 20, color: theme.white),
+          const Text(
+            "Début :",
+            style: TextStyle(fontSize: 20, color: theme.white),
           ),
           const SizedBox(
             height: 16,
@@ -146,25 +147,41 @@ class _ManageAskAppointementDialogState
                       if (newTime == null) return;
                       setState(() => widget.startTime = newTime);
                     },
-                    child: const Icon(Icons.access_time)),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.access_time),
+                        Text(
+                          "  $starthours:$startminutes",
+                          style:
+                              const TextStyle(fontSize: 20, color: theme.white),
+                        ),
+                      ],
+                    )),
                 ElevatedButton(
-                    onPressed: () async {
-                      DateTime? newDate = await showDatePicker(
-                          context: context,
-                          initialDate: widget.startDate,
-                          firstDate: DateTime(2015, 8),
-                          lastDate: DateTime(2101));
-                      if (newDate == null) return;
-                      setState(() => widget.startDate = newDate);
-                    },
-                    child: const Icon(Icons.event)),
+                  onPressed: () async {
+                    DateTime? newDate = await showDatePicker(
+                        context: context,
+                        initialDate: widget.startDate,
+                        firstDate: DateTime(2015, 8),
+                        lastDate: DateTime(2101));
+                    if (newDate == null) return;
+                    setState(() => widget.startDate = newDate);
+                  },
+                  child: Row(children: [
+                    const Icon(Icons.event),
+                    Text(
+                      "  $startday/$startmonth/$startyear",
+                      style: const TextStyle(fontSize: 20, color: theme.white),
+                    ),
+                  ]),
+                ),
               ]),
           const SizedBox(
             height: 30,
           ),
-          Text(
-            "Fin : $endhours:$endminutes        $endday/$endmonth/$endyear",
-            style: const TextStyle(fontSize: 20, color: theme.white),
+          const Text(
+            "Fin :",
+            style: TextStyle(fontSize: 20, color: theme.white),
           ),
           const SizedBox(
             height: 16,
@@ -180,7 +197,16 @@ class _ManageAskAppointementDialogState
                       if (newTime == null) return;
                       setState(() => widget.endTime = newTime);
                     },
-                    child: const Icon(Icons.access_time)),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.access_time),
+                        Text(
+                          "  $endhours:$endminutes",
+                          style:
+                              const TextStyle(fontSize: 20, color: theme.white),
+                        ),
+                      ],
+                    )),
                 ElevatedButton(
                     onPressed: () async {
                       DateTime? newDate = await showDatePicker(
@@ -191,7 +217,14 @@ class _ManageAskAppointementDialogState
                       if (newDate == null) return;
                       setState(() => widget.endDate = newDate);
                     },
-                    child: const Icon(Icons.event)),
+                    child: Row(children: [
+                      const Icon(Icons.event),
+                      Text(
+                        "  $endday/$endmonth/$endyear",
+                        style:
+                            const TextStyle(fontSize: 20, color: theme.white),
+                      ),
+                    ]))
               ]),
           const SizedBox(
             height: 30,
@@ -199,18 +232,41 @@ class _ManageAskAppointementDialogState
           ElevatedButton(
             onPressed: () {
               // Validate returns true if the form is valid, or false otherwise.
-              if (true) {
-                // If the form is valid, display a snackbar. In the real world,
-                // you'd often call a server or save the information in a database.
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Processing Data')),
-                );
+              if (controller.text.isNotEmpty) {
+                try {
+                  String startDateTimeUTC = formatDateTimeUTC(startday,
+                      startmonth, startyear, starthours, startminutes);
+                  String endDateTimeUTC = formatDateTimeUTC(
+                      endday, endmonth, endyear, endhours, endminutes);
+                  widget.appointementRepository.askAppointement(
+                      tutoratId: widget.tutoratId,
+                      start: startDateTimeUTC,
+                      end: endDateTimeUTC,
+                      location: controller.text);
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Rendez-vous planifié'),
+                    backgroundColor: theme.success,
+                  ));
+                  Navigator.pop(context);
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Erreur'),
+                    backgroundColor: theme.error,
+                  ));
+                }
               }
             },
-            child: const Text('Submit'),
+            style: ElevatedButton.styleFrom(backgroundColor: theme.white),
+            child: const Text('Enregistrer',
+                style: TextStyle(fontSize: 20, color: theme.primaryDark)),
           ),
         ],
       ),
     ));
+  }
+
+  formatDateTimeUTC(day, month, year, hours, minutes) {
+    //2022-01-13T10:25:35Z
+    return "$year-$month-${day}T$hours:$minutes:00Z";
   }
 }
