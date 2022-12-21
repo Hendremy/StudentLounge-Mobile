@@ -1,5 +1,7 @@
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:studentlounge_mobile/models/api_exception.dart';
 
 class LocationRepository {
   Future<LatLng> getDevicePosition() async {
@@ -28,8 +30,14 @@ class LocationRepository {
   }
 
   Future<LatLng> getAddressPosition(String address) async {
-    Position position = await Geolocator.getCurrentPosition();
-    return LatLng(position.latitude + 10,
-        position.longitude + 10); //Rechercher addresse google
+    List<Location> locations =
+        await locationFromAddress(address, localeIdentifier: 'fr_FR');
+    if (locations.isNotEmpty) {
+      Location place = locations.first;
+      return LatLng(place.latitude, place.longitude);
+    } else {
+      throw ApiException(
+          status: 404, message: "Address didn't match any location");
+    }
   }
 }
