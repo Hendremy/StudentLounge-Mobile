@@ -7,8 +7,8 @@ import '../models/tutorat_model.dart';
 
 abstract class TutoringRepository extends StudentApiService {
   TutoringRepository(
-      {required super.studentId, 
-      required super.token, 
+      {required super.studentId,
+      required super.token,
       required super.apiUrl,
       required super.controller});
 
@@ -20,12 +20,15 @@ abstract class TutoringRepository extends StudentApiService {
 
 class AppTutoringRepository extends TutoringRepository {
   AppTutoringRepository(
-      {required super.studentId, required super.token, required super.apiUrl, required super.controller});
+      {required super.studentId,
+      required super.token,
+      required super.apiUrl,
+      required super.controller});
 
   @override
   Future<dynamic> askTutorat(String lessonId) async {
     Uri uri = Uri.parse('$controllerUrl/lesson/$lessonId');
-    http.Response response = await http.put(uri, headers: jsonHeaders);
+    http.Response response = await http.post(uri, headers: jsonHeaders);
     if (response.statusCode == 200) {
       return true;
     }
