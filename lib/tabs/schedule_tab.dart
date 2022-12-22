@@ -34,7 +34,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
                   ScheduleBloc(scheduleRepository: _services.scheduleRepo)),
           BlocProvider(
               create: (context) => AppointmentListBloc(
-                  appointmentRepo: _services.appointmentRepository)),
+                  appointmentRepo: _services.appointmentRepo)),
         ],
         child: Navigator(onGenerateRoute: ((settings) {
           Widget page = const SchedulePage();

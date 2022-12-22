@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:studentlounge_mobile/repositories/appointment_repository.dart';
 
-import '../../repositories/appointement_repository.dart';
 import 'appointement_state.dart';
 
 class AppointementCubit extends Cubit<AppointementState> {
-  final AppointementRepository appointementRepository;
+  final AppointmentRepository appointementRepository;
   AppointementCubit({required this.appointementRepository})
       : super(AskAppointementInitial());
 

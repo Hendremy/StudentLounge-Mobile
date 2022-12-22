@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:studentlounge_mobile/blocs/manage_appointement/manage_appointement_state.dart';
 import 'package:studentlounge_mobile/repositories/adress_search.dart';
+import 'package:studentlounge_mobile/repositories/appointment_repository.dart';
 import 'package:studentlounge_mobile/repositories/place_service.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 import 'package:studentlounge_mobile/repositories/appointement_repository.dart';
@@ -11,7 +12,7 @@ import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
 class ManageAppointementDialog extends StatefulWidget {
-  final AppointementRepository appointementRepository;
+  final AppointmentRepository appointmentRepository;
   final int tutoratId;
   TimeOfDay startTime = const TimeOfDay(hour: 10, minute: 10);
   TimeOfDay endTime = const TimeOfDay(hour: 10, minute: 10);
@@ -19,7 +20,7 @@ class ManageAppointementDialog extends StatefulWidget {
   DateTime endDate = DateTime.utc(2022, 10, 10);
   ManageAppointementDialog(
       {super.key,
-      required this.appointementRepository,
+      required this.appointmentRepository,
       required this.tutoratId});
 
   @override
@@ -53,7 +54,7 @@ class _ManageAskAppointementDialogState
 
     return BlocProvider(create: (context) {
       manageAppointementBloc = ManageAppointementBloc(
-          appointementRepo: widget.appointementRepository,
+          appointmentRepo: widget.appointmentRepository,
           tutoratId: widget.tutoratId);
       return manageAppointementBloc;
     }, child: BlocBuilder<ManageAppointementBloc, ManageAppointementState>(
@@ -238,7 +239,7 @@ class _ManageAskAppointementDialogState
                       startmonth, startyear, starthours, startminutes);
                   String endDateTimeUTC = formatDateTimeUTC(
                       endday, endmonth, endyear, endhours, endminutes);
-                  widget.appointementRepository.askAppointement(
+                  widget.appointmentRepository.askAppointement(
                       tutoratId: widget.tutoratId,
                       start: startDateTimeUTC,
                       end: endDateTimeUTC,

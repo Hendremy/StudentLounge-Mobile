@@ -31,8 +31,7 @@ abstract class StudentServicesProvider {
   TutoringRepository get tutoratRepo;
   ChatRepository get chatRepo;
   ScheduleRepository get scheduleRepo;
-  AppointementRepository get appointementRepo;
-  AppointmentRepository get appointmentRepository;
+  AppointmentRepository get appointmentRepo;
   LocationRepository get locationRepository;
   DirectionsRepository get directionsRepository;
 }
@@ -82,14 +81,7 @@ class AppStudentServices extends StudentServicesProvider {
       controller: 'Agendas');
 
   @override
-  AppointementRepository get appointementRepo => AppAppointementRepository(
-      studentId: user.id,
-      token: user.token,
-      apiUrl: apiUrl,
-      controller: 'Appointments');
-
-  @override
-  AppointmentRepository get appointmentRepository => AppAppointmentRepository(
+  AppointmentRepository get appointmentRepo => AppAppointmentRepository(
       studentId: user.id,
       token: user.token,
       apiUrl: apiUrl,

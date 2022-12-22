@@ -1,11 +1,8 @@
 import 'dart:convert';
-
 import 'package:studentlounge_mobile/models/api_exception.dart';
 import 'package:studentlounge_mobile/models/appointment.dart';
 import 'package:studentlounge_mobile/repositories/api_service.dart';
 import 'package:http/http.dart' as http;
-
-import '../models/appointment_request.dart';
 
 abstract class AppointmentRepository extends StudentApiService {
   AppointmentRepository(
@@ -15,7 +12,11 @@ abstract class AppointmentRepository extends StudentApiService {
       required super.controller});
 
   Future<List<Appointment>> getUserAppointments();
-  Future<Appointment> makeAppointment(AppointmentRequest req);
+  Future<dynamic> askAppointement(
+      {required int tutoratId,
+      required String start,
+      required String end,
+      required String location});
 }
 
 class AppAppointmentRepository extends AppointmentRepository {
@@ -37,16 +38,24 @@ class AppAppointmentRepository extends AppointmentRepository {
   }
 
   @override
-  Future<Appointment> makeAppointment(AppointmentRequest req) async {
-    Uri uri = Uri.parse(controllerUrl);
-    String body = jsonEncode(req);
+  Future<dynamic> askAppointement(
+      {required int tutoratId,
+      required String start,
+      required String end,
+      required String location}) async {
+    var body = jsonEncode({
+      'tutoringId': tutoratId,
+      'start': start,
+      'end': end,
+      'location': location
+    });
+    var url = Uri.parse(controllerUrl);
     http.Response response =
-        await http.post(uri, headers: jsonHeaders, body: body);
+        await http.post(url, headers: jsonHeaders, body: body);
     if (response.statusCode == 200) {
-      return _reviveAppointment(response.body);
-    } else {
-      throw ApiException(status: response.statusCode, message: response.body);
+      return true;
     }
+    return null;
   }
 
   _reviveAppointment(jappointment) {

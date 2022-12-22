@@ -112,7 +112,7 @@ class _ChatPageState extends State<ChatPage> {
     return BlocProvider(
         create: ((context) => AppointementCubit(
             appointementRepository:
-                context.read<AppStudentServices>().appointementRepo)),
+                context.read<AppStudentServices>().appointmentRepo)),
         child: AppointementButton(chatId: chatId));
   }
 }

@@ -26,7 +26,7 @@ class _AppointementButtonState extends State<AppointementButton> {
         create: (context) {
           appointementCubit = AppointementCubit(
               appointementRepository:
-                  context.read<AppStudentServices>().appointementRepo);
+                  context.read<AppStudentServices>().appointmentRepo);
           return appointementCubit;
         },
         child: BlocListener<AppointementCubit, AppointementState>(
@@ -53,7 +53,7 @@ class _AppointementButtonState extends State<AppointementButton> {
     showDialog(
         context: context,
         builder: (context) => ManageAppointementDialog(
-            appointementRepository: appointementCubit.appointementRepository,
+            appointmentRepository: appointementCubit.appointementRepository,
             tutoratId: chatId));
   }
 }
