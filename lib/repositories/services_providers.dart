@@ -50,14 +50,14 @@ class AppStudentServices extends StudentServicesProvider {
       studentId: user.id,
       token: user.token,
       apiUrl: apiUrl,
-      controller: 'Lesson');
+      controller: 'Lessons');
 
   @override
   LessonFilesRepository get lessonFilesRepo => AppLessonFilesRepository(
       studentId: user.id,
       token: user.token,
       apiUrl: apiUrl,
-      controller: 'LessonFile',
+      controller: 'LessonFiles',
       downloadPath: downloadPath);
 
   @override
@@ -65,21 +65,21 @@ class AppStudentServices extends StudentServicesProvider {
       studentId: user.id,
       token: user.token,
       apiUrl: apiUrl,
-      controller: 'Tutoring');
+      controller: 'Tutorings');
 
   @override
   ChatRepository get chatRepo => AppChatRepository(
       studentId: user.id,
       token: user.token,
       apiUrl: apiUrl,
-      controller: 'Tutoring');
+      controller: 'Tutorings');
 
   @override
   ScheduleRepository get scheduleRepo => AppScheduleRepository(
       studentId: user.id,
       token: user.token,
       apiUrl: apiUrl,
-      controller: 'Agenda');
+      controller: 'Agendas');
 
   @override
   AppointementRepository get appointementRepo => AppAppointementRepository(

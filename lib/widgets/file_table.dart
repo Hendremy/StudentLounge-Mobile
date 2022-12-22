@@ -73,7 +73,7 @@ class _FileTableState extends State<FileTable> {
             alignment: Alignment.center,
             child: const Text(
               'Id',
-              overflow: TextOverflow.ellipsis,
+              overflow: TextOverflow.clip,
             ))),
     /*GridColumn(
         columnName: 'Type',
@@ -91,17 +91,13 @@ class _FileTableState extends State<FileTable> {
             alignment: Alignment.center,
             child: const Text(
               'Nom',
-              overflow: TextOverflow.ellipsis,
             ))),
     GridColumn(
         columnName: 'Auteur',
         label: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             alignment: Alignment.center,
-            child: const Text(
-              'Auteur',
-              overflow: TextOverflow.ellipsis,
-            ))),
+            child: const Text('Auteur'))),
     GridColumn(
         columnName: 'Date',
         label: Container(
@@ -109,7 +105,7 @@ class _FileTableState extends State<FileTable> {
             alignment: Alignment.center,
             child: const Text(
               'Date',
-              overflow: TextOverflow.ellipsis,
+              //overflow: TextOverflow.visible,
             ))),
     GridColumn(
         columnName: 'Actions',
@@ -118,7 +114,7 @@ class _FileTableState extends State<FileTable> {
             alignment: Alignment.center,
             child: const Text(
               'Actions',
-              overflow: TextOverflow.ellipsis,
+              //overflow: TextOverflow.ellipsis,
             ))),
   ];
 
