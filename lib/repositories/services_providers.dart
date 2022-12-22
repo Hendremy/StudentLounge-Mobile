@@ -71,7 +71,7 @@ class AppStudentServices extends StudentServicesProvider {
       studentId: user.id,
       token: user.token,
       apiUrl: apiUrl,
-      controller: 'Tutorings');
+      controller: 'Chats');
 
   @override
   ScheduleRepository get scheduleRepo => AppScheduleRepository(

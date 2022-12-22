@@ -22,12 +22,12 @@ class AppChatRepository extends ChatRepository {
 
   @override
   Future<dynamic> getUserChats() async {
-    return await getChatList("/chat");
+    return await getChatList();
   }
 
-  Future<List<Chat>?> getChatList(String options) async {
-    http.Response response = await http.get(Uri.parse('$controllerUrl$options'),
-        headers: jsonHeaders);
+  Future<List<Chat>?> getChatList() async {
+    http.Response response =
+        await http.get(Uri.parse(controllerUrl), headers: jsonHeaders);
     if (response.statusCode == 200) {
       return convertJSONChatList(response.body);
     }
