@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "617490373514-i0ts2i6mj87kibg2la5v35r80s22600a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.studentlounge_mobile",
+            "certificate_hash": "ccbc2651eb98576f13db374e4f0a24c2766a3682"
+          }
+        },
+        {
           "client_id": "617490373514-i9tib68p9sghlmfige1mj4qbb2v3cukf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
