@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:studentlounge_mobile/models/app_user.dart';
 import 'package:studentlounge_mobile/repositories/api_service.dart';
+import 'package:studentlounge_mobile/utils/my_string_hasher.dart';
 
 abstract class UserRepository extends ApiService {
   UserRepository({required super.apiUrl, required super.controller});
@@ -24,7 +25,10 @@ class AppUserRepository extends UserRepository {
     required String username,
     required String password,
   }) async {
-    var body = jsonEncode({'username': username, 'password': password});
+    var body = jsonEncode({
+      'username': username,
+      'password': MyStringHasher.hashSHA256(password)
+    });
     return await _retrieveUser('Login', body);
   }
 
