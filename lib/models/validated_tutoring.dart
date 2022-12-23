@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:studentlounge_mobile/models/tutoring_user.dart';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class ValidatedTutoring {
   final int id;
@@ -25,21 +27,4 @@ class ValidatedTutoring {
 
   factory ValidatedTutoring.fromJson(String source) =>
       ValidatedTutoring.fromMap(json.decode(source) as Map<String, dynamic>);
-}
-
-class TutoringUser {
-  final String name;
-  final String? image;
-
-  TutoringUser({required this.image, required this.name});
-
-  factory TutoringUser.fromMap(Map<String, dynamic> map) {
-    return TutoringUser(
-      name: map['name'] as String,
-      image: map['image'] as String?,
-    );
-  }
-
-  factory TutoringUser.fromJson(String source) =>
-      TutoringUser.fromMap(json.decode(source) as Map<String, dynamic>);
 }
