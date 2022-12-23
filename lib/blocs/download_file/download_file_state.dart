@@ -8,6 +8,12 @@ class DownloadFileFailed extends DownloadFileState {
   DownloadFileFailed({required this.fileName});
 }
 
+class DownloadFileLoad extends DownloadFileState {
+  final String fileName;
+
+  DownloadFileLoad({required this.fileName});
+}
+
 class DownloadFileSuccess extends DownloadFileInitial {
   final String fileName;
   final String filePath;

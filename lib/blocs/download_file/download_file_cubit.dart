@@ -12,6 +12,7 @@ class DownloadFileCubit extends Cubit<DownloadFileState> {
       required String fileName,
       required String contentType}) async {
     try {
+      emit(DownloadFileLoad(fileName: fileName));
       String path = await lessonFilesRepository.downloadFile(fileId, fileName);
       emit(DownloadFileSuccess(
           fileName: fileName, filePath: path, contentType: contentType));

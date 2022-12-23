@@ -47,34 +47,37 @@ class _MessagesState extends State<Messages> {
                     : CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 300,
-                    child: ListTile(
-                      tileColor: widget.name == qs['name']
-                          ? theme.secondary
-                          : theme.grey,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 200,
-                            child: Text(
-                              qs['message'],
-                              softWrap: true,
-                              style: const TextStyle(
-                                  fontSize: 18, color: theme.white),
-                            ),
+                      width: 300,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        elevation: 3,
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          tileColor: widget.name == qs['name']
+                              ? theme.secondary
+                              : theme.grey,
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 200,
+                                child: Text(
+                                  qs['message'],
+                                  softWrap: true,
+                                  style: const TextStyle(
+                                      fontSize: 18, color: theme.white),
+                                ),
+                              ),
+                              Text(
+                                "${d.hour}:${d.minute}",
+                                style: const TextStyle(color: theme.white),
+                              ),
+                            ],
                           ),
-                          Text(
-                            "${d.hour}:${d.minute}",
-                            style: const TextStyle(color: theme.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                        ),
+                      )),
                 ],
               ),
             );

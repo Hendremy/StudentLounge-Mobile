@@ -58,23 +58,19 @@ class _ChatPageState extends State<ChatPage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Expanded(
+                            child: Card(
+                          elevation: 3,
                           child: TextFormField(
                             controller: message,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               filled: true,
                               fillColor: theme.lightgrey,
                               hintText: 'message',
                               enabled: true,
-                              contentPadding: const EdgeInsets.only(
+                              contentPadding: EdgeInsets.only(
                                   left: 14.0, bottom: 8.0, top: 8.0),
                               focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: theme.activeIcon),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: const BorderSide(width: 0),
-                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(color: theme.activeIcon),
                               ),
                             ),
                             validator: (value) {},
@@ -82,7 +78,7 @@ class _ChatPageState extends State<ChatPage> {
                               message.text = value!;
                             },
                           ),
-                        ),
+                        )),
                         IconButton(
                           onPressed: () {
                             if (message.text.isNotEmpty) {
@@ -98,7 +94,10 @@ class _ChatPageState extends State<ChatPage> {
                               message.clear();
                             }
                           },
-                          icon: const Icon(Icons.send_sharp),
+                          icon: const Icon(
+                            Icons.send_sharp,
+                            color: theme.primaryDark,
+                          ),
                         ),
                       ],
                     )),

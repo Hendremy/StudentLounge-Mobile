@@ -34,8 +34,12 @@ class _AppointmentPathPageState extends State<AppointmentPathPage> {
             bottom: PreferredSize(
                 preferredSize: Size.zero,
                 child: Text(
-                  "${widget.appointment.date} de ${widget.appointment.startHour} à ${widget.appointment.endHour} \n ${widget.appointment.location}",
-                  style: const TextStyle(fontSize: 12, color: theme.white),
+                  textAlign: TextAlign.center,
+                  "${widget.appointment.date} de ${widget.appointment.startHour} à ${widget.appointment.endHour} / ${widget.appointment.location} \n",
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: theme.white,
+                  ),
                 )),
             actions: const [],
             backgroundColor: theme.primary,

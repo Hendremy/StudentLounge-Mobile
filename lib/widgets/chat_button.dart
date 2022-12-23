@@ -11,15 +11,16 @@ class ChatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        color: theme.white,
+        elevation: 3,
+        color: theme.secondary,
         child: ListTile(
             onTap: () => onPressed(chat),
             trailing: const Icon(
               Icons.chevron_right,
               size: 40,
-              color: theme.primary,
+              color: theme.white,
             ),
             title: Text(chat.name,
-                style: const TextStyle(color: theme.black, fontSize: 30))));
+                style: const TextStyle(color: theme.white, fontSize: 30))));
   }
 }
