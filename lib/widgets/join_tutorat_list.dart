@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:studentlounge_mobile/blocs/join_tutorat/join_tutorat_state.dart';
 
 import '../models/tutorat_model.dart';
-import '../repositories/tutorat_repository.dart';
+import '../repositories/tutoring_repository.dart';
 import 'join_tutorat_row.dart';
 
 class JoinTutoratList extends StatefulWidget {

@@ -7,7 +7,7 @@ import 'package:studentlounge_mobile/widgets/retry_message.dart';
 import '../blocs/manage_tutorat/manage_tutorat_bloc.dart';
 import '../blocs/manage_tutorat/manage_tutorat_events.dart';
 import '../blocs/manage_tutorat/manage_tutorat_state.dart';
-import '../repositories/tutorat_repository.dart';
+import '../repositories/tutoring_repository.dart';
 import '../widgets/join_tutorat_list.dart';
 
 // ignore: must_be_immutable

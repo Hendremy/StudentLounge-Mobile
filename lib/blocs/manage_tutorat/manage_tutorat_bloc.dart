@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import '../../repositories/tutorat_repository.dart';
+import '../../repositories/tutoring_repository.dart';
 import 'manage_tutorat_events.dart';
 import 'manage_tutorat_state.dart';
 

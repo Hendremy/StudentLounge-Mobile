@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:studentlounge_mobile/blocs/tutorat/tutorat_state.dart';
 
-import '../../repositories/tutorat_repository.dart';
+import '../../repositories/tutoring_repository.dart';
 
 class TutoratCubit extends Cubit<TutoratState> {
   final TutoringRepository tutoratRepository;

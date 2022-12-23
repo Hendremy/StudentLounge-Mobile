@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:studentlounge_mobile/models/tutoring_request.dart';
 import 'package:studentlounge_mobile/repositories/api_service.dart';
 import 'package:http/http.dart' as http;
 
@@ -16,6 +17,7 @@ abstract class TutoringRepository extends StudentApiService {
 
   Future<dynamic> acceptTutorat(int tutoratId);
   Future<dynamic> getTutorats({required lessonId});
+  Future<TutoringRequest> getUserTutoringRequestStatus({required lessonId});
 }
 
 class AppTutoringRepository extends TutoringRepository {
@@ -46,8 +48,19 @@ class AppTutoringRepository extends TutoringRepository {
   }
 
   @override
-  Future getTutorats({required lessonId}) async {
+  Future<TutoringRequest> getUserTutoringRequestStatus(
+      {required lessonId}) async {
     Uri uri = Uri.parse('$controllerUrl/lesson/$lessonId');
+    http.Response response = await http.get(uri, headers: jsonHeaders);
+    if (response.statusCode == 200) {
+      return TutoringRequest.fromJson(response.body);
+    }
+    return TutoringRequest.empty();
+  }
+
+  @override
+  Future getTutorats({required lessonId}) async {
+    Uri uri = Uri.parse('$controllerUrl/lesson/$lessonId/all');
     http.Response response = await http.get(uri, headers: jsonHeaders);
     if (response.statusCode == 200) {
       return convertJSONTutoratList(response.body);

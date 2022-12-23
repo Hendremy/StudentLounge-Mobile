@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studentlounge_mobile/repositories/tutorat_repository.dart';
+import 'package:studentlounge_mobile/repositories/tutoring_repository.dart';
 import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
 

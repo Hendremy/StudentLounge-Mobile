@@ -3,7 +3,7 @@ import 'package:studentlounge_mobile/blocs/tutorat_list/tutorat_list_event.dart'
 import 'package:studentlounge_mobile/blocs/tutorat_list/tutorat_list_state.dart';
 import 'package:studentlounge_mobile/models/tutorat_model.dart';
 
-import '../../repositories/tutorat_repository.dart';
+import '../../repositories/tutoring_repository.dart';
 
 class TutoratListBloc extends Bloc<TutoratListEvent, TutoratListState> {
   final TutoringRepository tutoratRepository;

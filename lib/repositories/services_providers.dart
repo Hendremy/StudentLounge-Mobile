@@ -7,7 +7,7 @@ import 'package:studentlounge_mobile/repositories/lesson_files_repository.dart';
 import 'package:studentlounge_mobile/repositories/lessons_repository.dart';
 import 'package:studentlounge_mobile/repositories/location_repository.dart';
 import 'package:studentlounge_mobile/repositories/schedule_repository.dart';
-import 'package:studentlounge_mobile/repositories/tutorat_repository.dart';
+import 'package:studentlounge_mobile/repositories/tutoring_repository.dart';
 import 'package:studentlounge_mobile/repositories/user_repository.dart';
 import 'package:studentlounge_mobile/.env.dart' as env;
 

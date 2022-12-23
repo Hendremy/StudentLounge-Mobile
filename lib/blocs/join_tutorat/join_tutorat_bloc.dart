@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:studentlounge_mobile/models/tutorat_model.dart';
-import '../../repositories/tutorat_repository.dart';
+import '../../repositories/tutoring_repository.dart';
 import 'join_tutorat_events.dart';
 import 'join_tutorat_state.dart';
 
