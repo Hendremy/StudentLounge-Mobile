@@ -20,7 +20,7 @@ class ChatButton extends StatelessWidget {
               size: 40,
               color: theme.white,
             ),
-            title: Text(chat.name,
+            title: Text("${chat.name}",
                 style: const TextStyle(color: theme.white, fontSize: 30))));
   }
 }

@@ -28,6 +28,10 @@ class TutoringRequest {
     return tutor.name.isEmpty;
   }
 
+  get isEmpty {
+    return id == -1 && lesson == "";
+  }
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,

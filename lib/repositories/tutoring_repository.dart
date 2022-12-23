@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:studentlounge_mobile/models/api_exception.dart';
 import 'package:studentlounge_mobile/models/tutoring_request.dart';
 import 'package:studentlounge_mobile/repositories/api_service.dart';
 import 'package:http/http.dart' as http;
@@ -65,7 +66,7 @@ class AppTutoringRepository extends TutoringRepository {
     if (response.statusCode == 200) {
       return convertJSONTutoratList(response.body);
     }
-    return null;
+    throw ApiException(status: 500, message: 'Error loading tutoring');
   }
 
   List<Tutorat> convertJSONTutoratList(String jsonList) {

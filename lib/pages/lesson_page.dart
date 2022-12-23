@@ -4,6 +4,7 @@ import 'package:studentlounge_mobile/blocs/download_file/download_file_cubit.dar
 import 'package:studentlounge_mobile/blocs/lesson/lesson_bloc.dart';
 import 'package:studentlounge_mobile/blocs/lesson/lesson_events.dart';
 import 'package:studentlounge_mobile/blocs/lesson/lesson_state.dart';
+import 'package:studentlounge_mobile/blocs/tutoring_request/tutoring_request_cubit.dart';
 import 'package:studentlounge_mobile/models/lesson_model.dart';
 import 'package:studentlounge_mobile/repositories/services_providers.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
@@ -12,6 +13,7 @@ import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
 import 'package:studentlounge_mobile/widgets/retry_message.dart';
 import 'package:studentlounge_mobile/widgets/tutorat_accepted_button.dart';
 import 'package:studentlounge_mobile/widgets/tutorat_button.dart';
+import 'package:studentlounge_mobile/widgets/tutoring_actions.dart';
 import 'package:studentlounge_mobile/widgets/wait_tutorat_button.dart';
 import '../blocs/tutorat/tutorat_cubit.dart';
 import '../widgets/get_tutorat_button.dart';
@@ -32,26 +34,29 @@ class _LessonPageState extends State<LessonPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) {
-      lessonBloc = LessonBloc(
-          lesson: widget.lesson,
-          lessonFilesRepository:
-              context.read<AppStudentServices>().lessonFilesRepo);
-      return lessonBloc;
-    }, child: BlocBuilder<LessonBloc, LessonState>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: theme.primary,
-            title:
-                Text(widget.lessonName, style: const TextStyle(fontSize: 30)),
-            actions: _renderActions(lessonBloc.lesson),
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) {
+            lessonBloc = LessonBloc(
+                lesson: widget.lesson,
+                lessonFilesRepository:
+                    context.read<AppStudentServices>().lessonFilesRepo);
+            return lessonBloc;
+          }),
+          BlocProvider(
+            create: (context) => TutoringRequestCubit(
+                tutoringRepository:
+                    context.read<AppStudentServices>().tutoratRepo),
           ),
-          body: _renderBody(state),
-        );
-      },
-    ));
+        ],
+        child: BlocBuilder<LessonBloc, LessonState>(builder: (context, state) {
+          return Scaffold(
+            appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(56),
+                child: TutoringActions(lesson: widget.lesson)),
+            body: _renderBody(state),
+          );
+        }));
   }
 
   _renderBody(LessonState state) {
@@ -71,40 +76,5 @@ class _LessonPageState extends State<LessonPage> {
 
   _retryLoad() {
     lessonBloc.add(RetryFileLoad());
-  }
-
-  _renderActions(Lesson lesson) {
-    List<Widget> actions = [];
-    Widget? askTutorat = _askTutorat(lesson);
-    Widget? getTutorat = _getTutorat(lesson);
-    if (askTutorat != null) actions.add(askTutorat);
-    if (getTutorat != null) actions.add(getTutorat);
-    return actions;
-  }
-
-  _askTutorat(Lesson lesson) {
-    if (lesson.tutoringIsAsked) {
-      if (lesson.tutoring.isPending) {
-        return const WaitTutoratButton();
-      } else {
-        return const TutoratAcceptedButton();
-      }
-    } else {
-      return BlocProvider(
-        create: ((context) => TutoratCubit(
-            tutoratRepository: context.read<AppStudentServices>().tutoratRepo)),
-        child: AskTutoratButton(lesson: lesson),
-      );
-    }
-  }
-
-  _getTutorat(Lesson lesson) {
-    if (lesson.tutoringIsAsked) return;
-    return BlocProvider(
-        create: ((context) => TutoratCubit(
-            tutoratRepository: context.read<AppStudentServices>().tutoratRepo)),
-        child: GetTutoratButton(
-          lesson: lesson,
-        ));
   }
 }
