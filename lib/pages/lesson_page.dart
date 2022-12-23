@@ -10,7 +10,9 @@ import 'package:studentlounge_mobile/theme.dart' as theme;
 import 'package:studentlounge_mobile/widgets/file_table.dart';
 import 'package:studentlounge_mobile/widgets/loading_indicator.dart';
 import 'package:studentlounge_mobile/widgets/retry_message.dart';
+import 'package:studentlounge_mobile/widgets/tutorat_accepted_button.dart';
 import 'package:studentlounge_mobile/widgets/tutorat_button.dart';
+import 'package:studentlounge_mobile/widgets/wait_tutorat_button.dart';
 import '../blocs/tutorat/tutorat_cubit.dart';
 import '../widgets/get_tutorat_button.dart';
 
@@ -74,15 +76,24 @@ class _LessonPageState extends State<LessonPage> {
     lessonBloc.add(RetryFileLoad());
   }
 
-  _askTutorat(lesson) {
-    return BlocProvider(
-      create: ((context) => TutoratCubit(
-          tutoratRepository: context.read<AppStudentServices>().tutoratRepo)),
-      child: AskTutoratButton(lesson: lesson),
-    );
+  _askTutorat(Lesson lesson) {
+    if (lesson.tutoringIsAsked) {
+      if (lesson.tutoring.isPending) {
+        return const WaitTutoratButton();
+      } else {
+        return const TutoratAcceptedButton();
+      }
+    } else {
+      return BlocProvider(
+        create: ((context) => TutoratCubit(
+            tutoratRepository: context.read<AppStudentServices>().tutoratRepo)),
+        child: AskTutoratButton(lesson: lesson),
+      );
+    }
   }
 
   _getTutorat(Lesson lesson) {
+    if (lesson.tutoringIsAsked) return;
     return BlocProvider(
         create: ((context) => TutoratCubit(
             tutoratRepository: context.read<AppStudentServices>().tutoratRepo)),

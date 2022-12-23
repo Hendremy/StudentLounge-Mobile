@@ -10,10 +10,14 @@ class Lesson extends Equatable {
   final String id;
   final TutoringRequest tutoring;
 
-  Lesson({required this.id, required this.name, required this.tutoring});
+  const Lesson({required this.id, required this.name, required this.tutoring});
 
   factory Lesson.empty() {
     return Lesson(name: "", id: "", tutoring: TutoringRequest.empty());
+  }
+
+  get tutoringIsAsked {
+    return tutoring.id > 0;
   }
 
   @override

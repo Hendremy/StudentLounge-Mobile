@@ -5,7 +5,7 @@ import 'package:studentlounge_mobile/models/tutoring_user.dart';
 
 class TutoringRequest {
   final int id;
-  final TutoringUser? tutor;
+  final TutoringUser tutor;
   final TutoringUser tutored;
   final String lesson;
 
@@ -24,10 +24,14 @@ class TutoringRequest {
         lesson: "");
   }
 
+  get isPending {
+    return tutor.name.isNotEmpty;
+  }
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'tutor': tutor?.toMap(),
+      'tutor': tutor.toMap(),
       'tutored': tutored.toMap(),
       'lesson': lesson,
     };
