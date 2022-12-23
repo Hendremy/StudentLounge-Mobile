@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 class AgendaDateEvent {
-  late String id;
+  late int id;
   late String label;
   late String description;
   late String location;
@@ -35,7 +35,7 @@ class AgendaDateEvent {
   }
 
   AgendaDateEvent.fromMap(Map<String, dynamic> map) {
-    id = map['id'] as String;
+    id = map['id'] as int;
     description = map['description'] as String;
     location = map['location'] as String;
     summary = map['summary'] as String;

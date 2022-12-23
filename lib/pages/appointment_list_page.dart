@@ -33,6 +33,9 @@ class _AppointmentListPageState extends State<AppointmentListPage> {
     if (widget.isEmpty) {
       return const CenterMessage(text: "Vous n'avez pas de rendez-vous");
     } else {
+      DateTime now = DateTime.now();
+      List<Appointment> apts = widget.appointments.toList();
+      apts = apts.where((apt) => apt.end.isAfter(now)).toList();
       return ListView(
           padding: const EdgeInsets.all(8),
           children: <AppointmentRow>[

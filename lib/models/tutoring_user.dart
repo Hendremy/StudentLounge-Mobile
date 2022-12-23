@@ -22,7 +22,7 @@ class TutoringUser {
   factory TutoringUser.fromMap(Map<String, dynamic> map) {
     return TutoringUser(
       name: map['name'] as String,
-      image: map['image'] as String,
+      image: map['image'] == null ? "" : map['image'] as String,
     );
   }
 

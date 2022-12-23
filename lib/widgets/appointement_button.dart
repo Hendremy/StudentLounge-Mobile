@@ -46,7 +46,7 @@ class _AppointementButtonState extends State<AppointementButton> {
         onPressed: () {
           appointementCubit.askAppointement(chatId);
         },
-        icon: const Icon(Icons.school_rounded, size: 24));
+        icon: const Icon(Icons.add_location_alt, size: 24));
   }
 
   _displaySuccessAskAppointement(BuildContext context) {
