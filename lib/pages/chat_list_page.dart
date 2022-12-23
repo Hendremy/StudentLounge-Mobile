@@ -36,7 +36,7 @@ class _ChatListPageState extends State<ChatListPage> {
           appBar: AppBar(
               centerTitle: true,
               backgroundColor: theme.primary,
-              title: const Text('Messages',
+              title: const Text('Chat',
                   style: TextStyle(fontSize: 30, fontFamily: 'Gugi'))),
           body: _renderBody(state));
     });
@@ -45,7 +45,7 @@ class _ChatListPageState extends State<ChatListPage> {
   _renderBody(ChatListState state) {
     if (state is ChatListLoaded) {
       if (state.chatList.isEmpty) {
-        return const CenterMessage(text: "Vous n'avez de discussions");
+        return const CenterMessage(text: "Vous n'avez pas de discussions");
       } else {
         return ChatButtonList(
             chatList: state.chatList, onPressed: _onChatButtonPressed);

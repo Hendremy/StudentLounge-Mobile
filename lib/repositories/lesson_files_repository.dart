@@ -15,7 +15,7 @@ abstract class LessonFilesRepository extends StudentApiService {
 
   Future<List<LessonFile>?> getLessonFiles(String lessonId);
 
-  Future<String> downloadFile(String fileId);
+  Future<String> downloadFile(String fileId, String fileName);
 }
 
 class AppLessonFilesRepository extends LessonFilesRepository {
@@ -46,15 +46,14 @@ class AppLessonFilesRepository extends LessonFilesRepository {
   }
 
   @override
-  Future<String> downloadFile(String fileId) async {
+  Future<String> downloadFile(String fileId, String fileName) async {
     if (downloadPath.isEmpty) {
       throw Exception("Can't download - Access to directory denied");
     }
     Uri downloadUrl = Uri.parse("$controllerUrl/$fileId");
-    // Uri downloadUrl = Uri.parse("https://www.ibm.com/downloads/cas/GJ5QVQ7X");
     http.Response response = await http.get(downloadUrl, headers: tokenHeader);
 
-    io.File file = io.File("$downloadPath/$fileId.pdf");
+    io.File file = io.File("$downloadPath/$fileName.pdf");
     var result = await file.writeAsBytes(response.bodyBytes,
         mode: io.FileMode.write, flush: true);
     return result.path;

@@ -35,11 +35,12 @@ class FileDataSource extends DataGridSource {
                   icon: const Icon(Icons.download),
                   onPressed: () => myDownloadFileCubit.downloadFile(
                       row.getCells()[0].value.toString(),
+                      row.getCells()[1].value.toString(),
                       row.getCells()[2].value.toString()))
               : Center(
                   child: Text(
                   dataGridCell.value.toString(),
-                  overflow: TextOverflow.ellipsis,
+                  // overflow: TextOverflow.ellipsis,
                 )));
     }).toList());
   }
@@ -49,6 +50,8 @@ class FileDataSource extends DataGridSource {
     dataGridRows = files
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell<String>(columnName: 'Id', value: dataGridRow.id),
+              DataGridCell<String>(
+                  columnName: 'ContentType', value: dataGridRow.contentType),
               DataGridCell<String>(columnName: 'Nom', value: dataGridRow.name),
               DataGridCell<String>(
                   columnName: 'Auteur', value: dataGridRow.user),
@@ -67,14 +70,15 @@ class _FileTableState extends State<FileTable> {
 
   final List<GridColumn> columns = <GridColumn>[
     GridColumn(
-        columnName: 'Id',
-        label: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            alignment: Alignment.center,
-            child: const Text(
-              'Id',
-              overflow: TextOverflow.clip,
-            ))),
+      visible: false,
+      columnName: '',
+      label: const Text(''),
+    ),
+    GridColumn(
+        visible: false,
+        columnName: '',
+        columnWidthMode: ColumnWidthMode.none,
+        label: const Text('')),
     /*GridColumn(
         columnName: 'Type',
         label: Container(
@@ -132,14 +136,16 @@ class _FileTableState extends State<FileTable> {
             _displayFailedToDownload(state.fileName);
           } else if (state is DownloadFileSuccess) {
             _displayDownloadSuccess(state.fileName);
-            showDialog(
-              context: context,
-              builder: (context) => Scaffold(
-                body: PDFView(
-                  filePath: state.filePath,
+            if (state.contentType == 'application/pdf') {
+              showDialog(
+                context: context,
+                builder: (context) => Scaffold(
+                  body: PDFView(
+                    filePath: state.filePath,
+                  ),
                 ),
-              ),
-            );
+              );
+            }
           }
         },
         child: SingleChildScrollView(

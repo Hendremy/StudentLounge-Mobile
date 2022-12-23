@@ -41,7 +41,7 @@ class _LessonListPageState extends State<LessonListPage> {
                 if (state is! LessonListLoadingFailed)
                   IconButton(
                     onPressed: () => _displayJoinLessons(state),
-                    icon: const Icon(Icons.add),
+                    icon: const Icon(Icons.toc),
                   )
               ],
               title: const Text('Cours',
