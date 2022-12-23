@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:intl/intl.dart';
 import 'package:studentlounge_mobile/blocs/download_file/download_file_cubit.dart';
 import 'package:studentlounge_mobile/blocs/download_file/download_file_state.dart';
 import 'package:studentlounge_mobile/models/lesson_file_model.dart';
@@ -11,7 +10,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class FileTable extends StatefulWidget {
   final List<LessonFile> files;
-  FileTable({super.key, required this.files});
+  const FileTable({super.key, required this.files});
 
   @override
   State<FileTable> createState() => _FileTableState();
@@ -33,7 +32,7 @@ class FileDataSource extends DataGridSource {
           child: dataGridCell.columnName == 'Action'
               ? IconButton(
                   color: theme.primary,
-                  icon: const Icon(Icons.download),
+                  icon: const Icon(Icons.visibility_rounded),
                   onPressed: () => myDownloadFileCubit.downloadFile(
                       fileId: row.getCells()[0].value.toString(),
                       contentType: row.getCells()[1].value.toString(),
@@ -147,6 +146,8 @@ class _FileTableState extends State<FileTable> {
                 ),
               );
             }
+          } else if (state is DownloadFileLoad) {
+            _displayLoadToDownload(state.fileName);
           }
         },
         child: SingleChildScrollView(
@@ -163,6 +164,13 @@ class _FileTableState extends State<FileTable> {
         content: Text("Le téléchargement de $fileName a échoué"),
         backgroundColor: theme.error);
     ScaffoldMessenger.of(context).showSnackBar(fail);
+  }
+
+  _displayLoadToDownload(String fileName) {
+    final load = SnackBar(
+        content: Text("Chargement du fichier $fileName"),
+        backgroundColor: theme.greyDark);
+    ScaffoldMessenger.of(context).showSnackBar(load);
   }
 
   _displayDownloadSuccess(String fileName) {

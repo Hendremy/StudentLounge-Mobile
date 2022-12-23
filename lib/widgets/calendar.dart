@@ -16,15 +16,6 @@ class Calendar extends StatelessWidget {
         scheduleViewSettings: const ScheduleViewSettings(
             appointmentItemHeight: 70,
             hideEmptyScheduleWeek: true,
-            weekHeaderSettings: WeekHeaderSettings(
-                height: 50,
-                textAlign: TextAlign.center,
-                backgroundColor: theme.secondary,
-                weekTextStyle: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 15,
-                )),
             monthHeaderSettings: MonthHeaderSettings(
                 monthFormat: 'MMMM, yyyy',
                 height: 50,
