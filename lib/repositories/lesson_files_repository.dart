@@ -53,7 +53,7 @@ class AppLessonFilesRepository extends LessonFilesRepository {
     Uri downloadUrl = Uri.parse("$controllerUrl/$fileId");
     http.Response response = await http.get(downloadUrl, headers: tokenHeader);
 
-    io.File file = io.File("$downloadPath/$fileName.pdf");
+    io.File file = io.File("$downloadPath/$fileName");
     var result = await file.writeAsBytes(response.bodyBytes,
         mode: io.FileMode.write, flush: true);
     return result.path;

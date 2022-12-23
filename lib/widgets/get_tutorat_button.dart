@@ -48,7 +48,7 @@ class _GetTutoratButtonState extends State<GetTutoratButton> {
         onPressed: () {
           tutoratCubit.getTutorats(lessonID);
         },
-        icon: const Icon(Icons.how_to_reg_rounded, size: 24));
+        icon: const Icon(Icons.groups, size: 24));
   }
 
   _displaySuccessTutorat(state) {

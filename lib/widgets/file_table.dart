@@ -6,6 +6,7 @@ import 'package:studentlounge_mobile/blocs/download_file/download_file_cubit.dar
 import 'package:studentlounge_mobile/blocs/download_file/download_file_state.dart';
 import 'package:studentlounge_mobile/models/lesson_file_model.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
+import 'package:studentlounge_mobile/utils/my_date_formatter.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class FileTable extends StatefulWidget {
@@ -34,9 +35,9 @@ class FileDataSource extends DataGridSource {
                   color: theme.primary,
                   icon: const Icon(Icons.download),
                   onPressed: () => myDownloadFileCubit.downloadFile(
-                      row.getCells()[0].value.toString(),
-                      row.getCells()[1].value.toString(),
-                      row.getCells()[2].value.toString()))
+                      fileId: row.getCells()[0].value.toString(),
+                      contentType: row.getCells()[1].value.toString(),
+                      fileName: row.getCells()[2].value.toString()))
               : Center(
                   child: Text(
                   dataGridCell.value.toString(),
@@ -57,7 +58,7 @@ class FileDataSource extends DataGridSource {
                   columnName: 'Auteur', value: dataGridRow.user),
               DataGridCell<String>(
                   columnName: 'Date',
-                  value: DateFormat.yMd().format(dataGridRow.date)),
+                  value: MyDateFormatter.formatDateYMMMD(dataGridRow.date)),
               const DataGridCell<Widget>(columnName: 'Action', value: null)
             ]))
         .toList();
