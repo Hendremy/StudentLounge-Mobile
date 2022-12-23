@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studentlounge_mobile/theme.dart' as theme;
-import 'package:studentlounge_mobile/widgets/appointementButton.dart';
+import 'package:studentlounge_mobile/widgets/appointement_button.dart';
 
 import '../blocs/appointement/appointement_cubit.dart';
 import '../repositories/services_providers.dart';
