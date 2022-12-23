@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:studentlounge_mobile/models/agenda.dart';
 import 'package:studentlounge_mobile/models/agenda_data_source.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:studentlounge_mobile/theme.dart' as theme;
 
 class Calendar extends StatelessWidget {
   final List<Agenda> agendas;
@@ -16,11 +17,9 @@ class Calendar extends StatelessWidget {
             appointmentItemHeight: 70,
             hideEmptyScheduleWeek: true,
             weekHeaderSettings: WeekHeaderSettings(
-                startDateFormat: 'dd MMM ',
-                endDateFormat: 'dd MMM, yy',
                 height: 50,
                 textAlign: TextAlign.center,
-                backgroundColor: Colors.red,
+                backgroundColor: theme.secondary,
                 weekTextStyle: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w400,
@@ -28,13 +27,11 @@ class Calendar extends StatelessWidget {
                 )),
             monthHeaderSettings: MonthHeaderSettings(
                 monthFormat: 'MMMM, yyyy',
-                height: 100,
-                textAlign: TextAlign.left,
-                backgroundColor: Colors.green,
+                height: 50,
+                textAlign: TextAlign.center,
+                backgroundColor: theme.primaryDark,
                 monthTextStyle: TextStyle(
-                    color: Colors.red,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w400))),
+                    color: Color.fromARGB(255, 255, 255, 255), fontSize: 15))),
         dataSource: ScheduleDataSource(agendas));
   }
 }

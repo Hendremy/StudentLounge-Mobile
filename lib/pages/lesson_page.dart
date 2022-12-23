@@ -46,10 +46,7 @@ class _LessonPageState extends State<LessonPage> {
             backgroundColor: theme.primary,
             title:
                 Text(widget.lessonName, style: const TextStyle(fontSize: 30)),
-            actions: [
-              _getTutorat(lessonBloc.lesson),
-              _askTutorat(lessonBloc.lesson)
-            ],
+            actions: _renderActions(lessonBloc.lesson),
           ),
           body: _renderBody(state),
         );
@@ -74,6 +71,15 @@ class _LessonPageState extends State<LessonPage> {
 
   _retryLoad() {
     lessonBloc.add(RetryFileLoad());
+  }
+
+  _renderActions(Lesson lesson) {
+    List<Widget> actions = [];
+    Widget? askTutorat = _askTutorat(lesson);
+    Widget? getTutorat = _getTutorat(lesson);
+    if (askTutorat != null) actions.add(askTutorat);
+    if (getTutorat != null) actions.add(getTutorat);
+    return actions;
   }
 
   _askTutorat(Lesson lesson) {

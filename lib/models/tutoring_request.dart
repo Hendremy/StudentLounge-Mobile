@@ -25,7 +25,7 @@ class TutoringRequest {
   }
 
   get isPending {
-    return tutor.name.isNotEmpty;
+    return tutor.name.isEmpty;
   }
 
   Map<String, dynamic> toMap() {

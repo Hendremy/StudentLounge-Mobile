@@ -49,10 +49,10 @@ class _SessionScreenState extends State<SessionScreen> {
                 gap: 8,
                 onTabChange: changeTab,
                 tabs: const [
-                  GButton(icon: Icons.messenger_outline, text: "Chat"),
+                  GButton(icon: Icons.chat, text: "Chat"),
                   GButton(icon: Icons.import_contacts_outlined, text: "Cours"),
                   GButton(icon: Icons.calendar_month_outlined, text: "Horaire"),
-                  GButton(icon: Icons.person_outline, text: 'Profil')
+                  GButton(icon: Icons.account_circle, text: 'Profil')
                 ]),
           );
         },
